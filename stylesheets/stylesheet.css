@@ -169,6 +169,10 @@ p img {
   text-align: center;
 }
 
+.contact {
+text-align: center;
+}
+
 pre, code {
   width: 100%;
   color: #222;
