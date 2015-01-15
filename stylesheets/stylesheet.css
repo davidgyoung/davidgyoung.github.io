@@ -139,13 +139,7 @@ img {
   max-width: 739px;
   padding: 5px;
   margin: 10px 0 10px 0;
-  border: 1px solid #ebebeb;
-
-  box-shadow: 0 0 5px #ebebeb;
-  -webkit-box-shadow: 0 0 5px #ebebeb;
-  -moz-box-shadow: 0 0 5px #ebebeb;
-  -o-box-shadow: 0 0 5px #ebebeb;
-  -ms-box-shadow: 0 0 5px #ebebeb;
+  border: 0px;
 }
 
 p img {
@@ -155,6 +149,24 @@ p img {
   vertical-align: middle;
   text-align: center;
   border: none;
+}
+
+.mugshot {
+  margin:10px; 
+  border: thin solid #333;
+  float:right;
+  height:100px;
+}
+
+.appimage {
+  width:200px;
+}
+.samples {
+  width:100%;
+}
+.samples td {
+  width:50%;
+  text-align: center;
 }
 
 pre, code {
@@ -264,7 +276,7 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
+  max-width: 800px;
   padding: 20px 10px;
   margin: 0 auto;
 }
@@ -294,7 +306,7 @@ Full-Width Styles
 }
 
 #header_wrap .inner {
-  padding: 50px 10px 30px 10px;
+  padding: 10px 10px 0px 10px;
 }
 
 #project_title {
@@ -353,13 +365,13 @@ Full-Width Styles
 }
 
 #main_content_wrap {
-  background: #f2f2f2;
+  background: #ffffff;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
 }
 
 #main_content {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 
 #footer_wrap {
