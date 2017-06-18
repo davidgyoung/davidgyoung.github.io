@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+        <title>David G. Young Tech</title>
+        <description>David G. Young Tech - David G. Young</description>
+        <link>http://davidgyoungtech.com</link>
+        <atom:link href="http://davidgyoungtech.com/rss.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Sun, 18 Jun 2017 16:41:27 -0400</lastBuildDate>
+        <pubDate>Sun, 18 Jun 2017 16:41:27 -0400</pubDate>
+        <ttl>60</ttl>
+
+
+        <item>
+                <title>Detecting Beacons With Android Things</title>
+                <description>
+&lt;p&gt;The new Android Things platform opens up a new way to build powerful Internet of Things systems using the
+ubiquitous Android platform.  For those who already know Android development, this offers a very low
+barrier to entry.  And for those building Bluetooth LE systems, the relatively robust BlueDroid
+bluetooth stack is a welcome change from the buggy, unstable and poorly-documented BlueZ bluetooth stack standard
+on non-Android Linux systems.&lt;/p&gt;
+
+&lt;p&gt;For all it’s power, Android Things has real drawbacks.  It takes over a minute to boot, which is an eternity for an embedded system.  It is designed for relatively high-powered devices with 512 Mb of RAM or more.  And while tiny computers like the Edison board and the Raspberry Pi 3 support it, the ultra tiny and crazy cheap $10 Raspberry Pi Zero W is unfortunately off-limits for this platform.  Its ARMv6 processor is not supported by Android at all.&lt;/p&gt;
+
+&lt;p&gt;But if you can live with these boot times and can work with the Raspberry Pi 3, this article will show you how to detect beacons with the Android Things platform.&lt;/p&gt;
+
+&lt;h1 id=&quot;tutorial&quot;&gt;Tutorial&lt;/h1&gt;
+
+&lt;p&gt;This tutorial assumes you have basic Android development skills.  If you haven’t developed an Android app before, you might want to go through a simple Android app tutorial first.&lt;/p&gt;
+
+&lt;p&gt;To get started detecting beacons with Android Things, you’ll need the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Raspberry Pi 3 with Micro SD card (or other supported board)&lt;/li&gt;
+  &lt;li&gt;USB card reader for your workstation&lt;/li&gt;
+  &lt;li&gt;Ethernet cable(s)&lt;/li&gt;
+  &lt;li&gt;Access to a router on the  same subnet as your workstation&lt;/li&gt;
+  &lt;li&gt;Android Studio 3  (You must have version 3+ to using the Android Things new project creation tool)&lt;/li&gt;
+  &lt;li&gt;A mobile phone with the Locate app for iOS or Android you can use to transmit a beacon signal&lt;/li&gt;
+  &lt;li&gt;Optional: A monitor with a HDMI cable (useful for troubleshooting boot problems)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;step-1-download-android-things&quot;&gt;Step 1: Download Android Things&lt;/h2&gt;
+
+&lt;p&gt;First, locate the system image for your hardware board on the Android Developers site &lt;a href=&quot;https://developer.android.com/things/preview/download.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once it is downloaded, unzip it and prepare to flash the image to your board.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-2-flash-the-system-image&quot;&gt;Step 2: Flash the system image&lt;/h2&gt;
+
+&lt;p&gt;The instructions to flash the system image to the micro SD card depends on the workstation you are using.  On my mac, I use the &lt;code&gt;dd&lt;/code&gt; command, but equivalent instructions exist for Windows and Linux here: &lt;a href=&quot;https://developer.android.com/things/hardware/raspberrypi.html&quot;&gt;https://developer.android.com/things/hardware/raspberrypi.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the flash completes, simply remove the micro SD card from your workstation, put it in your board.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-3-set-up-a-console-connection&quot;&gt;Step 3. Set up a console connection&lt;/h2&gt;
+
+&lt;p&gt;Android Things is an embedded system, so you don’t control the device from a user interface.  You control it through a console (sometimes using the Android Debug Bridge (ADB) tool or GUI tools talking over ADB like Android Studio or Android Monitor.)   You can use a special serial cable to connect your Raspberry Pi to your workstation via a USB port, but if you have access to an open ethernet port on the same subnet as your workstation, this is by far the easiest way.&lt;/p&gt;
+
+&lt;p&gt;Simply use an ethernet cable to connect your Raspberry Pi to the network, and power it on.  If all goes well, you will see lights flash on the Pi board.  Wait about 90 seconds for it to boot up, then type the following on your workstation where you have the Android development tools installed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;adb connect Android.local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If it works, you’ll see a response like &lt;code&gt;connected to Android.local:5555&lt;/code&gt;.  Running this command is the equivalent of connecting a USB cable to a development Android phone, when USB debugging is enabled.  The ADB tool on your workstation now has a connection to your device.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-4-set-up-wifi-optional&quot;&gt;Step 4. Set up WiFi (optional)&lt;/h2&gt;
+
+&lt;p&gt;This is enough to Android Studio working with your board, but you might also want to set up a WiFi connection for your Raspberry Pi so it doesn’t have to stay connected to the ethernet cable.  If you set it up with a WiFi network on the same subnet as your workstation, you’ll be able to perform the same command above without the Pi connected via an ethernet cable.&lt;/p&gt;
+
+&lt;p&gt;To do this, you first run the &lt;code&gt;adb shell&lt;/code&gt; command on your workstation to get a console into the Pi.  Then you run the following command to set up the wifi for your network:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;am startservice com.google.wifisetup/.WifiSetupService -a WifiSetupService.Connect -e ssid MY_SSID_NAME -e MY_PASSPRHRASE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You’ll of course need to replace MY_SSID_NAME and MY_PASSPHRASE with the credentials for your wifi network.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-5-create-a-new-android-things-app&quot;&gt;Step 5. Create a new Android Things app&lt;/h2&gt;
+
+&lt;p&gt;Now that you have a connection to your Android Things board from your workstation, you are ready to use Android Studio to build your app.  Making a new Android Things app is an awful lot like making a regular Android app.  If you have Android Studio 3+, there is a tool for starting new Android Things projects by going to: File -&amp;gt; New -&amp;gt; New Project&lt;/p&gt;
+
+&lt;p&gt;Follow  the screenshots like shown below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new-project-1.png&quot; width=&quot;640px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new-project-2.png&quot; width=&quot;640px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new-project-3.png&quot; width=&quot;640px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new-project-4.png&quot; width=&quot;640px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the project template is created, take a look at the AndroidManifest.xml.  You’ll see this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
+&amp;lt;manifest package=&quot;com.davidgyoungtech.androidthingsbeaconscanner&quot;
+          xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&amp;gt;
+
+    &amp;lt;application&amp;gt;
+        &amp;lt;uses-library android:name=&quot;com.google.android.things&quot;/&amp;gt;
+
+        &amp;lt;activity android:name=&quot;.MainActivity&quot;&amp;gt;
+            &amp;lt;intent-filter&amp;gt;
+                &amp;lt;action android:name=&quot;android.intent.action.MAIN&quot;/&amp;gt;
+
+                &amp;lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&amp;gt;
+            &amp;lt;/intent-filter&amp;gt;
+            &amp;lt;intent-filter&amp;gt;
+                &amp;lt;action android:name=&quot;android.intent.action.MAIN&quot;/&amp;gt;
+
+                &amp;lt;category android:name=&quot;android.intent.category.IOT_LAUNCHER&quot;/&amp;gt;
+                &amp;lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&amp;gt;
+            &amp;lt;/intent-filter&amp;gt;
+        &amp;lt;/activity&amp;gt;
+    &amp;lt;/application&amp;gt;
+
+&amp;lt;/manifest&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This looks like a regular Android App manifest with a special &lt;intent-filter&gt; added to the main activity:&lt;/intent-filter&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;intent-filter&amp;gt;
+    &amp;lt;action android:name=&quot;android.intent.action.MAIN&quot;/&amp;gt;
+    &amp;lt;category android:name=&quot;android.intent.category.IOT_LAUNCHER&quot;/&amp;gt;
+    &amp;lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&amp;gt;
+&amp;lt;/intent-filter&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This filter is what will launch our app automatically when the device boots up.  Android Things apps are based on Activities just like regular Android apps.  The big difference is that a user interface is optional (if a display is attached, you can show regular Android UI elements) and Activities can run at boot (and keep running forever) without user interaction.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-6-code-beacon-detections&quot;&gt;Step 6. Code Beacon Detections&lt;/h2&gt;
+
+&lt;p&gt;Edit the build.gradle (Module: app) file so it looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dependencies {
+    compile 'org.altbeacon:android-beacon-library:2.9.1'
+    ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then go to MainActivity.java and add these four lines to the end to the onCreate method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
+beaconManager.getBeaconParsers().clear();
+beaconManager.getBeaconParsers().add(new BeaconParser(&quot;iBeacon&quot;).setBeaconLayout(&quot;m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24&quot;));
+beaconManager.bind(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These lines set the Android Beacon Library up to look for iBeacons.&lt;/p&gt;
+
+&lt;p&gt;You’ll get an error flagged on the last line, because we have not yet made our Activity implement the BeaconConsumer interface.  Let’s fix that.  Change the class definition to look like below.  And while we’re at it, let’s add a TAG definition so we can log debug lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MainActivity extends Activity implements BeaconConsumer, RangeNotifier {
+   private static final String TAG = MainActivity.class.getSimpleName();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The changes to the class definition above adds two interfaces to the Activity, one to connect to the Android Beacon Library and the other to get beacon ranging callbacks from it.  You’ll see errors that not all the methods of the interfaces have been implemented.  So you’ll need to add the following to the body of the class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@Override 
+public void onBeaconServiceConnect() { 
+  Log.d(TAG, &quot;Beacon service connected.  Starting ranging.&quot;); 
+  try { 
+    mBeaconManager.startRangingBeaconsInRegion(new Region(&quot;allbeacons&quot;, null, null, null)); 
+    mBeaconManager.addRangeNotifier(this); 
+  } catch (RemoteException e) { 
+    e.printStackTrace(); 
+  }
+ }
+
+  @Override 
+public void didRangeBeaconsInRegion(Collection&amp;lt;Beacon&amp;gt; beacons, Region region) { 
+    for (Beacon beacon: beacons) { 
+            Log.d(TAG, &quot;Detected beacon: &quot;+beacon);
+     } 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This code waits for the library to be initialized, at which point &lt;code&gt;onBaconServiceConnect&lt;/code&gt; gets called.  Inside that method, it starts beacon ranging, defining a “Region” of beacons to match that has all identifiers set to null – this effectively makes it match any beacon it sees.  It also sets the RangeNotifier to be this same MainActivity class.  That makes it so that the &lt;code&gt;didRangeBeaconsInRegion&lt;/code&gt; method below will get called once per second with a list of all beacons that are detected.   And that method definition simply loops through all of the detected beacons and logs them.&lt;/p&gt;
+
+&lt;p&gt;We can now build and run this app though Android Studio.  Choose Run -&amp;gt; Run App, and Android Studio will build your application APK package, upload it to the Android Things board, and start running it.  If you don’t have a display, you won’t see anything.  But you’ll see log lines in LogCat window in Android Studio.  You should see something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;06-12 13:11:37.691 31695 31695 D MainActivity: Beacon service connected.  Starting ranging.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;step-7-obtain-permissions&quot;&gt;Step 7. Obtain Permissions&lt;/h2&gt;
+
+&lt;p&gt;We haven’t detected any beacons yet.  And in case you have jumped the gun and turned on a beacon transmitter, you’ll notice it doesn’t work to detect beacons.  Why?&lt;/p&gt;
+
+&lt;p&gt;If you’ve ever worked with Bluetooth on Android before, you might know that Android requires you to request and get permission from the user to access the device’s location in order to scan for Bluetooth beacons.  It does this because beacons are often used to figure out the user’s location, so the need to declare this permission int the AndroidManifest.xml as of Android 7.  Because Android Things preview release is based on Android 7, the same requirement applies.  What’s more, because Android classifies location as a “dangerous” permission, it must be dynamically requested from the user at runtime. But Android Things is designed to run without a user interface.  So how can this work?&lt;/p&gt;
+
+&lt;p&gt;Android Things solves this by automatically granting dangerous permissions at boot time to any applications that declare the need for them in its AndroidManifest.xml.   The Android Beacon Library automatically includes these in its manifest, and they get merged to your application’s manifest by Android Studio during the build.  You can see the merged manifest in Android Studio 3 by bringing up AndroidManifest.xml and tapping the “Merged Manifest” tab at the bottom of the screen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/things-manifest-merged.png&quot; width=&quot;640px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, the following permission was brought in automatically by the AndroidBeaconLibrary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;uses-permission-sdk-23 android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is enough to get us going, but it won’t work until we reboot the Android Things device after installing the app.  Trying to detect bluetooth devices (or access other location APIs) will fail silently until you do this.  If you write code to check if the permission has been granted, it will return false until after a reboot.  And if you write code to dynamically request the permission from the user&lt;/p&gt;
+
+&lt;p&gt;So long story short: just reboot your Android Things device after installing your app the first time!&lt;/p&gt;
+
+&lt;p&gt;Turn off your Android Things device, turn it back on, and wait about 90 seconds for it to boot.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-8-test&quot;&gt;Step 8. Test&lt;/h2&gt;
+
+&lt;p&gt;After you have rebooted your device, you’ll need to reconnect adb again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;adb connect Android.local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you’ve done that, you should see your log line in the LogCat pane in Android Studio like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;06-12 13:11:37.691 31695 31695 D MainActivity: Beacon service connected.  Starting ranging.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This indicates that your app started up automatically at boot, something we configured in
+the AndroidManifest.xml.&lt;/p&gt;
+
+&lt;p&gt;Now it’s time to turn on a beacon and see if we detect it.  Go to the Locate app on your iOS or Android phone, and turn on a beacon with any identifier.  The screenshot below shows the iOS version.  The Android version looks different but does the same thing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;border: 2px;&quot; src=&quot;/images/ios-transmitter.png&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As soon as you turn on the beacon transmitter, you should see log lines in Android Studio show up like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;06-12 13:12:44.671 31695 31695 D MainActivity: Detected beacon: id1: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6 id2: 1 id3: 2 type iBeacon
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Congratulations!  You’ve just detected a beacon with Andorid Things.&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2017/06/18/detecting-beacons-with-android-things</link>
+                <guid>http://davidgyoungtech.com/2017/06/18/detecting-beacons-with-android-things</guid>
+                <pubDate>Sun, 18 Jun 2017 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>Battery-Friendly Beacon Transmission</title>
+                <description>&lt;p&gt;While most beacon apps focus on detection of bluetooth beacons, some of the coolest mobile apps you can make involve making the device transmit as a beacon as well.  Think about an app that lets friends know they are nearby one another.  When two users walk within about 50 meters of each other, presto!  The app alerts you that a friend is nearby.&lt;/p&gt;
+
+&lt;p&gt;Apple has supported beacon transmission since iOS 6, and most Android devices have done the same starting with Android 5.0.  But lots of folks are wary of transmitting all the time.  The conventional wisdom is that app developers need to be careful about transmitting because of its impact on battery.  We all know that angry users with drained batteries will quickly uninstall your app.  Is transmitting as a beacon really that bad?&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2015/12/09/battery-friendly-beacon-transmission&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+
+</description>
+                <link>http://davidgyoungtech.com/2015/11/12/battery-friendly-beacon-transmission</link>
+                <guid>http://davidgyoungtech.com/2015/11/12/battery-friendly-beacon-transmission</guid>
+                <pubDate>Thu, 12 Nov 2015 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>Is Your Beacon App Ready for Android 6.0?</title>
+                <description>&lt;p&gt;The new Android 6.0 release has several important changes that affect apps detecting bluetooth beacons.  If you have a beacon-based app already in the Play Store, or are planning a new beacon-based app, you’ll need to make updates to keep your app from breaking as users transition to Android 6.0.&lt;/p&gt;
+
+&lt;p&gt;While this article focusses largely on the impact for users of the &lt;a href=&quot;https://altbeacon.github.io/android-beacon-library/&quot;&gt;Android Beacon Library&lt;/a&gt; and Radius Networks’ &lt;a href=&quot;http://proximitykit.radiusnetworks.com&quot;&gt;ProximityKit&lt;/a&gt; and  &lt;a href=&quot;http://campaignkit.radiusnetworks.com&quot;&gt;CampaignKit&lt;/a&gt; libraries that are built upon it, the same issues described here apply to any app that detects beacons.  If you are using a different vendor’s SDK, it is important to make sure they will continue to work on Android 6.0.&lt;/p&gt;
+
+&lt;h2 id=&quot;runtime-permissions&quot;&gt;Runtime Permissions&lt;/h2&gt;
+
+&lt;p&gt;The biggest change for beacon apps in Android 6.0, codenamed Marshmallow, and sometimes called just “M”, has to do with permissions.  Just like iOS, Android now implements permissions at runtime instead of the traditional way of granting permissions at install time.  Apps designed for Marshmallow (SDK 23 and above) must add code to prompt users for some permissions after the app starts up, otherwise they will not be granted.&lt;/p&gt;
+
+&lt;p&gt;Not all permissions, however, work this way.  Permissions marked as &lt;code&gt;PERMISSION_NORMAL&lt;/code&gt; are still granted the old fashioned way: at install time.  For beacon apps, two important permissions continue to follow the old model:  &lt;code&gt;android.permission.BLUETOOTH&lt;/code&gt; and &lt;code&gt;android.permission.BLUETOOTH_ADMIN&lt;/code&gt;, both of which is needed to scan for beacons.  Because these permissions still use the old behavior, nothing really changes with them in Marshmallow.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2015/09/29/is-your-beacon-app-ready-for-android-6&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2015/09/29/is-your-beacon-app-ready-for-android-6</link>
+                <guid>http://davidgyoungtech.com/2015/09/29/is-your-beacon-app-ready-for-android-6</guid>
+                <pubDate>Tue, 29 Sep 2015 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>How To Push Beacon Messages Without an App</title>
+                <description>&lt;p&gt;One of most common things businesses want to do with bluetooth beacons is to solicit customers to get their mobile app.  This has long been impossible, because beacons can’t be detected without an app already on the phone to look for them.  For folks wanting to get visitors to use their app, it’s a classic chicken and egg problem.&lt;/p&gt;
+
+&lt;p&gt;As of today, Google is taking steps to change this.  The company is updating its Chrome for iOS web browser to automatically integrate with its Physical Web project, which detects &lt;a href=&quot;http://store.radiusnetworks.com/products/eddystone-devkit&quot;&gt;beacons transmitting the Eddystone-URL format&lt;/a&gt;.  When Chrome for iOS detects one of these beacons, it shows information about the website to the user, allowing the user the option of visiting it within the browser.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-it-works&quot;&gt;How it Works&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/chrome-configure.png&quot; width=&quot;214&quot; align=&quot;right&quot; /&gt;
+The new Chrome feature works within the Chrome Today widget on the Notification Center Today view.  For those unfamiliar with the feature, the Today view is what you see when you swipe down from the top of your iPhone. By default it shows your calendar and  stock information, but you can add other App widgets by tapping the Edit button at the bottom of the screen.  If you have Chrome for iOS installed, the Chrome Today widget will show up in the list of the ones you can add.&lt;/p&gt;
+
+&lt;p&gt;If the Chrome Today widget is activated, the first time a Eddystone-URL beacon is discovered, the website’s title and description will appear in the Chrome Today widget.  Tapping on the website launches Chrome to the web page address transmitted by the beacon.  This web page can be optimized for mobile, serving a welcome message to the visitor that can solicit a download of a mobile app to further take advantage of beacons.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2015/07/22/how-to-push-messages-without-an-app&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2015/07/22/how-to-push-messages-without-an-app</link>
+                <guid>http://davidgyoungtech.com/2015/07/22/how-to-push-messages-without-an-app</guid>
+                <pubDate>Wed, 22 Jul 2015 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>Building Apps With Eddystone</title>
+                <description>&lt;p&gt;With Eddystone™, the new beacon format from Google, developers have more options than ever in buidling beacon applications.  To understand the basics of working with Eddystone, it’s useful to show the process of putting together an app.  If you are new to Eddystone, check out our companion blog post, &lt;a href=&quot;http://developer.radiusnetworks.com/2015/07/14/introducing-eddystone.html&quot;&gt;Introducing Eddystone&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This example will focus on making an Android app using the &lt;a href=&quot;http://altbeacon.github.io/android-beacon-library/&quot;&gt;Android Beacon Library&lt;/a&gt;, which fully supports Eddystone.  If you want to try this yourself, you’ll need an Android device with 4.3+ and a computer with an Android Studio development environment.  Of course, if you actually want the app to respond to beacons, you’ll need a beacon that supports Eddystone, too.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2015/07/14/building-apps-with-eddystone&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2015/07/14/building-apps-with-eddystone</link>
+                <guid>http://davidgyoungtech.com/2015/07/14/building-apps-with-eddystone</guid>
+                <pubDate>Tue, 14 Jul 2015 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>Beacon Navigation at the Consumer Electronics Show</title>
+                <description>&lt;p&gt;It’s hard not to get lost at the Consumer Electronics Show. The event is simply huge.  My colleague logged over 20,000 steps on his fitness tracker wandering around the show in a single day.  The space spans three different halls at the Las Vegas Convention Center, another at the Sands Expo Convention Center, as well as more exhibit and meeting spaces in the Venetian and Westgate hotels.  As if that’s not enough, the show spills out into tents scattered over two huge parking lots near the convention center.&lt;/p&gt;
+
+&lt;p&gt;This leads everybody to ask the same questions:  Where am I?  How do I get to booth 26002?&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2015/01/13/beacon-navigation-at-the-consumer-electronics-show&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2015/01/13/beacon-navigation-at-the-consumer-electronics-show</link>
+                <guid>http://davidgyoungtech.com/2015/01/13/beacon-navigation-at-the-consumer-electronics-show</guid>
+                <pubDate>Tue, 13 Jan 2015 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>Fundamentals of Beacon Ranging</title>
+                <description>&lt;p&gt;The most basic use of beacon technology is to determine how far a mobile device is from a beacon, but as anybody who has played with beacon ranging knows, these distance estimates can have a significant degree of uncertainty.  For a beacon that is 5 meters away, distance estimates might fluctuate between 2 meters and 10 meters.&lt;/p&gt;
+
+&lt;p&gt;The reasons for these distance estimate variations and the steps that can be taken to reduce them are some of the most frequent questions we get about beacons.  Factors that influence the error in the estimate include reflections of the radio signal, obstructions that attenuate the radio signal, and orientation of both the phone and the beacon.&lt;/p&gt;
+
+&lt;p&gt;By far the biggest factor affecting error in distance estimates is radio noise.  Background radio noise exists everywhere (it’s what causes the static seen on an old analog TV).  For strong radio signals (a high signal-to-noise ratio), noise is far less of an issue than with weak signals (a low signal to noise ratio).  For this reason, a device that is within a few meters of a beacon can provide much more accurate distance estimates than a device that is 10 meters or more away.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2014/12/04/fundamentals-of-beacon-ranging&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2014/12/04/fundamentals-of-beacon-ranging</link>
+                <guid>http://davidgyoungtech.com/2014/12/04/fundamentals-of-beacon-ranging</guid>
+                <pubDate>Thu, 04 Dec 2014 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>Beacon Transmission With Android 5.0</title>
+                <description>&lt;p&gt;One of the most exciting new features of Android 5.0 is the support for Bluetooth LE peripheral mode, which makes it possible to turn an Android device to a beacon transmitter.  Radius Networks is proud to release the new QuickBeacon app for Android 5.0, which creates a configurable beacon supporting both the AltBeacon and Apple iBeacon™   formats.  This app is available for free for a limited time only in the &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.radiusnetworks.quickbeacon&quot;&gt;Google Play Store&lt;/a&gt;, and works with the new Nexus 6 phone and Nexus 9 tablet.&lt;/p&gt;
+
+&lt;p&gt;QuickBeacon for Android makes for an extremely versatile software beacon transmitter, because unlike iOS-based transmitters, it allows you to keep transmitting even when the app is no longer in the foreground.  This makes it suitable for production use on tablets used as point-of-sale (POS) devices where the transmitter app will not always be in the foreground.&lt;/p&gt;
+
+&lt;p&gt;The app also allows you to configure the transmitter power, allowing you to adjust how far away the beacon transmission will be detected.  Similarly, you can adjust the transmission frequency of the beacon, allowing you to save battery power if frequent transmissions are not needed.  Neither of these adjustments are available on iOS or OS X-based transmitters.&lt;/p&gt;
+
+&lt;p&gt;It is important to note that not all devices with Android 5.0 can send beacon transmissions.  The Android device must have Bluetooth LE hardware and it must have peripheral mode enabled by the device manufacturer.   Google surprised many people when it &lt;a href=&quot;https://code.google.com/p/android-developer-preview/issues/detail?id=1570&quot;&gt;disabled peripheral mode for their Nexus 5 and Nexus 7 devices&lt;/a&gt;, meaning these devices cannot transmit beacon advertisements using QuickBeacon or other software.  This can be confusing for folks using the Google Play store, because it does not have a capabilities filter for BLE peripheral mode.  As a result, QuickBeacon must be installed and tested on each Android 5.0 model before it is known whether or not the app is compatible with that model.  If the Android model does not support BLE peripheral mode, the app will tell you right away.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2014/11/18/beacon-transmission-with-android-5&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2014/11/18/beacon-transmission-with-android-5</link>
+                <guid>http://davidgyoungtech.com/2014/11/18/beacon-transmission-with-android-5</guid>
+                <pubDate>Tue, 18 Nov 2014 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>Extending Background Ranging on iOS</title>
+                <description>&lt;p&gt;One of the most common use cases for beacon-enabled applications is to perform an action when a user gets close to a specific location.  Since beacons typically have a transmitting range of up to 50 meters, it’s often not appropriate to trigger that far away.  A gas station app, for example, shouldn’t prompt a user to pay at the pump when the user’s phone detects the beacon from across the street.&lt;/p&gt;
+
+&lt;p&gt;There are a couple of strategies to solve this.  One involves turning down the transmitter power of the beacon so it can’t be detected until the user is only a few meters away.  The RadBeacon models sold by Radius Networks allow adjusting the transmitter power for this exact reason.   But when very close triggering is desired, this approach can sometimes lead to actions not being triggered at all.  Received signal levels can vary depending on mobile device model, and where the device is placed.&lt;/p&gt;
+
+&lt;p&gt;A second approach involves tracking the beacon in the background, noting its estimated distance, and only triggering an action when the beacon is estimated to be within a specific range.  This approach is problematic on iOS, because CoreLocation generally allows only 10 seconds of ranging time when an app is in the background.  If a beacon is first detected at 50 meters, and a person is approaching the beacon at one meter per second, the mobile device will still be 40 meters away when iOS suspends the app and stops it from ranging.&lt;/p&gt;
+
+&lt;p&gt;The good news is that it is possible to extend background ranging time on iOS.  If your app is a navigation app, you can specify location updates in the “Required background modes” in your Info.plist.  But this approach makes it harder to get AppStore approval – you have to convince reviewers that your app is providing navigation services to the user.  This probably isn’t true for many apps that simply want to use beacons to trigger at a specific distance.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, you can still extend background ranging time without requesting special background modes.  The time you can get is limited – only three minutes.  But this clock restarts each time your app is woken up in the background, meaning you can get an extra three minutes of ranging time each time your app detects a beacon (enters a beacon region) or stops seeing beacons (exits a beacon region.)&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2014/11/13/extending-background-ranging-on-ios&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2014/11/13/extending-background-ranging-on-ios</link>
+                <guid>http://davidgyoungtech.com/2014/11/13/extending-background-ranging-on-ios</guid>
+                <pubDate>Thu, 13 Nov 2014 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>iOS 7.1 Background Beacon Detection Times</title>
+                <description>&lt;p&gt;The release of iOS 7.1 has led to some hope that the new release will improve beacon background detection times.  Repeating &lt;a href=&quot;/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground.html&quot;&gt;earlier tests&lt;/a&gt; on iOS 7.0 shows this not to be the case — it can still take up to 15 minutes to detect an beacon in the background.&lt;/p&gt;
+
+&lt;p&gt;These tests used a iPhone 4S recently upgraded to iOS 7.1 running an &lt;a href=&quot;https://github.com/RadiusNetworks/ibeacon-background-demo&quot;&gt;Beacon BackgroundDemo program available on GitHub&lt;/a&gt;.  The same program had been used to test background detection times on iOS 7.0, and the full test setup and procedure is described in an &lt;a href=&quot;/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground.html&quot;&gt;accompanying blog post&lt;/a&gt;.   For an beacon transmitter, the test used a &lt;a href=&quot;http://store.radiusnetworks.com/collections/all&quot;&gt;Radius Networks Dual Beacon Development Kit&lt;/a&gt; (with two transmitters), that send out advertisements at a frequency of 10Hz when enabled.   Cycling these transmitters on and off produced the following annotated log file (annotations start with #):&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2014/03/12/ios7-1-background-detection-times&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2014/03/12/ios7-1-background-detection-times</link>
+                <guid>http://davidgyoungtech.com/2014/03/12/ios7-1-background-detection-times</guid>
+                <pubDate>Wed, 12 Mar 2014 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>Beacon Monitoring in the Background and Foreground</title>
+                <description>&lt;p&gt;There has been lots of confusion about how Beacon monitoring and ranging work in the background on iOS.  In general ranging only works in the foreground, but monitoring updates can happen in the background.  There are two ways to configure background monitoring, and even when done properly updates can take a long time to come.  Because these delays, some people mistakenly believe that monitoring in the background doesn’t work.&lt;/p&gt;
+
+&lt;p&gt;##Summary&lt;/p&gt;
+
+&lt;p&gt;The tables below summarizes whether you can get monitoring updates under various conditions, and how long it might take to get them.&lt;/p&gt;
+
+&lt;p&gt;When the app is in the foreground:&lt;/p&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+  table.rsum {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+  table.rsum td{
+    border: 1px solid black;
+    padding: 5px;
+  }
+  table.rsum th{
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+&lt;/style&gt;
+
+&lt;table class=&quot;rsum&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Condition&lt;/th&gt;&lt;th&gt;Max time to detect a region change&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;App ranging    &lt;/td&gt;&lt;td&gt;1 second&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;App not ranging&lt;/td&gt;&lt;td&gt;up to 15 minutes&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When the app is not in the foreground:&lt;/p&gt;
+
+&lt;table class=&quot;rsum&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Condition&lt;/th&gt;&lt;th&gt;Max time to detect a region change&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Phone awakened, notifyEntryStateOnDisplay=YES&lt;/td&gt;&lt;td&gt;1 second &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Phone awakened, notifyEntryStateOnDisplay=NO&lt;/td&gt;&lt;td&gt;NEVER &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;UIBackgroundModes=location ON&lt;/td&gt;&lt;td&gt;up to 15 minutes &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;UIBackgroundModes=location OFF&lt;/td&gt;&lt;td&gt;up to 15 minutes &lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Note: “Phone awakened” means pressing either the shoulder button or the home button when the phone display was off.  The detection times, in this case, reflect the time from when the screen turns on.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-maximize-beacon-responsiveness&quot;&gt;How to maximize beacon responsiveness&lt;/h2&gt;
+
+&lt;p&gt;The above tables show that two things are very important to maximizing the frequency of beacon monitoring updates:&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+</description>
+                <link>http://davidgyoungtech.com/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground</link>
+                <guid>http://davidgyoungtech.com/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground</guid>
+                <pubDate>Wed, 13 Nov 2013 00:00:00 -0500</pubDate>
+        </item>
+
+        <item>
+                <title>CoreBluetooth Doesn't Let You See Beacons</title>
+                <description>&lt;p&gt;So, is there any way to to monitor or range for any beacon regardless of its ProximityUUID on iOS?  The short answer is no.&lt;/p&gt;
+
+&lt;p&gt;The long answer involves trying a couple of different ways:&lt;/p&gt;
+
+&lt;h3 id=&quot;corelocation-apis&quot;&gt;CoreLocation APIs&lt;/h3&gt;
+
+&lt;p&gt;Using the CoreLocation APIs, the obvious way to look for all beacons is to pass a nil value for the ProximityUUID when constructing a CLBeaconRegion.  But that doesn’t work.  If you try this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:nil identifier:@&quot;myUniqueIdentifer&quot;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://developer.radiusnetworks.com/2013/10/21/corebluetooth-doesnt-let-you-see-ibeacons&quot;&gt;Continue reading this blog post&lt;/a&gt; on the Radius Networks website&lt;/i&gt;&lt;/p&gt;
+
+</description>
+                <link>http://davidgyoungtech.com/2013/10/21/corebluetooth-doesnt-let-you-see-ibeacons</link>
+                <guid>http://davidgyoungtech.com/2013/10/21/corebluetooth-doesnt-let-you-see-ibeacons</guid>
+                <pubDate>Mon, 21 Oct 2013 00:00:00 -0400</pubDate>
+        </item>
+
+        <item>
+                <title>Reverse Engineering the iBeacon Profile</title>
+                <description>
+&lt;p&gt;This blog post was originally published on the Radius Networks website, but was taken down in July of 2014 after representatives of Apple requested changes to infromation published under terms of the iBeacon license agreement.&lt;/p&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;http://web.archive.org/web/20131017042628/http://developer.radiusnetworks.com/2013/10/01/reverse-engineering-the-ibeacon-profile.html&quot;&gt;read the blog post in its original form&lt;/a&gt; through the Internet Wayback Machine.&lt;/p&gt;
+
+</description>
+                <link>http://davidgyoungtech.com/2013/10/01/reverse-engineering-the-ibeacon-profile</link>
+                <guid>http://davidgyoungtech.com/2013/10/01/reverse-engineering-the-ibeacon-profile</guid>
+                <pubDate>Tue, 01 Oct 2013 00:00:00 -0400</pubDate>
+        </item>
+
+
+</channel>
+</rss>
