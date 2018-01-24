@@ -33,47 +33,47 @@ With practice holding the camera and in good lighting conditions, I have found t
 
 To set this up, you use the same AVCaptureSession class that has been around since iOS 4 to take pictures and videos.  
 
-```swift
+{% highlight swift %}
 var captureSession = AVCaptureSession()
-```
-`
+{% endhighlight %}
+
 You then use the AVCaptureDevice class to find the camera you want to use (usually the rear camera), and attach it to the captureSession  Like this:
 
-```swift
+{% highlight swift %}
 let videoInput = try AVCaptureDeviceInput(device: captureDevice)
 captureSession.addInput(videoInput)
-````
+{% endhighlight %}
 
 You next add a hook to extract metadata from the video.  This uses the AVCaptureMetadataOutput class.  It has a delegate method you use to return the captured bar code data. 
 
-```swift
+{% highlight swift %}
 let captureMetadataOutput = AVCaptureMetadataOutput()
 captureSession.addOutput(captureMetadataOutput)
 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-```
+{% endhighlight %}
 
 The delegate callback comes in the  AVCaptureMetadataOutputObjectsDelegate
 protocol.  It only has one method that looks like below in Swift 4.  (Caution: If using Swift 3.x the delegate method is different, so it won’t get called if defined like below.)
 
-```swift
+{% highlight swift %}
 func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], 
              from connection: AVCaptureConnection) {
   // TODO: populate this method later
 }
-```
+{% endhighlight %}
 
 
 You then tell the AVCaptureMetadataOutput which bar code types you want to capture.  For our example, we’ll try to capture every type it knows about.
 
-```swift
+{% highlight swift %}
 captureMetadataOutput.metadataObjectTypes = barCodeTypes
-```
+{% endhighlight %}
 
 Finally, you start the capture session with:
 
-```swift
+{% highlight swift %}
 captureSession.startRunning()
-```
+{% endhighlight %}
 
 The  above steps are enough to get callbacks to the delegate method every time the camera points to a recognized bar code.   However, a few things are missing:
 
@@ -85,14 +85,14 @@ Let’s tackle those issues one at a time, starting with the permissions issue. 
 
 Before anything else, you must add a new key/value into the app’s Info.plist file.  This entry declares that the app wants to use the camera and supplies the user with a prompt message explaining why.  
 
-```
+{% highlight swift %}
 <key>NSCameraUsageDescription</key>
 <string>Camera access needed to scan bar codes.</string>
-```
+{% endhighlight %}
 
 Before trying to access the camera, you check to see if this permission has been granted already, and if not, ask the user for it:
 
-```swift
+{% highlight swift %}
 let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
 if authorizationStatus == .notDetermined {
     // permission dialog not yet presented, request authorization
@@ -106,7 +106,7 @@ if authorizationStatus == .notDetermined {
 if authorizationStatus == .restricted || authorizationStatus == .denied {
     accessDenied = true
 }
-``` 
+{% endhighlight %}
        
 In the code above, I set a couple of flags called accessDenied and accessRequested, so we can use these later to know what is going on if we cannot get access to the camera.  We can then present a dialog to the user explaining why.  Since this isn’t core to this exercise, I won’t show the details here.   But you can see how the dialogs are presented in the full code in “Extra credit section 1”.
 
@@ -116,15 +116,16 @@ The setupCapture method defined referenced above will have the full code needed 
 
 With that done, we can move on to the second missing item, showing on the screen what the camera is seeing.  Doing this is pretty simple.   We construct a videoPreviewLayer with the capture session, and make it a subview of our view.  Like this:
 
-```swift
+{% highlight swift %}
 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 videoPreviewLayer?.videoGravity = .resizeAspectFill
 videoPreviewLayer?.frame = view.layer.bounds
 view.layer.addSublayer(videoPreviewLayer!)
-```
+{% endhighlight %}
+
 With this in place, our full setupCapture method looks like this:
 
-```swift
+{% highlight swift %}
 func setupCapture() {
     var success = false
     var accessDenied = false
@@ -222,11 +223,11 @@ func setupCapture() {
         }
     }
 }
-```
+{% endhighlight %}
 
 Our code currently doesn’t do anything if it does not find a bar code.  The simplest solution is to show a dialog that displays the text encoded in the barcode.   If the text is a URL (as is typically true with a QR code), then we can add a button on the dialog to launch it in Safari.  Here’s the code that does that:
 
-```swift
+{% highlight swift %}
 func processBarCodeData(metadataObjects: [AVMetadataObject]) {        
     if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
         if barCodeTypes.contains(metadataObject.type) {
@@ -281,11 +282,11 @@ func displayBarCodeResult(code: String) {
     alertPrompt.addAction(cancelAction)
     present(alertPrompt, animated: true, completion: nil)
 }
-```
+{% endhighlight %}
 
 The code above is defined in its own methods and not called from the delegate callback.  You can hook that in for Swift 3 or 4 like this:
 
-```swift
+{% highlight swift %}
 // Swift 3.x callback
 func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, 
                    from connection: AVCaptureConnection!) {
@@ -297,7 +298,7 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
              from connection: AVCaptureConnection) {
     processBarCodeData(metadataObjects: metadataObjects)
 }
-```
+{% endhighlight %}
 
 <img src='/images/scanresult.png' width="320px"/>
 
