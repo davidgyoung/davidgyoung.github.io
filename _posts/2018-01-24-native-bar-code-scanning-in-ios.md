@@ -8,13 +8,13 @@ Folks using the camera on iOS 11 may have discovered that it now allows you to s
 
 While this is a nifty shortcut, it highlights powerful bar code scanning capabilities that have been built into iOS since version 7.  Using AVFoundation, you can not only scan QR codes but quite a large variety of industry bar code formats.  This is good news, because it greatly expands the use case of this technology beyond the once ubiquitous QR codes that proliferated early the mobile phone era.
 
-This article will show you how easy it is to add bar code scanning to your app.  You can follow along below or get a head start by cloning the repo [here](at https://github.com/davidgyoung/bar-code-scanner).
+This article will show you how easy it is to add bar code scanning to your app.  You can follow along below or get a head start by cloning the repo [here](https://github.com/davidgyoung/bar-code-scanner).
 
 But first a little Q&A:
 
 ### What kind of bar codes can AVFoundation scan?
 
-Almost anything.  Support includes a wide variety of bar code formats (both 1-dimensional ones like supermarket UPC codes as well as newer 2-dimensional variants) as well as QR codes.  You can see a full list of the types in the [AVMetadataObject.ObjectType](enumeration https://developer.apple.com/documentation/avfoundation/avmetadataobject.objecttype).
+Almost anything.  Support includes a wide variety of bar code formats (both 1-dimensional ones like supermarket UPC codes as well as newer 2-dimensional variants) as well as QR codes.  You can see a full list of the types in the [AVMetadataObject.ObjectType](https://developer.apple.com/documentation/avfoundation/avmetadataobject.objecttype) enumeration.
 
 You can scan codes in the supermarket, scan airline or train tickets, or almost anything that is designed to be machine readable.
 
@@ -302,7 +302,7 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
 <img src='/images/scanresult.png' width="320px"/>
 
 
-If you put all of this in a ViewController, you’ll now have a fully functioning bar code scanning app.  You can try this yourself with the full project on Github [here](at https://github.com/davidgyoung/bar-code-scanner).   The project includes all the code above plus a few other little features that are a bit peripheral to the subject to discuss in detail:
+If you put all of this in a ViewController, you’ll now have a fully functioning bar code scanning app.  You can try this yourself with the full project on Github [here](https://github.com/davidgyoung/bar-code-scanner).   The project includes all the code above plus a few other little features that are a bit peripheral to the subject to discuss in detail:
 
 * The app draws a crosshair overlay on top of the video to give guidance of where to aim the camera.  (See extra credit section 2)
 * The app draws an outline around the scanned bar code area right after it is detected.  (See extra credit section 3)
