@@ -112,6 +112,8 @@ In the code above, I set a couple of flags called accessDenied and accessRequest
 
 The setupCapture method defined referenced above will have the full code needed to set up the bar code capture.  This code must include this permissions checking, but we will recursively call it again after the permission is granted so we can set up the capture again if the user authorized camera access.  
 
+<img src='/images/scanpermission.png' width="320px"/>
+
 With that done, we can move on to the second missing item, showing on the screen what the camera is seeing.  Doing this is pretty simple.   We construct a videoPreviewLayer with the capture session, and make it a subview of our view.  Like this:
 
 ```swift
@@ -296,6 +298,9 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
     processBarCodeData(metadataObjects: metadataObjects)
 }
 ```
+
+<img src='/images/scanresult.png' width="320px"/>
+
 
 If you put all of this in a ViewController, you’ll now have a fully functioning bar code scanning app.  You can try this yourself with the full project on Github [here](at https://github.com/davidgyoung/bar-code-scanner).   The project includes all the code above plus a few other little features that are a bit peripheral to the subject to discuss in detail:
 
