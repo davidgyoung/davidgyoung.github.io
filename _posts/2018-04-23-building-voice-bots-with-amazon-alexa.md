@@ -48,11 +48,11 @@ A big part of the setup process involves filling out a web form on Amazon, rathe
 
 Once you are logged in to the Amazon Developer console, you can go to this URL to create a new Alexa skill:  https://developer.amazon.com/alexa/console/ask, then click the Create Skill button.  You'll be taken to a screen that allows you to name your skill.
 
-<img src="images/skill-name.png" alt="setting the skill name" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-name.png" alt="setting the skill name" style="width:750px;border-style:solid;border-width:5px;">
 
 Give the skill the name "Bus Status" then submit the form.  You'll then be asked if you want to use a predefined template to create your skill.  We want to create a custom one.
 
-<img src="images/skill-model.png" alt="adding sample utterances" style="width:750px;border-style:solid;border-width:5px;">
+<img src=skill-model.png" alt="adding sample utterances" style="width:750px;border-style:solid;border-width:5px;">
 
 Choose "Custom", then hit the create Skill button.  This will create a skeleton skill.  To set it up so it will do anything, we need to fill out information in four areas of the checklist shown on the screen:
 
@@ -61,13 +61,13 @@ Choose "Custom", then hit the create Skill button.  This will create a skeleton 
 * Build Model
 * Endpoint
 
-<img src="images/skill-configuration.png" alt="configuring the skill" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-configuration.png" alt="configuring the skill" style="width:750px;border-style:solid;border-width:5px;">
 
 #### Invocation Name
 
 Tap the invocation section to bring up a screen like below.
 
-<img src="images/skill-invocation-name.png" alt="setting the invocation name" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-invocation-name.png" alt="setting the invocation name" style="width:750px;border-style:solid;border-width:5px;">
 
 The invocation name is a short set of words that activates your skill.  Think of it like a web site's domain name.  Choosing a good invocation name is an important marketing decision, because consumers will have to say "Alexa, ask [invocation name] ..." to use your skill.
 
@@ -85,7 +85,7 @@ or
 
 Collectively, all questions of this type are asking the same thing.  We refer to this as an "intent".  We can create a new intent to answer this type of question in the Intent section of the web portal.  Click on that section, and enter the intent name of "NextBusIntent", then click "Create Custom Intent".
 
-<img src="images/skill-add-intent.png" alt="creating a new intent" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-add-intent.png" alt="creating a new intent" style="width:750px;border-style:solid;border-width:5px;">
 
 #### Samples
 
@@ -108,11 +108,11 @@ In this case, we've only defined two samples.  For a real skill, you probably wa
 
 As you type in the above samples, the console will detect your slot name in the curly braces and prompt you to confirm an existing Slot Type or define a new one.  Choose to create a new one as shown here:
 
-<img src="images/skill-add-sample-utterance.png" alt="adding a sample utterance" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-add-sample-utterance.png" alt="adding a sample utterance" style="width:750px;border-style:solid;border-width:5px;">
 
 When you've added all your sample utterances, the screen should look like this:
 
-<img src="images/skill-add-sample-utterances.png" alt="adding sample utterances" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-add-sample-utterances.png" alt="adding sample utterances" style="width:750px;border-style:solid;border-width:5px;">
 
 You may notice that the slot type has not been defined for Destination.  We're going to define a custom slot type to hold all our favorite destinations.  In the left-hand bar, you'll see "Slot Types (0)" with a blue + Add button by it.  Press that add button to create a new Slot Type.
 
@@ -125,11 +125,11 @@ BWI Airport
 
 A real custom slot might have dozens or hundreds of values.  But let's just keep it to these two so that things are simple.  Here's what the screen should look like:
 
-<img src="images/skill-custom-slot.png" alt="defining a custom slot" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-custom-slot.png" alt="defining a custom slot" style="width:750px;border-style:solid;border-width:5px;">
 
 With these steps done, you should now be able to build your Alexa model.  Click the button that says Build Model.  After a few seconds, you should see a successful result as indicated by a dialog like this:
 
-<img src="images/skill-build-model-success.png" alt="building the model" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-build-model-success.png" alt="building the model" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Processing Questions
@@ -177,7 +177,7 @@ We'll name our new role "BusStatusProcessorRole" for consistency.
 
 If you make all these changes to the screen, it should look like this:
 
-<img src="images/skill-create-lambda.png" alt="creating the lambda" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-create-lambda.png" alt="creating the lambda" style="width:750px;border-style:solid;border-width:5px;">
 
 Hit the Create Function button, and you'll be taken to the next screen which shows the "ARN" for your lambda at the top right of the screen.  This is a unique identifier you can use to hook it up to your Alexa skill.  Write this number down.  Yours will be different, but mine looks something like this:
 
@@ -191,11 +191,11 @@ Now go back in to the lambda configuration and look at the "Designer Section".  
 
 Again, **paste YOUR value (not mine above) into the Skill ID blank on this screen**, then tap Add and Save.  The screenshot below shows what you should see before you hit Add and Save.
 
-<img src="images/skill-link-to-lambda-1.png" alt="linking" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-link-to-lambda-1.png" alt="linking" style="width:750px;border-style:solid;border-width:5px;">
 
 Now we need to do tell the Skill where to find our Lambda.  Go back to the Amazon developer portal skill configuration page,  and click the Endpoint entry section on your Alexa Skill.  Choose the Lambda endpoint option, then paste in the ARN of your Lambda from the previous section.  Again, paste YOUR Lambda ARN, not mine shown above.   Yours will have a different number but otherwise look similar.  Before you submit your form, it should look something like this:
 
-<img src="images/skill-link-to-lambda-2.png" alt="linking to the lambda" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-link-to-lambda-2.png" alt="linking to the lambda" style="width:750px;border-style:solid;border-width:5px;">
 
 #### Adding Code to the Lambda
 
@@ -215,11 +215,11 @@ By default, lambdas can only run for 3 seconds before they get terminated.  In p
 We can now do a first test of our skill.  On the Amazon developer console skill configuration page, click the test tab on the top bar of the screen.  When the test screen opens, you'll see there is a switch at the top that lets you enable and disable testing for the skill.  This will be disabled, by default, so change it to be enabled.
 
 
-<img src="images/skill-first-test.png" alt="enabling testing" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-first-test.png" alt="enabling testing" style="width:750px;border-style:solid;border-width:5px;">
 
 Next type in "use david's test status" into the blank at the top of the page (or if you are feeling ambitious, hit the microphone button and very clearly say the same thing.)  If all goes well, you'll see the skill respond with "Welcome to the bus status skill." like in the screenshot below:
 
-<img src="images/skill-first-test-result.png" alt="running the test" style="width:750px;border-style:solid;border-width:5px;">
+<img src="/images/skill-first-test-result.png" alt="running the test" style="width:750px;border-style:solid;border-width:5px;">
 
 If you don't see this, move on to the next section on debugging.
 
