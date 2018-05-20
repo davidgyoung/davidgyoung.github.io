@@ -437,5 +437,6 @@ Small Device Styles
   }
 
 }
-
-.navbar-default { background-color: #ffffff; }
+.navbar-default {
+    background-image: linear-gradient(to bottom,#000 0,#404040 100%);
+}
