@@ -32,14 +32,37 @@ frameborder="0" allowFullScreen></iframe>
     <ul>
       <li>iOS and Android app development</li>
       <li>Beacon and Bluetooth LE expertise</li>
-      <li>HTML 5 app development</li>
-      <li>Web service development with Ruby and Java</li>
       <li>Bluetooth Low Energy applications</li>
-      <li>News and media applications</li>
+      <li>Alexa and voice AI applications</li>
+      <li>Web service development with Ruby and Java</li>
     </ul>
     
     <h4>Sample Commercial Projects:</h4>
     <table class="samples">
+    <tr>
+    <td>
+    <img class="appimage" src='./images/amtrak-tag-and-track.png'/>
+    <p>Amtrak Bag Check App (Private)</p>
+    <p>
+    Conductor application for baggage check and tracking
+    &#8226; Bar code scanning with iPhone camera
+    &#8226; Bluetooth tag printer integration
+    &#8226; Swift 4 and Objective C
+    &#8226; AWS Lambda with Node.js and a Dynamo DB
+    </p>
+    </td>
+    <td>
+    <img class="appimage" src='./images/amtrak-alexa.png'/>
+    <p>Amtrak Alexa Train Status (Private Beta)</p>
+    <p>
+    Alexa voice app for accessing real-time Amtrak train schedules.
+    &#8226; AWS Lambda with a Dynamo DB
+    &#8226; Java / Maven code to drive lambda
+    &#8226; Restful refresh serverless API
+    </p>
+    </td>
+    </tr>
+
     <tr>
     <td>
     <img class="appimage" src='./images/washingtonpost.png'/>
@@ -73,11 +96,14 @@ Beacon location and transmission tool
 </p>
     </td>
     <td>
-    <img class="appimage" src='./images/smithsonian.png'/>
-    <p>National Air and Space Museum (Private)</p>
+    <img class="appimage" src='./images/commutyble.png'/>
+    <p><a href='https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8'>Commutyble</a></p>
 <p>
-Demonstration museum guide app
+Garage Reservation and Access App
 &#8226; iOS and Android
+&#8226; Coded in Swift, Java and React Native
+&#8226; Bluetooth GATT comms with Node.js garage access point
+&#8226; NFC tag reading
 </p>
     </td>
     </tr>
@@ -87,11 +113,15 @@ Demonstration museum guide app
     <table class="samples">
     <tr>
     <td>
-    <img class="appimage" src='./images/scavengerhunt.png'/>
-    <p>Beacon Scavenger Hunt</p>
-<p>
-iOS and Android
-</p>
+    <img class="appimage" src='./images/ningo-web.png'/>
+    <p><a href='https://ningo-api.herokuapp.com'>Ningo Beacon Registry</a></p>
+    <p>
+    Mobile web app, iOS/Android SDKs
+    &#8226; Responsive web app in React.js
+    &#8226; Beacon metadata server APIs in Ruby on Rails 5 / Postgres
+    &#8226; Open soruce iOS SDK in Swift
+    &#8226; Open soruce Andorid SDK in Java   
+    </p>
     </td>
     <td>
     <img class="appimage" src='./images/androidbeaconlibrary.png'/>
@@ -118,28 +148,25 @@ been an excellent resource for our team."
 <br/>-- James Docherty, Co-Founder, Orchard VIE Ltd</blockquote>
     
     <h4>Other Apps</h4>
-    <p>Amtrak Baggage Check for iOS (private)</p>
     <p>Washington Post News for <a href='https://play.google.com/store/apps/details?id=com.washingtonpost.rainbow&hl=en'>Android</a></p>
     <p>Washington Post News for <a href='https://itunes.apple.com/us/app/the-washington-post/id938922398?mt=8'>iPad</a></p>
-    <p>Commutyble for <a href='https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.commmutyble.commutyble&hl=en'>Android</a></p>
-    <p>Orchard Beacon detector for Android (private)</p>
+    <p>Workstation Locker App for iOS, Android, Mac and Windows 10 (private)</p>
+    <p>Samsung Cordless Security App for Android (private)</p>
+   <p>Orchard Beacon detector for Android (private)</p>
     <p>Washington Post Election 2012 for iPad (retired)</p>
-    <p>Raadaar for iOS and <a href='https://play.google.com/store/apps/details?id=com.mradar&hl=en'>Android</a></p>
     <p>Froogle for <a href='https://itunes.apple.com/us/app/froogle/id1122434174?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.lifemediainc.lifemedia&hl=en'>Android</a></p>
-    <p>Locate Beacon for <a href='https://itunes.apple.com/us/app/locate-beacon/id738709014?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.radiusnetworks.locate&hl=en'>Android</a></p>
     <p>Music + Art for iOS (not released)</p>
     <p>HortiBeacon and ProxInfo for <a href='https://itunes.apple.com/by/app/prox-info/id1055589119?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.proxiot.proxinfo&hl=en'>Android</a></p>
     <p>Fi Mobile Credit Unions for <a href='https://itunes.apple.com/us/app/navy-federal-credit-union/id370811491?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.navyfederal.android&hl=en'>Android</a></p>
-    <p>Consumer Electronics Show 2015/2016 Mobile Maps for iOS and Android (retired)</p>
+    <p>Beacon Scope for <a href='https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner'>Android</a></p>
 
     <h4>Other Libraries</h4>
     <p><a href='http://altbeacon.github.io/android-beacon-library/'>Android Beacon Library</a></p>
     <p>Orchard Beacon detector Library for Android (private)</p>
     <p>Hydr8 BottleKit Framework for iOS (private)</p>
     <p>All My Spots Beacon Framework for iOS (private)</p>
-    <p>Iota Labs BLE Library for Android (private)</p>       
-
-
+    <p>Iota Labs BLE Library for Android (private)</p>
+    <p>Observer SDK for Android (private)</p>       
     <p class="contact">Contact: <a href='mailto:tech@davidgyoung.com'>tech@davidgyoung.com</a></p>
   </section>
 </div>
