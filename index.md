@@ -44,7 +44,7 @@ frameborder="0" allowFullScreen></iframe>
     <img class="appimage" src='./images/amtrak-tag-and-track.png'/>
     <p>Amtrak Bag Check App (Private)</p>
     <p>
-    Conductor application for baggage check and tracking
+    Allows Amtrak conductors to check and track your bags with printed tags
     &#8226; Bar code scanning with iPhone camera
     &#8226; Bluetooth tag printer integration
     &#8226; Swift 4 and Objective C
