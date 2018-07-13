@@ -1,5 +1,3 @@
-# Building Voice Bots with Amazon Alexa
-
 This tutorial gives you an introduction to Amazon's voice bot technologies which include Amazon Alexa and Amazon Web Services Lex.  We'll discuss the differences between the two with a primary focus on Alexa.  To illustrate how the technologies work, we'll actually show how you how to build a custom Alexa skill.  Basic programming knowledge is helpful, although if you're not a coder, the conceptual sections will still be useful to understanding how voice bot technologies work.
 
 ## Alexa Skills Overview
