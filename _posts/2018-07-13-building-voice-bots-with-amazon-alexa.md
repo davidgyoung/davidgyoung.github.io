@@ -6,10 +6,9 @@ This tutorial gives you an introduction to Amazon's voice bot technologies which
 
 Building an Alexa skill allows you to add new functionality to Amazon's Alexa voice assistants, allowing Alexa users around the world to access your new functionality.  Building a skill for Alexa is kind of like building an app for a mobile phone.  When you make an app, you put it in Apple's App Store so consumers can install it on their iPhones, or into the Google Play Store so consumers can install it on their Android phones.  With Alexa skills, you put the skill into Amazon's skill catalog, then any owner of Amazon Echo and other Alexa devices can enable the skill through the companion mobile app or the Alexa skills web page.
 
-## Alexa Skills vs. Amazon Lex
-
-
 <div style="float: right; padding-left: 10px;"><img src="/images/bus-alexa.png" alt="Alexa" style="display: block; width:250px;border-style:solid;border-width:5px;"/></div>
+
+## Alexa Skills vs. Amazon Lex
 
 Alexa Skills are similar to Amazon Lex voice bots.  Both let you create voice-activated digital assistants.  Alexa is a  consumer service available to the general public, and making a custom Alexa skill basically lets you bolt on your voice assistant features to the same Alexa that millions of people use around the world.  
 
