@@ -15,7 +15,7 @@ private APIs) but as of iOS 11, Apple has locked down all known private APIs to 
 be used anymore.
 
 Like it or not, this blocks legitimate uses of phone number capture.  A common workaround is to ask the user to type in their
-phone number, something that is tedious, error-prone, and subject to users providing intentionally providing false numbers.
+phone number, something that is tedious, error-prone, and subject to users intentionally providing false numbers.
 WhatsApp, for example, requires you to type in your phone number, then go through a process to verify the phone number by having their
 servers send you a SMS code that you are later required to enter to complete your registration.
 
@@ -130,7 +130,7 @@ languages.
  <img src="/images/create_lambda.png" alt="create labmda" style="width:750px;border-style:solid;border-width:5px;">
   
 6. Once the Lambda is created, you’ll be presented with a screen where you can actually paste in the code we want to execute.  Since we have selected Node.js, we can paste a simple code snippet inline that will take the parameters from SNS and insert them into our DynamoDB table we made above.   
- Copy and paste the following code and put it into the code entry field: (Paste code from PhoneNumberCatcher.js)
+ Copy and paste the following code and put it into the code entry field: (Paste code from [PhoneNumberCatcher.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberCatcher.js))
 7. Once it is there, hit the orange Save button in the upper right.
 
  <img src="/images/lambda_code_edit.png" alt="labmda code edit" style="width:750px;border-style:solid;border-width:5px;">
@@ -207,7 +207,7 @@ So far, we’ve built something that can take incoming phone numbers and device 
 
 4. Under Policy Templates, choose “Simple Microservice Permissions”
 5. Tap Create function 
-6. Just like before, once the Lambda is created, you can paste in this code: (Paste code from PhoneNumberQuery.js)
+6. Just like before, once the Lambda is created, you can paste in this code: (Paste code from [PhoneNumberQuery.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberQuery.js))
 7. Tap Save
 
   <img src="/images/create_lambda_query.png" alt="create lambda query" style="width:750px;border-style:solid;border-width:5px;">
