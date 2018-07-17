@@ -213,7 +213,7 @@ So far, we’ve built something that can take incoming phone numbers and device 
   <img src="/images/create_lambda_query.png" alt="create lambda query" style="width:750px;border-style:solid;border-width:5px;">
 
 
-### Step 8: Crating an API Gateway
+### Step 8: Creating an API Gateway
 
 1. Go to https://console.aws.amazon.com/
 2. Select Networking and Content Delivery -> API Gateway
