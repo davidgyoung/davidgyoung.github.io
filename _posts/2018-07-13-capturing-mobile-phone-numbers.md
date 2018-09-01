@@ -231,10 +231,12 @@ So far, we’ve built something that can take incoming phone numbers and device 
 
 ### Step 8: Creating an API Gateway
 
+{:start="1"}
 1. Go to https://console.aws.amazon.com/
 2. Select Networking and Content Delivery -> API Gateway
 3. Choose to Create a New API.  
 4. On the API creation screen fill out the following fields:
+
   ```
   Type: New API
   API Name: PhoneNumberQueryAPI
