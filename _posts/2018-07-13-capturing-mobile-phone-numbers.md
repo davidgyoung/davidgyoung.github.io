@@ -128,7 +128,8 @@ languages.
 5. Tap Create function
 
  <img src="/images/create_lambda.png" alt="create labmda" style="width:750px;border-style:solid;border-width:5px;">
-  
+
+{:start="6"}  
 6. Once the Lambda is created, you’ll be presented with a screen where you can actually paste in the code we want to execute.  Since we have selected Node.js, we can paste a simple code snippet inline that will take the parameters from SNS and insert them into our DynamoDB table we made above.   
  Copy and paste the following code and put it into the code entry field: (Paste code from [PhoneNumberCatcher.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberCatcher.js))
 7. Once it is there, hit the orange Save button in the upper right.
@@ -200,11 +201,14 @@ So far, we’ve built something that can take incoming phone numbers and device 
 1. Log in to https://console.aws.amazon.com
 2. Tap Compute -> Lambda -> Create Function
 3. Select “Author from scratch” then enter the following values:
+
+   ```
    Name: PhoneNumberQuery
    Runtime: Node.js 6.10
    Role: Create new role from template(s)
    Role Name: phoneNumberQueryRole
-
+   ```
+{:start="4"}
 4. Under Policy Templates, choose “Simple Microservice Permissions”
 5. Tap Create function 
 6. Just like before, once the Lambda is created, you can paste in this code: (Paste code from [PhoneNumberQuery.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberQuery.js))
@@ -219,34 +223,48 @@ So far, we’ve built something that can take incoming phone numbers and device 
 2. Select Networking and Content Delivery -> API Gateway
 3. Choose to Create a New API.  
 4. On the API creation screen fill out the following fields:
+  ```
   Type: New API
   API Name: PhoneNumberQueryAPI
   Description: (leave blank)
   Endpoint Type: Regional
+  ```
+{:start="5"}
 5. Tap “Create API”
 
   <img src="/images/create_api_query.png" alt="create api query" style="width:750px;border-style:solid;border-width:5px;">
 
+{:start="6"}
 6. You will see an API editor screen.  Under the “Actions” pull down menu, choose “Create” Method, then in the picklist choose “POST”.  
 7. Update the following fields:
    Integration Type: Lambda
    Lambda: PhoneNumberQuery
    Lambda Proxy Integration: CHECKED
+
+{:start="8"}
 8. Tap “Save”
 
+  ```
   <img src="/images/create_post.png" alt="create post" style="width:750px;border-style:solid;border-width:5px;">
+  ```
 
+{:start="9"}
 9. Using the “Actions” pull-down menu, select Deploy.  In the dialog that pops up, enter:
-   
+
+  ```   
   Deployment stage: [New Stage]
   Stage name: test
   Stage description; (leave blank)
   Deployment description (leave blank)
-   
+  ```   
+
+{:start="10"}
 10. Tap Deploy
 
+  
   <img src="/images/deploy_api.png" alt="deploy api" style="width:750px;border-style:solid;border-width:5px;">
 
+{:start="11"}
 11. Wait for the spinner to complete.  When done, you’ll see a new stage has been created, and the URL for your resource will be available.  It should give you an invoke URL that looks something like this:
 https://asdfasdfaa.execute-api.us-east-1.amazonaws.com/test
 
