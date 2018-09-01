@@ -89,10 +89,10 @@ see [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-accoun
     Display name: (blank)  
 5. Tap Create 
 
-<img src="/images/create_sns_topic.png" alt="create sns topic" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/create_sns_topic.png" alt="create sns topic" style="width:750px;border-style:solid;border-width:5px;">
 
 
-### STEP 3: Create a new DynamoDB Table
+### Step 3: Create a new DynamoDB Table
 
 This database table will hold the phone numbers captured
 
@@ -104,7 +104,7 @@ This database table will hold the phone numbers captured
 3. Tap Create
 4. Wait for the table creation to finish. 
 
-<img src="/images/create_dynamodb.png" alt="create dynamo db" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/create_dynamodb.png" alt="create dynamo db" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Step 4: Create a new Lambda
@@ -150,7 +150,7 @@ comes from SMS.)
 4. Check the checkbox next to the phonenumbercatcher topic
 5. Hit the Actions button and choose “Subscribe to topic” 
 
-  <img src="/images/subscribe_to_topic.png" alt="subscribe to topic" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/subscribe_to_topic.png" alt="subscribe to topic" style="width:750px;border-style:solid;border-width:5px;">
 
 6. In the dialog that pops up, choose the following:
    ```
@@ -174,9 +174,9 @@ comes from SMS.)
    Message Format: JSON
    Message:
   
-  {
+   {
 	"default": "{\"originationNumber\": \"+1XXX5550100\",\"messageBody\": \"device_uuid:abcd123456\",\"inboundMessageId\":\"cae173d2-66b9-564c-8309-21f858e9fb84\",\"messageKeyword\": \"device_uuid\",\"destinationNumber\": \"+1XXX5550199\"}"
-  }
+   }
    ```
 
    The message you see above has a bunch of backslashes in it because it is JSON encoded inside a string.  The “default” key tells AWS what the SNS the message should be for default processors.  The value must be a string.  In order to send the same kind of JSON data inside this string that a SMS message would send, we have to put backslashes in front of all the strings in our JSON data.  For now, don’t worry about this too much.  Just trust that this is what the SNS message will look like when it gets converted from a SMS message sending the text message “device_uuid:abcd123456”.
