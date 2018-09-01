@@ -1,5 +1,5 @@
 Ever want to write an iOS app that determines the phone number of the device on which it is running?  Well, it turns
-out you can't, at least not with iOS APIs.  But there is a way!  Read on to find out how.
+out you can't, at least not with iOS APIs.  But throw a cloud server into the mix and there is a way!  
 
 ## The Problem
 
@@ -65,6 +65,7 @@ are limited to sending 200 messages per day.  If you want to go beyond this, you
 short code, for which you must pay.  For our use case, we will not be sending any messages
 at all, so this works fine.
 
+{:start="1"}
 1. Go to https://console.aws.amazon.com and log in or create an account
 2. Fill out a request to get a "long code"" phone number assigned to your AWS account as described [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-long-code.html) (Note that you can only have 5 long codes associated with your account.)
 3. Expect to receive a half dozen questions about your AWS ticket to request the long code.  The agent
@@ -81,6 +82,7 @@ We will use this Simple Notification Service topic to receive any messages from 
 number.  The SNS topic allows us to hook in to other AWS services from SMS.  For details,
 see [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-account.html#settings-account-sms-number-2way)
 
+{:start="1"}
 1. Log in to https://console.aws.amazon.com 
 2. Tap Application Integration -> Simple Notification Service
 3. Tap Create Topic
@@ -96,6 +98,7 @@ see [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-accoun
 
 This database table will hold the phone numbers captured
 
+{:start="1"}
 1. Log in to https://console.aws.amazon.com
 2. Tap Database -> DynamoDB -> Create Table
 3. Set the following values:
@@ -119,11 +122,14 @@ languages.
 1. Log in to https://console.aws.amazon.com
 2. Tap Compute -> Lambda -> Create Function
 3. Select “Author from scratch” then enter the following values:
+   ```
    Name: phoneNumberCatcher
    Runtime: Node.js 6.10
    Role: Create new role from template(s)
    Role Name: phoneNumberCatcherRole
+   ```
 
+{:start="4"}
 4. Under Policy Templates, choose “Simple Microservice Permissions”, and "Dynamo DB Full Access"
 5. Tap Create function
 
@@ -142,6 +148,7 @@ languages.
 This configuration will make it so the Lambda above is executed each time a new SNS message is added (which
 comes from SMS.)  
 
+{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap app integration -> Simple Notification Service
 3. Tap on topics
@@ -158,6 +165,7 @@ comes from SMS.)
 
 ### Step 6: Test SNS integration with your database
 
+{:start="1"}
 1. Return to the SNS console as in the previous step, and tap on the phonenumbercatcher topic, then hit the “Publish to Topic” button at the top of the screen
 2. Edit the following fields:
 
@@ -172,6 +180,7 @@ comes from SMS.)
 
  The message you see above has a bunch of backslashes in it because it is JSON encoded inside a string.  The “default” key tells AWS what the SNS the message should be for default processors.  The value must be a string.  In order to send the same kind of JSON data inside this string that a SMS message would send, we have to put backslashes in front of all the strings in our JSON data.  For now, don’t worry about this too much.  Just trust that this is what the SNS message will look like when it gets converted from a SMS message sending the text message “device_uuid:abcd123456”.
 
+{:start="3"}
 3. Scroll to the bottom of the screen at tap “Publish Message”.
 
   <img src="/images/topic_test.png" alt="topic test" style="width:750px;border-style:solid;border-width:5px;">
@@ -179,6 +188,7 @@ comes from SMS.)
 
 If all goes well, this should insert a new row into the DynamoDB.  To check this:
 
+{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap Database -> DynamoDB -> Tables, and select your table from the list
 3. Tap the “Items” tab.  If it worked, you should see one row in the table with the phone number and device uuid.
@@ -189,6 +199,7 @@ If all goes well, this should insert a new row into the DynamoDB.  To check this
 
 If you don’t see the expected results in the previous section, it’s time to troubleshoot.  You can do this by checking the CloudWatch logs, which get generated whenever our lambda is invoked.
 
+{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap Management Tools -> CloudWatch, then hit the Logs menu item in the left-hand column
 3. You should see a list that includes /aws/lambda/phoneNumberCatcher.  If you do, tap on it.  If you don’t, then this means your lambda is not being invoked.  Go back to the “Hooking up SNS to the Lambda” section and verify everything is set up properly.
@@ -198,6 +209,7 @@ If you don’t see the expected results in the previous section, it’s time to 
 
 So far, we’ve built something that can take incoming phone numbers and device UUIDs and throw them into a database, but we have no way to get them out.  What we now need is a web service that our app can call to get the phone number from our DynamoDB based on its device UUID.  For that, we’ll make another lambda that simply queries the database.
 
+{:start="1"}
 1. Log in to https://console.aws.amazon.com
 2. Tap Compute -> Lambda -> Create Function
 3. Select “Author from scratch” then enter the following values:
