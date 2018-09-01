@@ -65,7 +65,6 @@ are limited to sending 200 messages per day.  If you want to go beyond this, you
 short code, for which you must pay.  For our use case, we will not be sending any messages
 at all, so this works fine.
 
-{:start="1"}
 1. Go to https://console.aws.amazon.com and log in or create an account
 2. Fill out a request to get a "long code"" phone number assigned to your AWS account as described [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-long-code.html) (Note that you can only have 5 long codes associated with your account.)
 3. Expect to receive a half dozen questions about your AWS ticket to request the long code.  The agent
@@ -82,7 +81,6 @@ We will use this Simple Notification Service topic to receive any messages from 
 number.  The SNS topic allows us to hook in to other AWS services from SMS.  For details,
 see [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-account.html#settings-account-sms-number-2way)
 
-{:start="1"}
 1. Log in to https://console.aws.amazon.com 
 2. Tap Application Integration -> Simple Notification Service
 3. Tap Create Topic
@@ -98,7 +96,6 @@ see [here](https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-accoun
 
 This database table will hold the phone numbers captured
 
-{:start="1"}
 1. Log in to https://console.aws.amazon.com
 2. Tap Database -> DynamoDB -> Create Table
 3. Set the following values:
@@ -122,6 +119,7 @@ languages.
 1. Log in to https://console.aws.amazon.com
 2. Tap Compute -> Lambda -> Create Function
 3. Select “Author from scratch” then enter the following values:
+
    ```
    Name: phoneNumberCatcher
    Runtime: Node.js 6.10
@@ -129,18 +127,16 @@ languages.
    Role Name: phoneNumberCatcherRole
    ```
 
-{:start="4"}
 4. Under Policy Templates, choose “Simple Microservice Permissions”, and "Dynamo DB Full Access"
 5. Tap Create function
 
- <img src="/images/create_lambda.png" alt="create labmda" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/create_lambda.png" alt="create labmda" style="width:750px;border-style:solid;border-width:5px;">
 
-{:start="6"}  
 6. Once the Lambda is created, you’ll be presented with a screen where you can actually paste in the code we want to execute.  Since we have selected Node.js, we can paste a simple code snippet inline that will take the parameters from SNS and insert them into our DynamoDB table we made above.   
- Copy and paste the following code and put it into the code entry field: (Paste code from [PhoneNumberCatcher.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberCatcher.js))
+   Copy and paste the following code and put it into the code entry field: (Paste code from [PhoneNumberCatcher.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberCatcher.js))
 7. Once it is there, hit the orange Save button in the upper right.
 
- <img src="/images/lambda_code_edit.png" alt="labmda code edit" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/lambda_code_edit.png" alt="labmda code edit" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Step 5: Hook up SNS to the Lambda
@@ -148,58 +144,60 @@ languages.
 This configuration will make it so the Lambda above is executed each time a new SNS message is added (which
 comes from SMS.)  
 
-{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap app integration -> Simple Notification Service
 3. Tap on topics
 4. Check the checkbox next to the phonenumbercatcher topic
 5. Hit the Actions button and choose “Subscribe to topic” 
+
   <img src="/images/subscribe_to_topic.png" alt="subscribe to topic" style="width:750px;border-style:solid;border-width:5px;">
+
 6. In the dialog that pops up, choose the following:
+   ```
    Protocol: AWS Lambda
    Endpoint: phoneNumberCatcher (choose yours from the picklist)
    Version or Alias: default
+   ```
 7. Tap “Create subscription”
-  <img src="/images/subscribe_to_topic2.png" alt="subscribe to topic part 2" style="width:750px;border-style:solid;border-width:5px;">
+
+   <img src="/images/subscribe_to_topic2.png" alt="subscribe to topic part 2" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Step 6: Test SNS integration with your database
 
-{:start="1"}
+
 1. Return to the SNS console as in the previous step, and tap on the phonenumbercatcher topic, then hit the “Publish to Topic” button at the top of the screen
 2. Edit the following fields:
 
+   ```
    Subject: (leave this blank)
    Message Format: JSON
    Message:
- ```
+  
   {
 	"default": "{\"originationNumber\": \"+1XXX5550100\",\"messageBody\": \"device_uuid:abcd123456\",\"inboundMessageId\":\"cae173d2-66b9-564c-8309-21f858e9fb84\",\"messageKeyword\": \"device_uuid\",\"destinationNumber\": \"+1XXX5550199\"}"
   }
- ```
+   ```
 
- The message you see above has a bunch of backslashes in it because it is JSON encoded inside a string.  The “default” key tells AWS what the SNS the message should be for default processors.  The value must be a string.  In order to send the same kind of JSON data inside this string that a SMS message would send, we have to put backslashes in front of all the strings in our JSON data.  For now, don’t worry about this too much.  Just trust that this is what the SNS message will look like when it gets converted from a SMS message sending the text message “device_uuid:abcd123456”.
+   The message you see above has a bunch of backslashes in it because it is JSON encoded inside a string.  The “default” key tells AWS what the SNS the message should be for default processors.  The value must be a string.  In order to send the same kind of JSON data inside this string that a SMS message would send, we have to put backslashes in front of all the strings in our JSON data.  For now, don’t worry about this too much.  Just trust that this is what the SNS message will look like when it gets converted from a SMS message sending the text message “device_uuid:abcd123456”.
 
-{:start="3"}
 3. Scroll to the bottom of the screen at tap “Publish Message”.
 
-  <img src="/images/topic_test.png" alt="topic test" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/topic_test.png" alt="topic test" style="width:750px;border-style:solid;border-width:5px;">
 
 
 If all goes well, this should insert a new row into the DynamoDB.  To check this:
 
-{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap Database -> DynamoDB -> Tables, and select your table from the list
 3. Tap the “Items” tab.  If it worked, you should see one row in the table with the phone number and device uuid.
 
-  <img src="/images/database_result.png" alt="database test result" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/database_result.png" alt="database test result" style="width:750px;border-style:solid;border-width:5px;">
 
 ### Troubleshooting
 
 If you don’t see the expected results in the previous section, it’s time to troubleshoot.  You can do this by checking the CloudWatch logs, which get generated whenever our lambda is invoked.
 
-{:start="1"}
 1. Go to https://console.aws.amazon.com
 2. Tap Management Tools -> CloudWatch, then hit the Logs menu item in the left-hand column
 3. You should see a list that includes /aws/lambda/phoneNumberCatcher.  If you do, tap on it.  If you don’t, then this means your lambda is not being invoked.  Go back to the “Hooking up SNS to the Lambda” section and verify everything is set up properly.
@@ -209,7 +207,6 @@ If you don’t see the expected results in the previous section, it’s time to 
 
 So far, we’ve built something that can take incoming phone numbers and device UUIDs and throw them into a database, but we have no way to get them out.  What we now need is a web service that our app can call to get the phone number from our DynamoDB based on its device UUID.  For that, we’ll make another lambda that simply queries the database.
 
-{:start="1"}
 1. Log in to https://console.aws.amazon.com
 2. Tap Compute -> Lambda -> Create Function
 3. Select “Author from scratch” then enter the following values:
@@ -220,69 +217,63 @@ So far, we’ve built something that can take incoming phone numbers and device 
    Role: Create new role from template(s)
    Role Name: phoneNumberQueryRole
    ```
-{:start="4"}
+
 4. Under Policy Templates, choose “Simple Microservice Permissions”
 5. Tap Create function 
 6. Just like before, once the Lambda is created, you can paste in this code: (Paste code from [PhoneNumberQuery.js](https://github.com/davidgyoung/phone-number-capture-ios/blob/master/AWS/PhoneNumberQuery.js))
 7. Tap Save
 
-  <img src="/images/create_lambda_query.png" alt="create lambda query" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/create_lambda_query.png" alt="create lambda query" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Step 8: Creating an API Gateway
 
-{:start="1"}
+An API gateway exposes your Lambda as a web service.  Create one like this:
+
 1. Go to https://console.aws.amazon.com/
 2. Select Networking and Content Delivery -> API Gateway
 3. Choose to Create a New API.  
 4. On the API creation screen fill out the following fields:
 
-  ```
-  Type: New API
-  API Name: PhoneNumberQueryAPI
-  Description: (leave blank)
-  Endpoint Type: Regional
-  ```
-{:start="5"}
+   ```
+   Type: New API
+   API Name: PhoneNumberQueryAPI
+   Description: (leave blank)
+   Endpoint Type: Regional
+   ```
 5. Tap “Create API”
 
-  <img src="/images/create_api_query.png" alt="create api query" style="width:750px;border-style:solid;border-width:5px;">
+   <img src="/images/create_api_query.png" alt="create api query" style="width:750px;border-style:solid;border-width:5px;">
 
-{:start="6"}
 6. You will see an API editor screen.  Under the “Actions” pull down menu, choose “Create” Method, then in the picklist choose “POST”.  
 7. Update the following fields:
+   ```
    Integration Type: Lambda
    Lambda: PhoneNumberQuery
    Lambda Proxy Integration: CHECKED
-
-{:start="8"}
+   ```
 8. Tap “Save”
 
-  ```
-  <img src="/images/create_post.png" alt="create post" style="width:750px;border-style:solid;border-width:5px;">
-  ```
+   <img src="/images/create_post.png" alt="create post" style="width:750px;border-style:solid;border-width:5px;">
 
-{:start="9"}
 9. Using the “Actions” pull-down menu, select Deploy.  In the dialog that pops up, enter:
 
-  ```   
-  Deployment stage: [New Stage]
-  Stage name: test
-  Stage description; (leave blank)
-  Deployment description (leave blank)
-  ```   
+   ```   
+   Deployment stage: [New Stage]
+   Stage name: test
+   Stage description; (leave blank)
+   Deployment description (leave blank)
+   ```   
 
-{:start="10"}
 10. Tap Deploy
 
   
-  <img src="/images/deploy_api.png" alt="deploy api" style="width:750px;border-style:solid;border-width:5px;">
+    <img src="/images/deploy_api.png" alt="deploy api" style="width:750px;border-style:solid;border-width:5px;">
 
-{:start="11"}
 11. Wait for the spinner to complete.  When done, you’ll see a new stage has been created, and the URL for your resource will be available.  It should give you an invoke URL that looks something like this:
 https://asdfasdfaa.execute-api.us-east-1.amazonaws.com/test
 
-  <img src="/images/staging_url.png" alt="staging url" style="width:750px;border-style:solid;border-width:5px;">
+    <img src="/images/staging_url.png" alt="staging url" style="width:750px;border-style:solid;border-width:5px;">
 
 
 ### Testing the Lookup API
@@ -311,7 +302,7 @@ the easiest way to get an app identifier is to use the iOS UUID generator and sa
 persistent storage.  This way, the first time your app is run it will generate a UUID and then keep
 using it forever.  The code below does this:
 
-```
+```javascript
     var deviceUuid: String {
         get {
             if let val = UserDefaults.standard.string(forKey: "deviceUuid") {
@@ -335,7 +326,7 @@ message body and a destination phone number and present it to a user for them to
 and then gesture to send.  The code below does prepares this message with the device id
 in the message body, populates the destination phone number, then presents the view.
 
-```
+```javascript
     self.composeVC = MFMessageComposeViewController()
     self.composeVC.messageComposeDelegate = self
                 
@@ -355,8 +346,7 @@ We can use a URLSession and a URLSessionDataTask to asynchronously call the serv
 if it has gotten the SMS.  Here is code that will do that:
 
 
-
-```
+```javascript
     let session = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
   
