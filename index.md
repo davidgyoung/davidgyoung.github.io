@@ -119,8 +119,8 @@ Garage Reservation and Access App
     Mobile web app, iOS/Android SDKs
     &#8226; Responsive web app in React.js
     &#8226; Beacon metadata server APIs in Ruby on Rails 5 / Postgres
-    &#8226; Open soruce iOS SDK in Swift
-    &#8226; Open soruce Andorid SDK in Java   
+    &#8226; Open source iOS SDK in Swift
+    &#8226; Open source Andorid SDK in Java   
     </p>
     </td>
     <td>
