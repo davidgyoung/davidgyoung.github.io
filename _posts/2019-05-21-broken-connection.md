@@ -10,8 +10,8 @@ Most complaints about Bluetooth on Android are vague and anecdotal.  With no har
 The data show that even at close range, Android Bluetooth connections fail a whopping 20 percent of the time, compared to less than 2 percent on iOS.  This sizable difference is big enough to feel in daily use.  On iOS, Bluetooth connection just work.  On Android, they usually work, but they aren't as reliable.
 
 
-<img src="images/broken_connection/image1.png" style="width: 624px; height: 385px"/>
-<img src="images/broken_connection/image2.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image1.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image2.png" style="width: 624px; height: 385px"/>
 
 The first graph above shows the percentage success and failure rate on each platform.  The second graph shows the raw counts of successes and failures recorded.  The total numbers are lower on Android because most users are on  the iOS platform.
 
@@ -36,18 +36,18 @@ The data show that there is no significant difference across different iPhone mo
 
 On Android, much higher failure rates are the norm, even on high end phones and newer operating system versions.  Surprisingly, success rates on Android 6-9 are not noticeably better than Android 5.  This is bad news as it indicates the situation on Android is not improving with newer operating system releases.  
 
-<img src="images/broken_connection/image3.png" style="width: 624px; height: 385px"/>
-<img src="images/broken_connection/image4.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image3.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image4.png" style="width: 624px; height: 385px"/>
 
 Newer Android hardware models also do not show reliability improvements.  Grouping the Samsung data by hardware generation (e.g. Galaxy Note 8, Galaxy S8 Edge,  and Galaxy S8 are lumped together as generation 8) show the failure rate is not improving.
 
-<img src="images/broken_connection/image5.png" style="width: 624px; height: 385px"/>
-<img src="images/broken_connection/image6.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image5.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image6.png" style="width: 624px; height: 385px"/>
 
 The detailed failure rates across Android models and operating system versions should be taken with a grain of salt.  The data were collected at garages in and around Washington, DC where iPhones are far more prevalent than Android models, making the Android data points relatively sparse.
 
-<img src="images/broken_connection/image7.png" style="width: 624px; height: 385px"/>
-<img src="images/broken_connection/image8.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image7.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image8.png" style="width: 624px; height: 385px"/>
 
 The more you drill down into the Android data, the fewer data points you have, making the statistical significance questionable.  So while it is possible to conclude with confidence that Android is far worse than iOS and that things are not getting better, it is hard to say anything about which Android models and manufacturers are better than others.  
 
