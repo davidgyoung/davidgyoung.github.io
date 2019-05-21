@@ -36,12 +36,12 @@ The data show that there is no significant difference across different iPhone mo
 
 On Android, much higher failure rates are the norm, even on high end phones and newer operating system versions.  Surprisingly, success rates on Android 6-9 are not noticeably better than Android 5.  This is bad news as it indicates the situation on Android is not improving with newer operating system releases.  
 
-<img src="/images/broken_connection/image3.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image5.png" style="width: 624px; height: 385px"/>
 <img src="/images/broken_connection/image7.png" style="width: 624px; height: 385px"/>
 
 Newer Android hardware models also do not show reliability improvements.  Grouping the Samsung data by hardware generation (e.g. Galaxy Note 8, Galaxy S8 Edge,  and Galaxy S8 are lumped together as generation 8) show the failure rate is not improving.
 
-<img src="/images/broken_connection/image5.png" style="width: 624px; height: 385px"/>
+<img src="/images/broken_connection/image3.png" style="width: 624px; height: 385px"/>
 <img src="/images/broken_connection/image6.png" style="width: 624px; height: 385px"/>
 
 The detailed failure rates across Android models and operating system versions should be taken with a grain of salt.  The data were collected at garages in and around Washington, DC where iPhones are far more prevalent than Android models, making the Android data points relatively sparse.
