@@ -4,7 +4,7 @@
 Building Bluetooth apps on Android has always been tricky.  Those of us who have worked on Andriod since its earliest days have been hounded by frustrations of the platform. These range from buggy Bluetooth stacks to fragmentation caused by manufacturers that have to build their phones just a little differently.
 
 
-Most complaints about Bluetooth on Android are vague and anecdotal.  With no hard data  to back up the problems, it is never clear if the real problem stems from operator,  a buggy app, or the hardware  of a  crappy off-brand phone.  It has always been easy to dismiss the complainers as  malingerers.  But months of real world data collection across a variety of devices provides evidence that Android itself is the real problem.  
+Most complaints about Bluetooth on Android are vague and anecdotal.  With no hard data  to back up the problems, it is never clear if the real problem stems from operator,  a buggy app, or the hardware  of a  crappy off-brand phone.  It has always been easy to dismiss the complainers as  malingerers.  But months of real world data collection across a variety of devices provides evidence that Android itself is the real problem.
 
 
 The data show that even at close range, Android Bluetooth connections fail a whopping 20 percent of the time, compared to less than 2 percent on iOS.  This sizable difference is big enough to feel in daily use.  On iOS, Bluetooth connection just work.  On Android, they usually work, but they aren't as reliable.
@@ -22,19 +22,19 @@ The first graph above shows the percentage success and failure rate on each plat
 Using a local automated parking system, I collected the data between late 2016 and early 2019.  The system provides automated commercial garage access using mobile phones to open the entry and exit gates.  The apps for iOS and Android use mobile data networks to authorize gate openings when a mobile network is  available.   But often times, when exiting a cavernous parking garage, cell connectivity is spotty at best.  That's where Bluetooth comes in.  We fitted garages with LInux-based bluetooth relays near the exits hosting a custom Bluetooth LE GATT service.   When the mobile app can't reach the server, it connects to this Bluetooth service to authorize opening the gate, allowing the customer to exit the garage.
 
 
-This usually works great. Within a couple of seconds of tapping an exit button, the gate simply goes up, and a happy customer drives away.  
+This usually works great. Within a couple of seconds of tapping an exit button, the gate simply goes up, and a happy customer drives away.
 
 
-Sometimes, however, this fails.  Anecdotal reports of drivers getting error messages (especially on Android) led me to collect metrics in the app and report them to a server.  
+Sometimes, however, this fails.  Anecdotal reports of drivers getting error messages (especially on Android) led me to collect metrics in the app and report them to a server.
 
 
 The data collected include not just success/fail status, but the specific failure condition as well as the phone manufacturer, model, and operating system version.  This allows us to compare failure rates across not just Android and iOS, but across different operating systems and versions.
 
 
-The data show that there is no significant difference across different iPhone models and iOS versions.  All perform quite well with very low failure rates of less than 2 percent.  
+The data show that there is no significant difference across different iPhone models and iOS versions.  All perform quite well with very low failure rates of less than 2 percent.
 
 
-On Android, much higher failure rates are the norm, even on high end phones and newer operating system versions.  Surprisingly, success rates on Android 6-9 are not noticeably better than Android 5.  This is bad news as it indicates the situation on Android is not improving with newer operating system releases.  
+On Android, much higher failure rates are the norm, even on high end phones and newer operating system versions.  Surprisingly, success rates on Android 6-9 are not noticeably better than Android 5.  This is bad news as it indicates the situation on Android is not improving with newer operating system releases.
 
 <img src="/images/broken_connection/image5.png" style="width: 624px; height: 385px"/>
 <img src="/images/broken_connection/image7.png" style="width: 624px; height: 385px"/>
@@ -49,7 +49,7 @@ The detailed failure rates across Android models and operating system versions s
 <img src="/images/broken_connection/image1.png" style="width: 624px; height: 385px"/>
 <img src="/images/broken_connection/image8.png" style="width: 624px; height: 385px"/>
 
-The more you drill down into the Android data, the fewer data points you have, making the statistical significance questionable.  So while it is possible to conclude with confidence that Android is far worse than iOS and that things are not getting better, it is hard to say anything about which Android models and manufacturers are better than others.  
+The more you drill down into the Android data, the fewer data points you have, making the statistical significance questionable.  So while it is possible to conclude with confidence that Android is far worse than iOS and that things are not getting better, it is hard to say anything about which Android models and manufacturers are better than others.
 
 
 For this reason, two versions of each graph are shown, one with total counts of successes and failures, and the other showing percentages.  But because we have very few samples for the new Galaxy S10 or for Huawei and Yulong devices (rare in Washington, DC), don't jump to conclusions about these outlier success and failure rates.  When you see a count below 50 or so in the second graph, know that the percentages in the first graph really don't mean anything.
@@ -79,16 +79,18 @@ On Android, the vast majority of the failures are on step 2.  The connection att
 What's more, the success/failure rates mentioned above are not counted as failures in the data set used for comparison in this article  if the data exchange ultimately succeeds on retires.  Anecdotal testing shows that retries on iOS are rare but on Android extremely common.  This means the raw Android failure rate is probably higher than 20 percent, and even in success cases, the common retries cause Android operations to be much slower than iOS.
 
 
-Without a doubt, the Android Bluetooth stack has a much higher failure rate establishing a Bluetooth LE connection than iOS, and once it establishes one, it is much more likely to drop the connection.  
+Without a doubt, the Android Bluetooth stack has a much higher failure rate establishing a Bluetooth LE connection than iOS, and once it establishes one, it is much more likely to drop the connection.
 
 
 I don't know the specific reasons why this is true.  A Bluetooth packet sniffer might reveal some insights, but it certainly wouldn't help anything without changes to Android.  These problems have been there since Bluetooth LE support was added in version 4.3 nearly six years ago.  Clearly, fixing this is not high on Google's priority list.  Knowing the details of why it is unreliable won't change anything for apps using public versions of Android.
 
 
+**UPDATE: [Changes in Android 10 offer hope for the future](/2019/10/08/broken-connection-no-more)**
+
 ### Is Bluetooth Useless on Android?
 
 
-Unreliable as Bluetooth LE connections are, there is still plenty of use for Bluetooth on Android.  Lots of functions like speakers use Bluetooth classic functionality and has nothing to do with Bluetooth LE connections.  Not all Bluetooth LE use cases even require connections.  Bluetooth LE Beacons, for example, are connectionless and work quite well on Android.  
+Unreliable as Bluetooth LE connections are, there is still plenty of use for Bluetooth on Android.  Lots of functions like speakers use Bluetooth classic functionality and has nothing to do with Bluetooth LE connections.  Not all Bluetooth LE use cases even require connections.  Bluetooth LE Beacons, for example, are connectionless and work quite well on Android.
 
 
 Some applications that rely on rare Bluetooth LE connections, like configuring a fitness tracker, work fine.  You might have to hit retry a few times before it works.  That is a bit annoying, but certainly acceptable.
@@ -106,7 +108,7 @@ If you are designing a system using Bluetooth LE on Android, and it needs to be 
 If not, can you use two-way beaconing to accomplish your goal?  While difficult to design, I have seen this approach work reliably.  Unfortunately it is limited to low data throughput use cases.
 
 
-If you cannot avoid Bluetooth LE connections, ask yourself this question:  Is a 20 percent failure rate acceptable for my use case?  Will my Android users be understanding if they sometimes have to hit retry a few times, and even then it still might not work?  For some use cases, this still might be acceptable.  
+If you cannot avoid Bluetooth LE connections, ask yourself this question:  Is a 20 percent failure rate acceptable for my use case?  Will my Android users be understanding if they sometimes have to hit retry a few times, and even then it still might not work?  For some use cases, this still might be acceptable.
 
 
 But for use cases where a high degree of reliability is critical, don't even try it.  The common approach to Bluetooth development is to build iOS first and then expect Android to be "just the same.”.  That approach will not make you, your boss, nor your customers happy.
