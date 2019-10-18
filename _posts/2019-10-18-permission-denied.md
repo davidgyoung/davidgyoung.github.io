@@ -13,10 +13,11 @@ both platforms.  For iOS the changes are big and potentially alarming from the e
 Users who grant an app permission to always access location are periodically be presented with a warning dialog reminding them this is happening.  iOS 13 ow adds a map showing the specific locations
 where the app read their location.
 
-images/used-location-in-background.jpg
-images/ios13-location-background-prompt.png
+| ![](/images/used-location-in-background.jpg){:width="320px"} |
+|:--:|
+| *New iOS Background Location Usage Warning* |
 
-For many apps, the new dialog on the right is unnecessary alarming.  Think about an app that checks your location periodically to tell you where you last parked your car.  Even if the app doesn't share the location with anyone, it will need to
+For many apps, the new dialog is unnecessary alarming.  Think about an app that checks your location periodically to tell you where you last parked your car.  Even if the app doesn't share the location with anyone, it will need to
 track wherever you drive just to know where you last were.  Such a dialog implies to the many users that this location information may be being transmitted off the phone for nefarious purposes, even if the app does none of these
 questionable things.   The knee-jerk user response is to say, "why do they need to track me?" and then deny always permission.  They don't realize how the app works and why background location access is important.
 
@@ -29,12 +30,16 @@ Of course, some apps, do behave badly, which is precisely why Apple added this s
 
 Unfortunately, this is not the only iOS 13 change.   When prompting the user for location permission for the app, iOS now offers a third option in addition to "Allow always" and "Allow when in use":  "Allow now".  The "allow now" option will give the app the ability to access your location on this app launch, but not the next one.  If the user selects "allow now", the next time the app is launched the user will be prompted again.
 
-images/ios13-initial-location-prompt.png
-images/ios10-location-promopt.png
-
+| ![](images/ios10-location-promopt.png){:width="320px"} | ![](/images/ios13-initial-location-prompt.png){:width="320px"} |
+|:--:|:--:|
+| *iOS 8-12* | *iOS 13*|
 
 
 But what about always access for getting location in the background?  Note that the new dialog above doesn't even give that option.  This is true even if the code that presented the dialog by specifically requesting always authorization with `locationManager.requestAlwaysAuthorization()`. The user has to grant one of these two options first, and once one is granted, the app may then request always authorization:
+
+| ![](/images/ios13-location-background-prompt.png){:width="320px"} |
+|:--:|
+| *Switching to Always Permission* |
 
 This two-step process is unfortunately cumbersome and will cause many users to be annoyed enough to deny always permission.
 
@@ -43,7 +48,7 @@ This two-step process is unfortunately cumbersome and will cause many users to b
 
 Changes in Android 10 are a bit of catch-up relative to iOS.  Android 10 now brings a new separate background location permission to the platform, and allowing the user to decide whether to grant "all the time" or "only while using the app" location permission.
 
-| ![/images/android-9-location-prompt.png](/images/android-9-location-prompt.png) | ![/images/android-permission-dialog.png](/images/android-permission-dialog.png) |
+| ![](/images/android-9-location-prompt.png){:width="320px"} | ![](/images/android-permission-dialog.png){:width="320px"} |
 |:--:|:--:|
 | *Android 6-9* | *Android 10*|
 
@@ -53,11 +58,9 @@ big change.  Even if the app asks for background "all the time" permission, the 
 permission.  The dialog below shows how that would look:
 
 
-| ![/images/android-switch-to-always.png](/images/android-switch-to-always.png) |
+| ![](/images/android-switch-to-always.png){:width="320px"} |
 |:--:|
 | *Switching to All The Time Permission* |
-
-<img src='/images/scanpermission.png' width="320px"/>
 
 Note that unike iOS, the Android permission request dialogs don't show you a user-customizable justification section.  As a result, it is a good idea to send you own pop-up first, setting the expectations that you are about to ask for location permission, and explaining the proper reasoning.
 
