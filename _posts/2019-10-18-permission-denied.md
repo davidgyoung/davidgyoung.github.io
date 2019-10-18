@@ -17,6 +17,7 @@ where the app read their location.
 |:--:|
 | *New iOS Background Location Usage Warning* |
 
+<br/>
 
 For many apps, the new dialog is unnecessary alarming.  Think about an app that checks your location periodically to tell you where you last parked your car.  Even if the app doesn't share the location with anyone, it will need to
 track wherever you drive just to know where you last were.  Such a dialog implies to the many users that this location information may be being transmitted off the phone for nefarious purposes, even if the app does none of these
@@ -35,6 +36,7 @@ Unfortunately, this is not the only iOS 13 change.   When prompting the user for
 |:--:|:--:|
 | *iOS 8-12* | *iOS 13*|
 
+<br/>
 
 But what about always access for getting location in the background?  Note that the new dialog above doesn't even give that option.  This is true even if the code that presented the dialog by specifically requesting always authorization with `locationManager.requestAlwaysAuthorization()`. The user has to grant one of these two options first, and once one is granted, the app may then request always authorization:
 
@@ -45,6 +47,7 @@ But what about always access for getting location in the background?  Note that 
 
 This two-step process is unfortunately cumbersome and will cause many users to be annoyed enough to deny always permission.
 
+<br/>
 
 ## Android 10 Changes
 
@@ -54,6 +57,7 @@ Changes in Android 10 are a bit of catch-up relative to iOS.  Android 10 now bri
 |:--:|:--:|
 | *Android 6-9* | *Android 10*|
 
+<br/>
 
 Apple introduced the equivalent changes to iOS 8 back in 2014.  But for Android apps that were built to expect always having permission to track beacons in the background once the user gives initial consent, this is still a
 big change.  Even if the app asks for background "all the time" permission, the user might only grant permission only when while using the app.   Apps must take care to expect this possibility and detect if the user has only granted "only while using the app" permission, ask the user to change the foreground-only location
@@ -64,6 +68,7 @@ permission.  The dialog below shows how that would look:
 |:--:|
 | *Switching to All The Time Permission* |
 
+<br/>
 
 Note that unike iOS, the Android permission request dialogs don't show you a user-customizable justification section.  As a result, it is a good idea to send you own pop-up first, setting the expectations that you are about to ask for location permission, and explaining the proper reasoning.
 
@@ -82,6 +87,7 @@ For those curious about how we got to this point, here is a table that shows the
 |Allow Once Offered              | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 |Background Requires Second Step | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 
+<br/>
 
 As you can see, Android 10 is currently where iOS 8 was in 2014.  Is that a bad thing?  Maybe -- if you think Apple's onerous new permissions process and frightening map dialog are a good thing.
 For lemming-like users who tend to grant any permissions requested just to play a sketchy game app, Apple's approach might be a good thing.  But for thoughtful app developers trying to make apps that legitimately use location in the background, Apple's new restrictions are nothing less than a nightmare.
