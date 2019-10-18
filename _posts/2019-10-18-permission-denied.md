@@ -17,6 +17,7 @@ where the app read their location.
 |:--:|
 | *New iOS Background Location Usage Warning* |
 
+
 For many apps, the new dialog is unnecessary alarming.  Think about an app that checks your location periodically to tell you where you last parked your car.  Even if the app doesn't share the location with anyone, it will need to
 track wherever you drive just to know where you last were.  Such a dialog implies to the many users that this location information may be being transmitted off the phone for nefarious purposes, even if the app does none of these
 questionable things.   The knee-jerk user response is to say, "why do they need to track me?" and then deny always permission.  They don't realize how the app works and why background location access is important.
@@ -30,7 +31,7 @@ Of course, some apps, do behave badly, which is precisely why Apple added this s
 
 Unfortunately, this is not the only iOS 13 change.   When prompting the user for location permission for the app, iOS now offers a third option in addition to "Allow always" and "Allow when in use":  "Allow now".  The "allow now" option will give the app the ability to access your location on this app launch, but not the next one.  If the user selects "allow now", the next time the app is launched the user will be prompted again.
 
-| ![](images/ios10-location-promopt.png){:width="320px"} | ![](/images/ios13-initial-location-prompt.png){:width="320px"} |
+| ![](/images/ios10-location-promopt.png){:width="320px"} | ![](/images/ios13-initial-location-prompt.png){:width="320px"} |
 |:--:|:--:|
 | *iOS 8-12* | *iOS 13*|
 
@@ -40,6 +41,7 @@ But what about always access for getting location in the background?  Note that 
 | ![](/images/ios13-location-background-prompt.png){:width="320px"} |
 |:--:|
 | *Switching to Always Permission* |
+
 
 This two-step process is unfortunately cumbersome and will cause many users to be annoyed enough to deny always permission.
 
@@ -62,6 +64,7 @@ permission.  The dialog below shows how that would look:
 |:--:|
 | *Switching to All The Time Permission* |
 
+
 Note that unike iOS, the Android permission request dialogs don't show you a user-customizable justification section.  As a result, it is a good idea to send you own pop-up first, setting the expectations that you are about to ask for location permission, and explaining the proper reasoning.
 
 ## How We Got Here
@@ -71,13 +74,14 @@ For those curious about how we got to this point, here is a table that shows the
 
 |Location Permission Restrictions|Android 4-5|Android 6-9|Android 10+|iOS 7|iOS 8|iOS 9-12|iOS 13+|
 |                                | 2013      | 2015      | 2019      | 2013| 2014| 2016   | 2019  |
-+--------------------------------+-----------+-----------+-----------+-----+-----+--------+-------+
+|:------------------------------:|:---------:|:---------:|:---------:|:---:|:---:|:------:|:-----:|
 |Dynamic Prompt Required?        | NO        | YES       | YES       | NO  | YES | YES    | YES   |
 |Background/Foreground Separate? | NO        | NO        | YES       | NO  | YES | YES    | YES   |
 |Background Use Warning Dialog   | NO        | NO        | NO        | NO  | NO  | YES    | YES   |
 |Background Use Warning w/ Map   | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 |Allow Once Offered              | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 |Background Requires Second Step | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
+
 
 As you can see, Android 10 is currently where iOS 8 was in 2014.  Is that a bad thing?  Maybe -- if you think Apple's onerous new permissions process and frightening map dialog are a good thing.
 For lemming-like users who tend to grant any permissions requested just to play a sketchy game app, Apple's approach might be a good thing.  But for thoughtful app developers trying to make apps that legitimately use location in the background, Apple's new restrictions are nothing less than a nightmare.
