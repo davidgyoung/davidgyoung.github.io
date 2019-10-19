@@ -28,7 +28,7 @@ be to deny the permission, then complain that the app doesn't work when they lat
 
 Even if the user isn't suspicious about the app, seeing that dialog over and over gets annoying.  Unfortunately, the only way to shut it up permanently is by denying background location access by tapping "When in use".  Some folks will certainly pick that option for that reason.
 
-Of course, some apps, do behave badly, which is precisely why Apple added this scary-looking dialog.  Honest app developers who need to track location in the background for legitimate purposes are collateral damage.
+Of course, some apps do behave badly, which is precisely why Apple added this scary-looking dialog.  Honest app developers who need to track location in the background for legitimate purposes are collateral damage.
 
 Unfortunately, this is not the only iOS 13 change.   When prompting the user for location permission for the app, iOS now offers a third option in addition to "Allow always" and "Allow when in use":  "Allow now".  The "allow now" option will give the app the ability to access your location on this app launch, but not the next one.  If the user selects "allow now", the next time the app is launched the user will be prompted again.
 
