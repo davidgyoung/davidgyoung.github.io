@@ -72,6 +72,13 @@ permission.  The dialog below shows how that would look:
 
 Note that unike iOS, the Android permission request dialogs don't show you a user-customizable justification section.  As a result, it is a good idea to send you own pop-up first, setting the expectations that you are about to ask for location permission, and explaining the proper reasoning.
 
+The second change in Android 10 is the new background usage warning dialog.  If your app accesses the location in the background and does not send a visible notification to the user, Android will now issue its own notification to warn the user much like iOS:
+
+| ![](/images/android-background-warning.png){:width="320px"} |
+|:--:|
+| *New Android Background Location Usage Warning* |
+
+
 ## How We Got Here
 
 For those curious about how we got to this point, here is a table that shows the evolution of location permission changes with operating system releases.
@@ -82,12 +89,17 @@ For those curious about how we got to this point, here is a table that shows the
 |:------------------------------:|:---------:|:---------:|:---------:|:---:|:---:|:------:|:-----:|
 |Dynamic Prompt Required?        | NO        | YES       | YES       | NO  | YES | YES    | YES   |
 |Background/Foreground Separate? | NO        | NO        | YES       | NO  | YES | YES    | YES   |
-|Background Use Warning Dialog   | NO        | NO        | NO        | NO  | NO  | YES    | YES   |
+|Background Use Warning Dialog   | NO        | NO        | YES       | NO  | NO  | YES    | YES   |
 |Background Use Warning w/ Map   | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 |Allow Once Offered              | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 |Background Requires Second Step | NO        | NO        | NO        | NO  | NO  | NO     | YES   |
 
 <br/>
 
-As you can see, Android 10 is currently where iOS 8 was in 2014.  Is that a bad thing?  Maybe -- if you think Apple's onerous new permissions process and frightening map dialog are a good thing.
+As you can see, Android 10 is currently where iOS 8 was in 2016.  Is that a bad thing?  Maybe -- if you think Apple's onerous new permissions process and frightening map dialog are a good thing.
 For lemming-like users who tend to grant any permissions requested just to play a sketchy game app, Apple's approach might be a good thing.  But for thoughtful app developers trying to make apps that legitimately use location in the background, Apple's new restrictions are nothing less than a nightmare.
+
+
+
+<hr/>
+This post as been updated to reflect that Android 10 shows a warning dialog for background usage.
