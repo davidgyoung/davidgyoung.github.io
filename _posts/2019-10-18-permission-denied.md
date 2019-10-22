@@ -13,11 +13,13 @@ both platforms.  For iOS the changes are big and potentially alarming from the e
 Users who grant an app permission to always access location are periodically be presented with a warning dialog reminding them this is happening.  iOS 13 ow adds a map showing the specific locations
 where the app read their location.
 
-| ![](/images/used-location-in-background.jpg){:width="320px"} |
+| ![](/images/used-location-in-background.png){:width="320px"} |
 |:--:|
 | *New iOS Background Location Usage Warning* |
 
 <br/>
+
+Each dot represents a place where the phone was when an app accessed its location -- either a lat/lon coordinate or a beacon.  Even if your app just detected a beacon, the map coordinate of where it did this is plotted.
 
 For many apps, the new dialog is unnecessary alarming.  Think about an app that checks your location periodically to tell you where you last parked your car.  Even if the app doesn't share the location with anyone, it will need to
 track wherever you drive just to know where you last were.  Such a dialog implies to the many users that this location information may be being transmitted off the phone for nefarious purposes, even if the app does none of these
