@@ -27,7 +27,7 @@ The developers give a basic overview of how they say it works:
 
 > TraceTogether uses Bluetooth to perform handshakes with other TraceTogether phones. Your Bluetooth-enabled phone is capable of connecting to multiple Bluetooth devices simultaneously, e.g. smart watch and wireless headphones. The different connections are separate and should not be affected by or affect TraceTogether... We use the Bluetooth Relative Signal Strength Indicator (RSSI) readings between devices across time to approximate the proximity and duration of an encounter between two users. This proximity and duration information is stored on one's phone for 21 days on a rolling basis — anything beyond that would be deleted. No location data is collected.
 
-Since the Android and iOS apps require a mobile phone with a Singapore country code to activate, I couldn't experiment with them myself. And because the source code is still not open source as of this writing (despite the authors' promises to release it) the easiest way to see how it works is to analyze the Android APK file. This analysis reveals a number of insights:
+Since the Android and iOS apps require a mobile phone with a Singapore country code to activate, I couldn't experiment with them myself. And because the source code was  not open source as of this writing (despite the authors' promises to release it) the easiest way to see how it works is to analyze the Android APK file. This analysis reveals a number of insights:
 
 1. The app advertises a Bluetooth LE GATT Service that exposes readable characteristics. It does not use Bluetooth beacons, and its advertisements are not beacons because they do not contain a unique identifier.
 2. The app connects to each other device it sees that also hosts the app, reading a GATT characteristic to reveal a numeric identifier to identify the other user. This identifier is supposedly anonymized so only the Ministry of Health knows who it is.
@@ -111,7 +111,7 @@ But while this privacy protection is laudable, the fact that the app's current t
 
 Both of these apps have gotten a lot of attention, but given the quality of what they do, this attention isn't really deserved.
 
-Singapore's Ministry of Health got attention because they were the first to release an app. They got more attention by promising to release it as "open source" -- something they still haven't done three weeks later as of this writing. The iOS version of the app expects users to leave their phone turned on all the time with the app visible on the screen for "best" results. Without a proper design that allows iOS Bluetooth tracking to work in the background, their app design is simply a non-starter.
+Singapore's Ministry of Health got attention because they were the first to release an app. They got more attention by promising to release it as "open source" -- something they still haven't done three weeks later as of this writing. (**EDIT:** the code has now been posted [here](https://github.com/opentrace-community)) The iOS version of the app expects users to leave their phone turned on all the time with the app visible on the screen for "best" results. Without a proper design that allows iOS Bluetooth tracking to work in the background, their app design is simply a non-starter.
 
 The MIT app, meanwhile, has no working Bluetooth tracking at all, relying instead on inaccurate location measurements typically without aid of the battery-hungry GPS radio. This simply isn't accurate enough to be a useful contact tracing tool.
 
