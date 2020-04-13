@@ -22,3 +22,5 @@ Don't get to excited, though.  Even if Android 10 does offer significant reliabi
 If past experience is a guide to the future, it will be five years before 90 percent of Android devices have Android 10.  That's how long it took to reach the 90 percent distribution of Android 5.0 that exists today.
 
 Five years is a long time to cross your fingers.  But with luck, by 2024, the worst of our Android Bluetooth connection reliability problems may be behind us.
+
+**UPDATE: April 13, 2020**: Bad news: several months of data collection has not shown statistically significant improvement in BLE connection reliability on Android 10.
