@@ -1,4 +1,8 @@
 
+<img src="/images/covid-transmitter.png" alt="BeaconScope Transmitter"
+	width="320" style="float: right; margin: 10px; "/>
+<img src="/images/covid-receiver.png" alt="BeaconScope Receiver"
+	width="320" style="float: right; margin: 10px; "/>
 
 When Google and Apple announced a common specification for pandemic contact tracing on April 10, it offered hope for a universal system.  Currently, dozens of projects around the world are working on mutually incompatible systems, specifically targeting national populations, individual provinces or even employees of  specific companies.
 
@@ -10,9 +14,11 @@ Android, however, is another story.  While Google has likewise not released any 
 
 The common system relies on a bluetooth packet that will be sent out of both Android and iOS phones.  The packet is a GATT service advertisement with attached data and looks like this:
 
+
 |length| type |  UUID  |length| type |  UUID  | rolling proximity identifier | metadata |
 |:----:|:----:|:------:|:----:|:----:|:------:|:------------------------------:|:--------:|
 | 0x03 | 0x03 | 0xfd6f | 0x17 | 0x16 | 0xfd6f |          16 bytes              | 4 bytes  |
+
 
 The 16-bit GATT service UUID, 0xfd6f identifies a transmission from the phone as an Exposure Notification Service advertisement (until recently branded the Contact Detection Service).  The 16 bytes of attached data is the identifier of the transmitting device -- a "rolling proximity identifier" as the spec describes.  An app transmitting this packet  is supposed to change this identifier every 15 minutes based on a cryptographic algorithm.   The final four bytes are "encrypted metadata" which include versioning information as well as a tx power value that indicates how strong the bluetooth signal might be at a known distance.
 GATT service advertisements are typically used to advertise connectable Bluetooth LE GATT services -- a little program that you can connect to over bluetooth, and exchange data.    But i this case, there is no such service.  The advertisement itself indicates it is not connectable.  The entire purpose of the advertisement is to announce its presence and deliver this identifier.  It is therefore a Bluetooth LE beacon advertisement, much like Google's Eddystone family of Bluetooth beacon advertisements that also are based on GATT service advertisements.
@@ -20,11 +26,6 @@ GATT service advertisements are typically used to advertise connectable Bluetoot
 ## Exposure Notification Beacons in Action
 
 Today, you can use the free and  open-source Android Beacon Library to send and receive this beacon format.   You can even try it out without writing any code by using my off-the-shelf [BeaconScope](https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner&hl=en_US) mobile app.  This app is based on the same library, and can both send and receive this Exposure Notification Service beacon advertisement.
-
-<img src="/images/covid-transmitter.png" alt="BeaconScope Transmitter"
-	width="320" style="float: right; margin: 10px; "/>
-<img src="/images/covid-receiver.png" alt="BeaconScope Receiver"
-	width="320" style="float: right; margin: 10px; "/>
 
 ## Making Your Own App
 
@@ -92,9 +93,19 @@ If you decide to proceed, be forewarned that the spec is not final, so it may be
 
 If you do build your own implementation, and a user later installs both your version and that inside Google Play Services, both will work at the same time.  To other devices, two implementations on a single phone will appear to be two different phones (although over short intervals they will share the same bluetooth MAC address so it is theoretically possible to know they are the same phone.)  The consequences of two copies running on the phone are little different than carrying two phones in your pocket.
 
+## Hacking on iOS
+
+Similar hacking on iOS is currently impossible -- at least on the transmission side.  Apple's iOS APIs prevent any 3rd party app from making the phone transmit the kind
+of advertisement shown in the spec.  While apps can transmit GATT service advertisements, they can't attach data.  The operating system forbids it.
+
+And while iOS can detect such advertisements with CoreBluetooth -- for now -- there is some risk that a future iOS update will block this.   An iOS update expected in May
+will be needed to make the operating system (but likely not 3rd party apps) transmit the new beacon type.  But it is quite likely that iOS will update CoreBluetooth in this
+same release to filter out receiving these advertisements.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon
+advertisement spec.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
+
 ## Is It Safe to Hack With This?
 
-One good thing about Apple and Google's system is that it is resistant to interference.  In general, you don't need to worry about causing problems by transmitting garbage identifiers.  While other phones using the system will store your garbage identifiers, and they will take up a tiny amount of space on phones, they will never match a reported positive contact, so the consequences will be nil.
+One good thing about Apple and Google's system is that it is resistant to interference.  In general, you don't need to worry about causing problems by building an Android app that transmits garbage identifiers.  While other phones using the system will store your garbage identifiers, and they will take up a tiny amount of space on phones, they will never match a reported positive contact, so the consequences will be nil.
 
 ## Hack Responsibly
 
