@@ -6,7 +6,7 @@
 
 When Google and Apple announced a common specification for pandemic contact tracing on April 10, it offered hope for a universal system.  Currently, dozens of projects around the world are working on mutually incompatible systems, specifically targeting national populations, individual provinces or even employees of  specific companies.
 
-The big problem with proposals from Google and Apple is that they are so far just vaporware.  Promised SDKs have not been published as of this writing, and cannot be used.   What's more, the latest version of iOS, 13.4.1 disallows transmitting the Exposure Notification Service beacon bluetooth advertising packet in the common specification.  Apple will have to push out a new version of iOS (maybe 13.5?)  before any code an be written.  When Apple's SDK is released and delivered with in a future version of XCode, Apple is expected to block direct transmission and detection of this beacon format by third party apps, forcing them to use higher-level APIs.
+The big problem with proposals from Google and Apple is that they are so far just vaporware.  Promised SDKs have not been published as of this writing, and cannot be used.   What's more, the latest version of iOS, 13.4.1 disallows transmitting the Exposure Notification Service beacon bluetooth advertising packet in the common specification.  Apple will have to push out a new version of iOS (maybe 13.5?)  before any code can be written.  When Apple's SDK is released and delivered with in a future version of XCode, Apple is expected to block direct transmission and detection of this beacon format by third party apps, forcing them to use higher-level APIs.
 
 Android, however, is another story.  While Google has likewise not released any new SDKs that support the proposed APIs (although a Google Play Services update is expected for this), Android already supports sending and detecting the Exposure Notification Service beacon advertisement that [the bluetooth specification](https://www.blog.google/documents/62/Exposure_Notification_-_Bluetooth_Specification_v1.1.pdf) envisions.
 
@@ -14,11 +14,14 @@ Android, however, is another story.  While Google has likewise not released any 
 
 The common system relies on a bluetooth packet that will be sent out of both Android and iOS phones.  The packet is a GATT service advertisement with attached data and looks like this:
 
+<hr/>
 
+{:class="table table-bordered"}
 |length| type |  UUID  |length| type |  UUID  | rolling proximity identifier | metadata |
 |:----:|:----:|:------:|:----:|:----:|:------:|:------------------------------:|:--------:|
 | 0x03 | 0x03 | 0xfd6f | 0x17 | 0x16 | 0xfd6f |          16 bytes              | 4 bytes  |
 
+<hr/>
 
 The 16-bit GATT service UUID, 0xfd6f identifies a transmission from the phone as an Exposure Notification Service advertisement (until recently branded the Contact Detection Service).  The 16 bytes of attached data is the identifier of the transmitting device -- a "rolling proximity identifier" as the spec describes.  An app transmitting this packet  is supposed to change this identifier every 15 minutes based on a cryptographic algorithm.   The final four bytes are "encrypted metadata" which include versioning information as well as a tx power value that indicates how strong the bluetooth signal might be at a known distance.
 GATT service advertisements are typically used to advertise connectable Bluetooth LE GATT services -- a little program that you can connect to over bluetooth, and exchange data.    But i this case, there is no such service.  The advertisement itself indicates it is not connectable.  The entire purpose of the advertisement is to announce its presence and deliver this identifier.  It is therefore a Bluetooth LE beacon advertisement, much like Google's Eddystone family of Bluetooth beacon advertisements that also are based on GATT service advertisements.
