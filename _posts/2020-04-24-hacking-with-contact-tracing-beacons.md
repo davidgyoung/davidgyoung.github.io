@@ -66,7 +66,7 @@ public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
 }
 ```
 
-You can also make the above transmitter and receiver work indefinitely in the background by using a Foreground Service. The library documentation describes how to set this up here.
+You can also make the above transmitter and receiver work indefinitely in the background by using a Foreground Service. The library documentation describes how to set this up [here](https://altbeacon.github.io/android-beacon-library/foreground-service.html).
 
 
 What the above shows is just raw transmission and reception.  It doesn't show is how to handle the "rolling proximity identifiers" inside these beacons.
