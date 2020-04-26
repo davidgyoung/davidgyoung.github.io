@@ -98,13 +98,40 @@ If you do build your own implementation, and a user later installs both your ver
 
 ## Hacking on iOS
 
-Similar hacking on iOS is currently impossible -- at least on the transmission side.  Apple's iOS APIs prevent any 3rd party app from making the phone transmit the kind
-of advertisement shown in the spec.  While apps can transmit GATT service advertisements, they can't attach data.  The operating system forbids it.
+Equivalent hacking on iOS is currently impossible -- at least on the transmission side.  Apple's iOS APIs prevent any 3rd party app from making the phone transmit the kind
+of advertisement shown in the spec.  While apps can transmit GATT service advertisements, they can't attach data. This is because the `CBAdvertisementDataServiceDataKey` that associates service data to an advertisement is read-only on iOS. You simply can't set the data needed to advertise one of these beacons.
 
-And while iOS can detect such advertisements with CoreBluetooth -- for now -- there is some risk that a future iOS update will block this.   An iOS update expected in May
-will be needed to make the operating system (but likely not 3rd party apps) transmit the new beacon type.  But it is quite likely that iOS will update CoreBluetooth in this
-same release to filter out receiving these advertisements.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon
-advertisement spec.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
+What iOS can do is detect such advertisements with CoreBluetooth -- for now at least.  Here's code that shows how you can do that:
+
+```
+let exposureNotificationServiceUuid = CBUUID(string: "FD6F")
+centralManager?.scanForPeripherals(withServices: [exposureNotificationServiceUuid], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+
+...
+func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+   if let advDatas = advertisementData[CBAdvertisementDataServiceDataKey] as? NSDictionary {
+       if let advData = advDatas.object(forKey: CBUUID(string: "FD6F")) as? Data {
+           let hexString = advData.map { String(format: "%02hhx", $0) }.joined()
+
+           let proximityId = String(hexString.prefix(32))
+           let metadata = hexString.suffix(8)
+           NSLog("Discovered Exposure Notification Service Beacon with Proximity ID\(proximityId), metadata \(metadata) and RSSI \(RSSI)")
+       }
+   }
+}
+```
+
+The code above shows you how to start a scan for a service advertisement of the proper FD6F type.  When one is detected, it then pulls out the
+service advertising data and splits it into the proximity id and metadata from the spec, and prints these out has hex bytes to the log.
+
+There are a few caveats to this code:
+
+1. It will only receive constant updates when the app is in the foreground -- meaning the device screen is unlocked, turned on and the app is visible.
+2. In the background, the app will get at most one detection callback.  That is because iOS ignores the `CBCentralManagerScanOptionAllowDuplicatesKey` when an app is not in the foreground, and only gives you the first detection.  While this is good enough to build a scanning test tool on iOS, it makes it impossible for third party apps to develop background detectors.
+
+There is also some risk that a future iOS update will block the above code from working.   An iOS update expected in May will  make the operating system (but likely not 3rd party apps) be able to transmit the new beacon type.  But it is also likely that iOS will update CoreBluetooth in this
+
+same release to filter out receiving these advertisements using code like shown above, so it no longer works.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon advertisement spec -- the array of advertising data is truncated to zero bytes.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
 
 ## Is It Safe to Hack With This?
 
