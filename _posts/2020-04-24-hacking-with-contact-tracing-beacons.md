@@ -112,5 +112,5 @@ One good thing about Apple and Google's system is that it is resistant to interf
 
 ## Hack Responsibly
 
-While it is safe to experiment, with enough effort, it is possible to maliciously try to interfere with the system.  You could, for example, to build an app that listens for real identifiers from these beacons in one location send them over the internet to a different phone, then re-transmit them in another location.  Such a "replay attack" would make the system believe that one person was in contact with people in a different location.  In most cases, this wouldn't really matter, but it could affect individual contact reports.  And if done on a broad scale, it could make the system less reliable.  Please don't do that.
+While it is safe to experiment, with enough effort, it is possible to maliciously try to interfere with the system.  You could, for example, build an app that listens for real identifiers from these beacons in one location, then send them over the internet to a different phone, then re-transmit them in another location.  Such a "replay attack" would make the system believe that one person was in contact with people in a different location.  In most cases, this wouldn't really matter, but it could affect individual contact reports.  And if done on a broad scale, it could make the system less reliable.  Please don't do that.
 
