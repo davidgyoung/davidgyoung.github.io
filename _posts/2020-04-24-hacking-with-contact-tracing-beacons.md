@@ -77,7 +77,7 @@ Much of the proposal from Android and Apple is devoted to [how to handle these i
 
 Because the identifiers appear to be randomly changing every 15 minutes, it is supposed to be impossible to tell which identifiers came from which device (or even which rotated identifiers came from the same device) -- unless you have the device's daily key.
 
-If medical tests confirm that a device's owner is infected with novel coronavirus, that owner can optionally publish his or her temporary exposure key over the last few weeks.  These temporary exposure key allow all other mobile phones in this system to look for a match.  They can then re-run the cryptographic algorithm with these keys, comparing the generated "rolling proximity identifiers" against ones the user has seen at specific times.  If there is a match, this means app knows when it saw the infected user, for how long, and how strong the bluetooth signal was at those times.
+If medical tests confirm that a device's owner is infected with novel coronavirus, that owner can optionally publish his or her temporary exposure keys from the last few weeks.  These temporary exposure keys allow all other mobile phones in this system to look for a match.  The apps on these phones can then re-run the cryptographic algorithm with these published keys, allowing it to see if any of the "rolling proximity identifiers" match ones send out by the device owned by the infected user.  If there is a match, the app knows the specific time when it saw the infected user, for how long, and how strong the bluetooth signal was at those times, giving an idea of how close the two people came.
 
 ## Can You Build Your Own Implementation?
 
