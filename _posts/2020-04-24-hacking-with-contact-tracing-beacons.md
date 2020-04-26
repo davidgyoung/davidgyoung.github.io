@@ -92,7 +92,7 @@ There are lots of reasons you might want to do so:
 
 If you decide to proceed, be forewarned that the spec is not final, so it may be subject to change.  In the past few days, the spec was updated to add the Encrypted Metadata field and change much of the terminology.
 
-## Multiple Installations on the same Phone
+## Multiple Installations on the Same Phone
 
 If you do build your own implementation, and a user later installs both your version and that inside Google Play Services, both will work at the same time.  To other devices, two implementations on a single phone will appear to be two different phones (although over short intervals they will share the same bluetooth MAC address so it is theoretically possible to know they are the same phone.)  The consequences of two copies running on the phone are little different than carrying two phones in your pocket.
 
