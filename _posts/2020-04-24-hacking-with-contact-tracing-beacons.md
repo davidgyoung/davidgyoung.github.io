@@ -129,9 +129,7 @@ There are a few caveats to this code:
 1. It will only receive constant updates when the app is in the foreground -- meaning the device screen is unlocked, turned on and the app is visible.
 2. In the background, the app will get at most one detection callback.  That is because iOS ignores the `CBCentralManagerScanOptionAllowDuplicatesKey` when an app is not in the foreground, and only gives you the first detection.  While this is good enough to build a scanning test tool on iOS, it makes it impossible for third party apps to develop background detectors.
 
-There is also some risk that a future iOS update will block the above code from working.   An iOS update expected in May will  make the operating system (but likely not 3rd party apps) be able to transmit the new beacon type.  But it is also likely that iOS will update CoreBluetooth in this
-
-same release to filter out receiving these advertisements using code like shown above, so it no longer works.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon advertisement spec -- the array of advertising data is truncated to zero bytes.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
+There is also some risk that a future iOS update will block the above code from working.   An iOS update expected in May will  make the operating system (but likely not 3rd party apps) be able to transmit the new beacon type.  But it is also likely that iOS will update CoreBluetooth in this same release to filter out receiving these advertisements using code like shown above, so it no longer works.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon advertisement spec -- the array of advertising data is truncated to zero bytes.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
 
 ## Is It Safe to Hack With This?
 
