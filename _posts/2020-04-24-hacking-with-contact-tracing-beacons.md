@@ -6,7 +6,8 @@
 
 When Google and Apple announced a common specification for pandemic contact tracing on April 10, it offered hope for a universal system.  Currently, dozens of projects around the world are working on mutually incompatible systems, specifically targeting national populations, individual provinces or even employees of  specific companies.
 
-The big problem with proposals from Google and Apple is that they are so far just vaporware.  Promised SDKs have not been published as of this writing, and cannot be used.   What's more, the latest version of iOS, 13.4.1 disallows transmitting the Exposure Notification Service beacon bluetooth advertising packet in the common specification.  Apple will have to push out a new version of iOS (maybe 13.5?)  before any code can be written.  When Apple's SDK is released and delivered with in a future version of XCode, Apple is expected to block direct transmission and detection of this beacon format by third party apps, forcing them to use higher-level APIs.
+The big problem with proposals from Google and Apple is that they are so far just vaporware.  Promised SDKs have not been published as of this writing, and cannot be used.  (UPDATE 4/30/2020: Apple released SDKs in XCode 11.5 beta for running on iOS 13.5 beta 2.) What's more, the latest version of iOS, 13.4.1 disallows transmitting the Exposure Notification Service beacon bluetooth advertising packet in the common specification.  Apple will have to release a 13.5 version of iOS before this will work.  When Apple's SDK is released and delivered with in a future version of XCode, Apple is expected to block direct transmission and detection of this beacon format by third party apps, forcing them to use higher-level APIs. (UPDATE 4/30/2020: This expected blocking is in place as of iOS 13.5 beta 2.)
+
 
 Android, however, is another story.  While Google has likewise not released any new SDKs that support the proposed APIs (although a Google Play Services update is expected for this), Android already supports sending and detecting the Exposure Notification Service beacon advertisement that [the bluetooth specification](https://www.blog.google/documents/62/Exposure_Notification_-_Bluetooth_Specification_v1.1.pdf) envisions.
 
@@ -101,7 +102,7 @@ If you do build your own implementation, and a user later installs both your ver
 Equivalent hacking on iOS is currently impossible -- at least on the transmission side.  Apple's iOS APIs prevent any 3rd party app from making the phone transmit the kind
 of advertisement shown in the spec.  While apps can transmit GATT service advertisements, they can't attach data. This is because the `CBAdvertisementDataServiceDataKey` that associates service data to an advertisement is read-only on iOS. You simply can't set the data needed to advertise one of these beacons.
 
-What iOS can do is detect such advertisements with CoreBluetooth -- for now at least.  Here's code that shows how you can do that:
+What iOS can do is detect such advertisements with CoreBluetooth -- for now at least.  (UPDATE 4/30/2020: This no longer works on iOS 13.5 beta 2.  It works on earlier OS versions.) Here's code that shows how you can do that:
 
 ```
 let exposureNotificationServiceUuid = CBUUID(string: "FD6F")
@@ -129,7 +130,7 @@ There are a few caveats to this code:
 1. It will only receive constant updates when the app is in the foreground -- meaning the device screen is unlocked, turned on and the app is visible.
 2. In the background, the app will get at most one detection callback.  That is because iOS ignores the `CBCentralManagerScanOptionAllowDuplicatesKey` when an app is not in the foreground, and only gives you the first detection.  While this is good enough to build a scanning test tool on iOS, it makes it impossible for third party apps to develop background detectors.
 
-There is also some risk that a future iOS update will block the above code from working.   An iOS update expected in May will  make the operating system (but likely not 3rd party apps) be able to transmit the new beacon type.  But it is also likely that iOS will update CoreBluetooth in this same release to filter out receiving these advertisements using code like shown above, so it no longer works.  Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon advertisement spec -- the array of advertising data is truncated to zero bytes.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
+There is also some risk that a future iOS update will block the above code from working.   An iOS update expected in May will  make the operating system (but likely not 3rd party apps) be able to transmit the new beacon type.  But it is also likely that iOS will update CoreBluetooth in this same release to filter out receiving these advertisements using code like shown above, so it no longer works.  (UPDATE 4/30/2020: Indeed, this blocking is confirmed as of iOS 13.5 beta 2.) Apple did exactly that for iBeacon advertisements.  CoreBluetooth APIs filter out any data bytes matching the iBeacon advertisement spec -- the array of advertising data is truncated to zero bytes.  Time will tell, but it is entirely likely they will do the same for this new beacon type.
 
 ## Is It Safe to Hack With This?
 
