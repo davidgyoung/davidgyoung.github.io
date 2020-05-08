@@ -88,12 +88,11 @@ matter if the app is in the foreground (visible) or if it is in the background w
 phone doesn't even need to be unlocked.  If the screen is on, locked or not, a callback for the overflow advertisement will get delivered to an app scanning for it
 repeatedly each time it is detected.
 
-The above screen-on restriction is why full background to background Bluetooth data exchange are often considered impossible on iOS.   While such an exchange is possible when both apps are in the background, it is only possible if the device receiving the advertisement has the screen on.  Fortunately there are tricks that can make the screen go on temporarily. (See note.)
+The above screen-on restriction is why full background to background Bluetooth data exchange are often considered impossible on iOS.   While such an exchange is possible when both apps are in the background, it is only possible if the device receiving the advertisement has the screen on.  Fortunately, there are tricks that can make the screen go on temporarily. (See note.)
 
-> Note: A common trick to make the screen go on is to send a local notification.  So long as the user is not in do not disturb mode
-on iOS, this will cause the screen to illuminate for 10 seconds, and overflow advertisements to get delivered during that time. By periodically
-forcing the screen on with this technique, an iOS app can discover services advertised from nearby backgrounded iOS apps.
-
+> Note: With default configuration, an iPhone screen will turn on briefly each time a notificaton is received -- every time the user gets an email or SMS  message, for example.  While this happens frequently enough on its own, a guranteed event can also be triggered from within an app by sending a local notification.  So long as the iOS device is not in do not disturb mode, any notification  will cause the screen to illuminate for 10 seconds, and overflow advertisements to get delivered during that time. During these intervals, 
+a backgrounded iOS app can discover services advertised from nearby backgrounded iOS apps. 
+ 
 ## How iOS Handles Collisions
 
 Since many service UUIDs share each bit position in the overflow area bitmask.  What happens if an iOS app is scanning for a
