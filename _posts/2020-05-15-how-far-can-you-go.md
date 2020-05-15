@@ -11,6 +11,9 @@ Estimating distance with Bluetooth has long been a source of befuddlement and co
 
 The idea is simple.  A radio transmitter sends out a signal to a receiver.  The receiver measures the strength of the signal.  When the transmitter is close, the signal is strong.  When the transmitter is far, the signal is weak.
 
+<img src="/images/signal-vs-distance.png" alt="Signal vs. Distance Graph"
+	width="320" style="float: left; margin: 10px; "/>
+
 Reversing this logic, if we see a weak signal we might assume the transmitter is far and a strong signal that the transmitter is near.  But what signal level indicates near and what signal indicates far?
 
 The answer to that question depends on the strength of the transmitter and how good the receiver is at picking it up.  The solution to this problem is to measure the signal at a known distance.  A distance of one meter is typically used because it is close enough for the signal to be strong but far enough to avoid "near field" effects that can make radio signals unpredictable.
@@ -21,12 +24,10 @@ So a simple distance estimation might work like this:. If the known measured sig
 
 Converting this information to a specific distance is theoretically possible because the energy in radio waves decreases exponentially with distance.   A graph shows a curve like this:
 
-<img src="/images/signal-vs-distance.png" alt="Signal vs. Distance Graph"
-	width="320" style="float: right; margin: 10px; "/>
 
 The units are decibels relative to one milliiwatt (dBm), and values are negative with more negative signals indicating a weaker signal.    This is  a logarithmic unit so a decline in 10 dB of signal level (e.g. from -50 dBm to -60 dBm) means that the power has declined by a factor of 10 -- only 10% of the signal power remains.
 
-The graph above can be explained by theoretical physics using this equation: <img src="/images/formula.png" alt="Distance Formula" style="display: inline-block;"/> where p is the measured power at 1 meter, s is the signal strength and n is a constant that describes how easily the signal passes through the air.
+The graph above can be explained by theoretical physics using this equation: <img src="/images/formula.png" alt="Distance Formula" width="100px" style="display: inline-block;"/> where p is the measured power at 1 meter, s is the signal strength and n is a constant that describes how easily the signal passes through the air.
 
 While that equation works, it is typically not as good at estimating distance as power functions using a cure fitting technique.  The reason the equation offered by physics doesn't work quite as well in practice is because there are other factors going on that involve more than radio signal theory (more on that below.) Here is an equation with a similarly shaped curve derived experimentally using a Nexus 4 as a bluetooth receiver.  This is Java code:
 
@@ -57,8 +58,8 @@ Do not expect this to be able to tell you the difference between being 1.1 or 1.
 The further you go away, the less accurate the distance estimates get.  At a real distance of 2 meters, the calculated distance estimate might be 2 +/- 1 meter.  Note that the margin of error has doubled.  The same thing happens the further you get away -- the margin of error keeps getting bigger.  Eventually, when you are over 10 meters away, the distance estimate has very little accuracy.  It can tell you that you are far away (e.g. > 8 meters, but it can't tell you how far.)
 
 
-<img src="/images/estimated-vs-actual.png" alt="Estimated vs. Actual Graph"
-	width="320" style="float: right; margin: 10px; "/>
+<img src="/images/estimate-vs-actual.png" alt="Estimated vs. Actual Graph"
+	width="320" style="float: left; margin: 10px; "/>
 
 
 The reason this happens is that the signal power declines exponentially the further you get away.   Bluetooth radios are weak transmitters to begin with.  Maximum range is typically around 100 meters.  But before you get anywhere near that distance, the signal is so weak that it is barely detectable.  At a range of 30 meters,  the signal level typically declines to about -100 dBm.  This is typically the weakest signal level that a receiver can hear.   At 40 meters, the receiver will fail to receive most packets as the signal is so weak it is indiscernible from background radio noise.  The packets it does receive have the same measured signal level of about -100 dBm as seen at 30 meters -- the receiver just gets fewer of them.  Those packets it did get were lucky to be heard.  
