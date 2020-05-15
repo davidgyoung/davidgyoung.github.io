@@ -18,7 +18,7 @@ Reversing this logic, if we see a weak signal we might assume the transmitter is
 
 The answer to that question depends on the strength of the transmitter and how good the receiver is at picking it up.  The solution to this problem is to measure the signal at a known distance.  A distance of one meter is typically used because it is close enough for the signal to be strong but far enough to avoid "near field" effects that can make radio signals unpredictable.
 
-So a simple distance estimation might work like this:. If the known measured signal level at 1 meter is -50dBm, and we see a slightly weaker signal, then that means the estimated distance is just a bit further than one meter.  To aid in this calculation, a bluetooth transmitter can actually send a data packet containing this "measured power" or "tx power" value.  That way the receiver knows the proper reference point for different transmitters with different power levels.
+So a simple distance estimation might work like this:. If the known measured signal level at 1 meter is -50dBm, and we see a slightly weaker signal, then that means the estimated distance is just a bit further than one meter.  To aid in this calculation, a Bluetooth transmitter can actually send a data packet containing this "measured power" or "tx power" value.  That way the receiver knows the proper reference point for different transmitters with different power levels.
 
 ## The Math
 
@@ -29,7 +29,7 @@ The units are decibels relative to one milliiwatt (dBm), and values are negative
 
 The graph above can be explained by theoretical physics using this equation: <img src="/images/formula.png" alt="Distance Formula" width="100px" style="display: inline-block;"/> where p is the measured power at 1 meter, s is the signal strength and n is a constant that describes how easily the signal passes through the air.
 
-While that equation works, it is typically not as good at estimating distance as power functions using a cure fitting technique.  The reason the equation offered by physics doesn't work quite as well in practice is because there are other factors going on that involve more than radio signal theory (more on that below.) Here is an equation with a similarly shaped curve derived experimentally using a Nexus 4 as a bluetooth receiver.  This is Java code:
+While that equation works, it is typically not as good at estimating distance as power functions using a cure fitting technique.  The reason the equation offered by physics doesn't work quite as well in practice is because there are other factors going on that involve more than radio signal theory (more on that below.) Here is an equation with a similarly shaped curve derived experimentally using a Nexus 4 as a Bluetooth receiver.  This is Java code:
 
 ```
 protected static double calculateDistance(int measuredPower, double rssi) {
@@ -108,9 +108,9 @@ There are lots of factors that complicate Bluetooth distance estimates.  Each on
 ### Phone Hardware and Bluetooth Stack Variations
 
 * **Non-Spherical Antenna Patterns**: antennas are not equally good at transmitting or receiving signals in every direction.  Every phone model has a different antenna and the signal will be weaker in some directions.  When graphed, this typically looks like a heart-shape.  On one side there is a pronounced recession with a weaker transmission/reception.  Depending on how you point your phone, signal levels will change.
-* **RSSI Sensor**:  the signal measurement is done by a bluetooth chip that typically uses an 8-bit analog to digital converter to get a value of 0 to 255, where 255 is the strongest signal.  There is code in the bluetooth stack to convert these values to a value in dBm.  How good this measurement and conversion actually represents a true value in dBm depends on all kinds of engineering factors.  How much care did the phone designers take here?  Did they simply copy the conversion from a completely different phone model without adjusting it  for new hardware differences?  Often times, particularly on cheap Android phones, the answer to the last question is certainly yes.
+* **RSSI Sensor**:  the signal measurement is done by a Bluetooth chip that typically uses an 8-bit analog to digital converter to get a value of 0 to 255, where 255 is the strongest signal.  There is code in the Bluetooth stack to convert these values to a value in dBm.  How good this measurement and conversion actually represents a true value in dBm depends on all kinds of engineering factors.  How much care did the phone designers take here?  Did they simply copy the conversion from a completely different phone model without adjusting it  for new hardware differences?  Often times, particularly on cheap Android phones, the answer to the last question is certainly yes.
 * **Bluetooth Channel Rotation**: Bluetooth LE uses three different advertising channels, each of which uses a slightly different radio frequency.  When scanning for advertisements, each phone model rotates between these frequencies at a different rate, ranging from a fraction of a second (iPhone) to 10 seconds (Samsung).  Because the antenna is tuned for peak detection at a single frequency, the measured RSSI will vary by a few dB depending on which channel it is on.  This can have a big effect on distance estimates, and there is no way to read the channel you are on, so the only way around this is to sample data over longer periods of time than the worst-case rotation rate across all channels (e.g. 30 seconds).
-* **Phone Case**:  A phone's case (especially if metal) and component placement will affect the signal strength and antenna pattern.  A user-installed phone case can do the same, although the more typical ones made of polymers typically have a minor effect.  But you never know when a teenager has metal "bling" embedded in the case right by that bluetooth antenna.
+* **Phone Case**:  A phone's case (especially if metal) and component placement will affect the signal strength and antenna pattern.  A user-installed phone case can do the same, although the more typical ones made of polymers typically have a minor effect.  But you never know when a teenager has metal "bling" embedded in the case right by that Bluetooth antenna.
 
 ### Environmental Factors
 
@@ -127,7 +127,7 @@ There are lots of factors that complicate Bluetooth distance estimates.  Each on
 
 ## The Curse of Fragmentation
 
-When Apple unveiled the Bluetooth LE iBeacon format back in June 2013, Bluetooth distancing was put on the map. Since then an explosion of phone models has complicated the situation.  This makes it impossible to do bluetooth distance estimates unless you correct for device variations.
+When Apple unveiled the Bluetooth LE iBeacon format back in June 2013, Bluetooth distancing was put on the map. Since then an explosion of phone models has complicated the situation.  This makes it impossible to do Bluetooth distance estimates unless you correct for device variations.
 
 ### Transmitter Variations
 
@@ -141,7 +141,7 @@ The calibration plan above worked great for a short time, because in June 2013 t
 
 Since the only phones that could detect iBeacon signals were also the iPhone 4S and 5 this system worked pretty well.
 
-But the very next month, in July 2013, this perfect world started to crumble.  Google released Android 4.3 making the Nexus 4 the first Android phone to support Bluetooth LE and beacon detection.  Over the next 7 years, 18 additional iPhone models would come out along with thousands of Android models.  Every single one of these devices has differences in the bluetooth chip, radio circuitry, antenna and case that affect the signal level the phone receives.
+But the very next month, in July 2013, this perfect world started to crumble.  Google released Android 4.3 making the Nexus 4 the first Android phone to support Bluetooth LE and beacon detection.  Over the next 7 years, 18 additional iPhone models would come out along with thousands of Android models.  Every single one of these devices has differences in the Bluetooth chip, radio circuitry, antenna and case that affect the signal level the phone receives.
 
 This makes it impossible for a beacon calibration performed on one phone to apply to a different phone.
 
