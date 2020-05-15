@@ -49,7 +49,7 @@ protected static double calculateDistance(int measuredPower, double rssi) {
 
 The above equation estimates distance using the measured power at one meter (received from the transmitter via a field in a transmitted data packet) and the signal strength measured by the Bluetooth chip.    The signal strength is measured on a phone using a field called the Received Signal Strength Indicator with units in dBm. (More on that later.)
 
-##Does this work?
+## Does this work?
 
 Roughly, yes.  And short instances of a few meters the above equation can give you an approximate distance estimate.  The closer to the one mater reference point you are, the more accurate the estimate might be.  Under ideal conditions (clear line of sight, no reflective surfaces nearby) you might get an estimate of 1m +/- 0.5 meters when you are really one meter away.  
 
