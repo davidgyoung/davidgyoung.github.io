@@ -127,7 +127,7 @@ There are lots of factors that complicate Bluetooth distance estimates.  Each on
 
 ## The Curse of Fragmentation
 
-When Apple unveiled the Bluetooth LE iBeacon format back in June 2013, Bluetooth distancing was put on the map. Since then an explosion of phone models has complicated the situation.  This makes it impossible to do Bluetooth distance estimates unless you correct for device variations.
+When Apple unveiled the Bluetooth LE iBeacon format back in June 2013, Bluetooth distancing was put on the map. Since then an explosion of phone models has complicated the situation.  This makes it impossible to get accurate absolute distance values from Bluetooth distance estimations unless you correct for device variations.
 
 ### Transmitter Variations
 
