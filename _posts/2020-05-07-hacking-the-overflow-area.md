@@ -81,18 +81,18 @@ func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPerip
 ```
 
 The same code will also give a callback if it sees an overflow advertisement with the corresponding bit in its bitmask set for
-that service UUID **but only if the screen is on.**
+that service UUID **but only if the screen is on, and beacon ranging is enabled.**
 
 Yes, scanning the overflow area service advertisements only works if the screen is illuminated on the receiving device.  It doesn't
 matter if the app is in the foreground (visible) or if it is in the background with another app or the springboard visible.  The
 phone doesn't even need to be unlocked.  If the screen is on, locked or not, a callback for the overflow advertisement will get delivered to an app scanning for it
-repeatedly each time it is detected.
+repeatedly each time it is detected.  Beacon ranging must also be enabled for this to work.
 
 The above screen-on restriction is why full background to background Bluetooth data exchange are often considered impossible on iOS.   While such an exchange is possible when both apps are in the background, it is only possible if the device receiving the advertisement has the screen on.  Fortunately, there are tricks that can make the screen go on temporarily. (See note.)
 
-> Note: With default configuration, an iPhone screen will turn on briefly each time a notificaton is received -- every time the user gets an email or SMS  message, for example.  While this happens frequently enough on its own, a guranteed event can also be triggered from within an app by sending a local notification.  So long as the iOS device is not in do not disturb mode, any notification  will cause the screen to illuminate for 10 seconds, and overflow advertisements to get delivered during that time. During these intervals, 
-a backgrounded iOS app can discover services advertised from nearby backgrounded iOS apps. 
- 
+> Note: With default configuration, an iPhone screen will turn on briefly each time a notificaton is received -- every time the user gets an email or SMS  message, for example.  While this happens frequently enough on its own, a guranteed event can also be triggered from within an app by sending a local notification.  So long as the iOS device is not in do not disturb mode, any notification  will cause the screen to illuminate for 10 seconds, and overflow advertisements to get delivered during that time. During these intervals,
+a backgrounded iOS app can discover services advertised from nearby backgrounded iOS apps.
+
 ## How iOS Handles Collisions
 
 Since many service UUIDs share each bit position in the overflow area bitmask.  What happens if an iOS app is scanning for a
@@ -170,6 +170,8 @@ This is no big deal if only one app does it per phone.
 
 However, if two apps on the same phone try to use the data exchange technique at the same time, both will fail.  If you plan to use this, realize it will only work until some other app on the phone tries to do the same thing.
 
+
+**UPDATE: May 28, 2020**: This post has been updated to clarify that beacon ranging must also be enabled for overflow area advertisements to be discovered when the app is not in the foreground.
 
 
 
