@@ -22,14 +22,14 @@ So a simple distance estimation might work like this:. If the known measured sig
 
 ## The Math
 
-Converting this information to a specific distance is theoretically possible because the energy in radio waves decreases exponentially with distance.   A graph shows a curve like this:
+Converting this information to a specific distance is theoretically possible because the energy in radio waves decreases exponentially with distance.   A graph shows a curve like above.
 
 
 The units are decibels relative to one milliiwatt (dBm), and values are negative with more negative signals indicating a weaker signal.    This is  a logarithmic unit so a decline in 10 dB of signal level (e.g. from -50 dBm to -60 dBm) means that the power has declined by a factor of 10 -- only 10% of the signal power remains.
 
 The graph above can be explained by theoretical physics using this equation: <img src="/images/formula.png" alt="Distance Formula" width="100px" style="display: inline-block;"/> where p is the measured power at 1 meter, s is the signal strength and n is a constant that describes how easily the signal passes through the air.
 
-While that equation works, it is typically not as good at estimating distance as power functions using a cure fitting technique.  The reason the equation offered by physics doesn't work quite as well in practice is because there are other factors going on that involve more than radio signal theory (more on that below.) Here is an equation with a similarly shaped curve derived experimentally using a Nexus 4 as a Bluetooth receiver.  This is Java code:
+While that equation works, it is typically not as good at estimating distance as power functions using a curve fitting technique.  The reason the equation offered by physics doesn't work quite as well in practice is because there are other factors going on that involve more than radio signal theory (more on that below.) Here is an equation with a similarly shaped curve derived experimentally using a Nexus 4 as a Bluetooth receiver.  This is Java code:
 
 ```
 protected static double calculateDistance(int measuredPower, double rssi) {
@@ -95,7 +95,7 @@ An alternative technology called RSSI fingerprinting uses completely different t
 
 There are many cases of people misusing this technology in ways that gives it a bad name.  The United Nations recently released a an app called [One Point Five](https://play.google.com/store/apps/details?id=app.onepointfive) that notifies you every time it estimated that another Bluetooth device came within 1.5 meters to warn of infection risk.  Critics panned the app for high false positive and false negative rates.
 
-The implementation is horrendous.  The app looks at every Bluetooth signal regardless of the device type, does not use a reference power value to do the distance estimate, and does nothing to correct for receiver sensitivity variations.
+The implementation is horrendous.  The app looks at every Bluetooth signal regardless of the device type, does not use a reference power value to do the distance estimate, and does nothing to correct for receiver efficiency variations.
 
 As a result, the app goes off all the time at all kinds of distances while people walk by Bluetooth-enabled  parking meters or garage door openers.  And the app often never alerts on close contacts with other people's phones, because those phones happen not to be emitting anything over Bluetooth.   This happens mainly because the app lets you to get notifications based proximity to other phones without the app -- a promise on which it can never ever hope to deliver.
 
@@ -153,7 +153,7 @@ While Apple devices tend to deviate less from the old iPhone 4S and 5 reference 
 
 ### Solving for Fragmentation
 
-In order to solve the problem of fragmentation on distance estimates, we need a good database of phone models vs. transmitter strength and receiver sensitivity.  Such a database might indicate that for an Android Nokia 3800GS with [Type Allocation Code](https://en.wikipedia.org/wiki/Type_Allocation_Code) 1234, the transmitter power deviates +2 dBm from a reference value and the receiver sensitivity deviates -1 dBm from a reference value. (This is just an example -- that's not even a real phone.)  Taking the time to properly measure each device might take 30 minutes.
+In order to solve the problem of fragmentation on distance estimates, we need a good database of phone models vs. transmitter strength and receiver efficiency.  Such a database might indicate that for an Android Nokia 3800GS with [Type Allocation Code](https://en.wikipedia.org/wiki/Type_Allocation_Code) 1234, the transmitter power deviates +2 dBm from a reference value and the receiver efficiency deviates -1 dBm from a reference value. (This is just an example -- that's not even a real phone.)  Taking the time to properly measure each device might take 30 minutes.
 
 There is no way that such a database can ever hope to cover every phone model out there.  But they can cover the most common ones.  Singapore's Trace Together team, for example, [took these kinds of measurements](https://raw.githubusercontent.com/opentrace-community/opentrace-calibration/master/src/images/raw_rssi_chart.png) using an antenna chamber for a few of the most popular phones in the Singapore market.  Unfortunately, they did not capture separate transmitter power and receiver sensitivity measurements.
 
