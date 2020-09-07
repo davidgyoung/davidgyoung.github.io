@@ -119,7 +119,7 @@ iOS apps are not allowed to receive non-iBeacon advertisements in the background
 The overflow area can be manipulated programmatically to put any pattern you want (except all zeroes) into the 16 byte bitmask area.  These data can then be transmitted from a backgrounded iOS app.
 The data can be received by iOS, Android and other devices, even in the background.  On iOS, the backgrounded reception does require that the screen be on.  But again, this can be forced periodically to do a quick read by sending a local notification.
 Another limitation is that the overflow area is shared between all apps on the phone.  Any app that advertises a Bluetooth service in the background will set (usually one) bit in the bitmask.  A second app on the same phone has no way of knowing this is happening.  So while an app can guarantee a pattern of 1s is set in the bitmask, it cannot guarantee any 0s.  In practice, it is rare for an iOS device to be running any backgrounded apps advertising Bluetooth.  So while you will usually get all 0s in the bitmask in positions you do not set, this is not guaranteed.
-Setting up data exchange is a bit tricky.  The key is to generate a table of 128 different service UUIDs known to occupy a distinct position in the bitmask.  Fortunately, I have already done that for you.  See the code in my [OverflowAreaUtils class](https://github.com/davidgyoung/BackgroundAdvertiser/blob/master/BackgroundAdvertiser/OverflowAreaUtils.swift).
+Setting up data exchange is a bit tricky.  The key is to generate a table of 128 different service UUIDs known to occupy a distinct position in the bitmask.  Fortunately, I have already done that for you.  See the code in my [OverflowAreaUtils class](https://github.com/davidgyoung/BackgroundAdvertiser/blob/master/BackgroundAdvertiser/OverflowArea/OverflowAreaUtils.swift).
 
 Using this utility, an iOS receiver can  scan for 128 different UUIDs, one for each position in the overflow area's bitmask.  
 
@@ -173,6 +173,7 @@ However, if two apps on the same phone try to use the data exchange technique at
 
 **UPDATE: May 28, 2020**: This post has been updated to clarify that beacon ranging must also be enabled for overflow area advertisements to be discovered when the app is not in the foreground.
 
+**UPDATE: September 7, 2020**: A full reference application is available that shows how you can make two iOS devices exchange data in the background.  [See here](https://github.com/davidgyoung/OverflowAreaBeaconRef).
 
 
 
