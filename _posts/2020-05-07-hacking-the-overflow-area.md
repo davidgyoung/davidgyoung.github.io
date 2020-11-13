@@ -154,7 +154,7 @@ peripheralManager?.startAdvertising(adData)
 
 The code shown above will transmit the 128-bit ASCII string, "OverflowAreaWoot" from a backgrounded iOS app to another backgrounded iOS app with the screen on.
 
-Using code like above, you can effectively exchange anything you can fit in 128 bits of data between backgrounded  iOS apps in a single packet.  And because overflow advertisements are sent out at 1Hz, you can send more data by altering the advertisement in time.  You just have to make sure the receiving iOS device has the screen turned on to receive it.  
+Using code like above, you can effectively exchange anything you can fit in 128 bits of data between backgrounded  iOS apps in a single packet.  And because overflow advertisements are sent out at 1Hz, you can send more data by altering the advertisement in time. (**NOTE:  this has been blocked by iOS 14, see below.**)  You just have to make sure the receiving iOS device has the screen turned on to receive it.  
 
 Oh, and don't forget, you cannot send 128 bits of zeroes.  If you don't advertise at least one service (for one bit position set to 1) no advertisement will go out.
 
@@ -175,6 +175,7 @@ However, if two apps on the same phone try to use the data exchange technique at
 
 **UPDATE: September 7, 2020**: A full reference application is available that shows how you can make two iOS devices exchange data in the background.  [See here](https://github.com/davidgyoung/OverflowAreaBeaconRef).
 
+**UPDATE: November 13, 2020**: Apple has changed how this behaves as of iOS 14:  Starting with that OS version, you cannot change the bluetooth services advertised by your app when it is in the background.  Doing so has no effect on the overflow area advertisement until the app is brought to the foreground.  So while you can set up an overflow area advert to work in the background as described in this blog post, that setup must happen while the app is in the foreground, then it will continue working with the app in the background.  Unfortunately, this means you cannot change the overflow area advertisement while the app is in the background -- you must get the user to bring the app back to the foreground to do so.**
 
 
 
