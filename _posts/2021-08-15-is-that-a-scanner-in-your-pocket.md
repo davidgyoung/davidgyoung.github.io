@@ -2,7 +2,7 @@
 title: Is That a Scanner in Your Pocket?
 ---
 
-# Bluetooth Scanning With Embdded Systems
+# Bluetooth Scanning With Embedded Systems
 
 Since the invention of Bluetooth LE, the most common use case has been to use a large device like a phone or laptop to scan for and connect to small peripheral devices like earpieces, health trackers and various remote sensors.  But some of the more innovative projects turn this idea upside down, building small devices that do Bluetooth LE scanning themselves, looking for phones, laptops, cars, and even other small peripherals that happen to be nearby.
 
