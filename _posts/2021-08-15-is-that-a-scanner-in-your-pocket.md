@@ -2,23 +2,23 @@
 title: Is That a Scanner in Your Pocket?
 ---
 
-# Bluetooth Scanning With Embedded Systems
+## Bluetooth Scanning With Embedded Systems
 
 Since the invention of Bluetooth LE, the most common use case has been to use a large device like a phone or laptop to scan for and connect to small peripheral devices like earpieces, health trackers and various remote sensors.  But some of the more innovative projects turn this idea upside down, building small devices that do Bluetooth LE scanning themselves, looking for phones, laptops, cars, and even other small peripherals that happen to be nearby.
 
-During the pandemic, countries like Singapore used small Bluetooth scanners like this to bring automated contact tracing to elderly residents without smart phones.   All kinds of other use cases are possible including making hardware devices aware of their environment and even giving them social awareness.
+During the pandemic, countries like Singapore used small Bluetooth scanners like this to bring automated contact tracing to elderly residents without smart phones.   All kinds of other use cases are possible including making hardware devices sense their environment and even giving them social awareness.
 
-It's common knowledge in the tech community that while Andorid and iOS devices are usually used in Bluetooth LE central mode (scanning for and connecting to peripherals), they can also work in peripheral mode (advertising themselves so others may scan for them.) What tech folks less often realize is that many embedded platforms allow the same kind of dual operation.   A plastic package might be scanning you right now.
+It's common knowledge in the tech community that while Andorid and iOS devices are usually used in Bluetooth LE central mode (scanning for and connecting to peripherals), they can also work in peripheral mode (advertising themselves so others may scan for them.) What tech folks less often realize is that many embedded platforms allow the same kind of dual operation.   A small plastic package nearby might be scanning you right now.
 
-## Choose Your Foundation Carefully
+### Choose Your Foundation Carefully
 
-If you want to build a product that relies on distributed Bluetooth scanning, you've got to pick your hardware platform wisely as it will be the foundation of your system.  Special care should be taken to figure out your budget for per unit hardware, up-front hardware design and manufacturing, software development, and power.
+If you want to build a product that relies on distributed Bluetooth scanning, you've got to pick your hardware platform wisely as it will be the foundation of your system.  Special care should be taken to figure out your budget for per unit hardware, up-front hardware design and manufacturing, software development, and power.  You also need to figure out how you are going to access the information gathered by the device.  You may be able to use onboard networking (e.g. WiFi), celular, or special radio networks like SigFox or LoRa.  In a pinch you can transfer data using Bluetooth connections, too.
 
 Below is a comparison of some of the different scanning platforms available, showing the code needed to set up scanning on each.
 
-### iOS and Android
+#### iOS and Android
 
-These platforms excel in that they require no custom manufacturing, they are easy to program, and they have relatively large built in batteries.  Android models may be quite cheap as well.  It's really hard to complete with existing manufacturing economies of scale.  Take advantage of this, and don't build your own hardware if you don't have to.
+These platforms excel in that they require no custom manufacturing, they are easy to program, have integrated cellular and WiFi radios, and they have relatively large built in batteries.  Android models may be quite cheap as well.  It's really hard to complete with existing manufacturing economies of scale.  Take advantage of this, and don't build your own hardware if you don't have to.
 
 Of the two platforms, iOS is much less flexible for scanning.  You cannot control the scan rate, and unless your code is running with a visible app on the screen, the scan rate will be low.  If the screen is on, your battery drain will be terrible.   If you can live with these serious limitations, you can start a scan like this (using Swift):
 
@@ -62,9 +62,9 @@ ScanCallback scanCallback = new ScanCallback() {
 ```
 
 
-### Raspberry Pi
+#### Raspberry Pi
 
-A number of Raspberry Pi form factors are available with Bluetooth LE built in.  The hardware is quite cheap and requires no custom manufacturing unless you want a snazzy case than you can buy off the shelf.  Programming is almost as easy as on iOS and Android.  While the BlueZ Bluetooth stack is fiddly and not well understood, experienced Linux C programmers are not difficult to find and can get the job done.
+A number of Raspberry Pi form factors are available with Bluetooth LE built in.  Most models also have WiFi connectivity for offloading data.  The hardware is quite cheap and requires no custom manufacturing unless you want a snazzy case than you can buy off the shelf.  Programming is almost as easy as on iOS and Android.  While the BlueZ Bluetooth stack is fiddly and not well understood, experienced Linux C programmers are not difficult to find and can get the job done.
 
 The real drawback is power.  These devices are designed for a wired USB power supply.  If you can plug them into a wall, great.  If not, expect to pair them with a large capacity USB battery.  Battery consumption is much worse than an Android or iOS device -- neither the hardware nor Linux are optimized to save power. 
 
@@ -109,11 +109,11 @@ while ( true ) {
 }
 ```
 
-### Nordic Semiconductor 
+#### Nordic Semiconductor 
 
-The Nordic chips in the nRF52x family are  the most widely used Bluetooth chipsets for Internet of Things projects.  Unlike the solutions above, this is a raw Bluetooth chip that  allows custom programming.  The have an embedded ARM processor that can be programmed in C using the Nordic SDK.   While it is not terribly hard to find a programmer to do this work, it is much harder than for the options above.  Engineers that write this kind of software rarely speak English, even for the those few where it is their native tongue.  Expect to deal with some serious neckbeard types here.
+The Nordic chips in the nRF52x family are  the most widely used Bluetooth chipsets for Internet of Things projects.  Unlike the higher-level platforms above, this is just a raw Bluetooth chip that  allows custom programming.  The chips have an embedded ARM processor that can be programmed in C using the Nordic SDK.   While it is not terribly hard to find a programmer to do this work, it is much harder than for the options above.  Engineers that write this kind of software rarely speak English, even those who claim it is their native tongue.  Expect to deal with some serious neckbeard types here.
 
-While you can buy battery-powered Nordic development kits as circuit boards the size of a deck of cards, these are not cheap and  almost never are used in production.  Nordic chips are almost always used on custom hardware, meaning you must design and build your own printed circuit board with all the other computer components you need added on.  You'll have to build your own power supply and provide your own battery, too.  This requires serious hardware engineering effort, a fairly large up-front R&D cost, and a contract manufacturer.   But once it is done, the per-unit costs can be quite low.
+While you can buy battery-powered Nordic development kits as circuit boards the size of a deck of cards, these are not cheap and  almost never are used in production.  Nordic chips are almost always used on custom hardware, meaning you must design and build your own printed circuit board with all the other computer components (including connectivity to offload data) you need added on.  You'll have to build your own power supply and provide your own battery, too.  This requires serious hardware engineering effort, a fairly large up-front R&D cost, and a contract manufacturer.   But once it is done, the per-unit costs can be quite low.
 
 Programming with the Nordic SDK is notoriously difficult due to sparse documentation that consists of a few sample applications, terse API docs, and Q&A forums filled with posts from frustrated developers.  Most samples deal with using Nordic chips as a peripheral (meaning it advertises itself to be scanned by a phone or a laptop.). But it is also quote possible to program a Nordic chip to do BLE scanning.  Like this (using C):
 
@@ -150,9 +150,9 @@ static void ble_evt_handler(ble_evt_t const *p_ble_evt, void *p_context) {
 }
 ```
 
-### ESP32
+#### ESP32
 
-The ESP32 is the new kid on the block and an attractive alternative to Nordic for an embedded system.  It is a family of chips designed by Espressif systems based on the Xtensa microprocessor, and the most popular variants come with both Bluetooth LE and WiFi on board.   While designing a custom PCB based on the ESP32 still requires hardware engineering and custom manufacturing, for projects requiring WiFi connectivity the onboard WiFi radio simplifies this process.  In addition, the development kids are relatively cheap with a small form factor suitable for production in some situations.  These development kits require USB power from a wired source or a battery.
+The ESP32 is the new kid on the block and an attractive alternative to Nordic for an embedded system.  It is a family of chips designed by Espressif systems based on the Xtensa microprocessor, and the most popular variants come with both Bluetooth LE and WiFi on board, including integrated antennas.   While designing a custom PCB based on the ESP32 still requires hardware engineering and custom manufacturing, for projects requiring WiFi connectivity the onboard WiFi radio simplifies this process.  In addition, the development kits are relatively cheap with a small form factor suitable for production in some situations.  These development kits require USB power from a wired source or a battery.
 
 Finding a programmer may not be easier than with Nordic, but the platform's popularity with hobbyists means you may be able to find somebody younger and cheaper to do the work  than the crusty neckbeards who dominate Nordic development.
 
@@ -190,7 +190,7 @@ static void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *par
 }
 ```
 
-### BlueNRG
+#### BlueNRG
 
 Like Nordic and ESP32 this is a programmable SoC that requires you to build your own PCB with supporting hardware.  This chipset is provided by ST Microelectronics, and is much less common.  It's lack of popularity is likely driven by its limited flexibility -- it provides little control over scans.   This chip has all the disadvantages of the Nordic and ESP32 competitors, but is much less common.  You probably won't choose to use this chip -- but you may find yourself doing so because somebody else has made that choice for you.  You are unlikely to find a programmer who has used this before, so find somebody with embedded programming experience and  pay for him or her to learn how to use it.
 
@@ -218,7 +218,7 @@ void hci_le_advertising_report_event(
 }
 ```
 
-## Got the Power?
+### Got the Power?
 
 When it comes to Bluetooth scanning, any of the above platforms can get the job done.
 
