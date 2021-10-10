@@ -31,10 +31,11 @@ frameborder="0" allowFullScreen></iframe>
     <h3>Specialties</h3>
     <ul>
       <li>iOS and Android app development</li>
-      <li>Beacon and Bluetooth LE expertise</li>
-      <li>Bluetooth Low Energy applications</li>
+      <li>Embedded firmware and Internet of Things development</li>
+      <li>Beacon and Bluetooth Low Energy applications/li>
+      <li>RFID, NFC, and UWB applications.</li>
       <li>Alexa and voice AI applications</li>
-      <li>Web service development with Ruby and Java</li>
+      <li>Web service development with Ruby, Node.js and Java</li>
     </ul>
     
     <h4>Sample Commercial Projects:</h4>
