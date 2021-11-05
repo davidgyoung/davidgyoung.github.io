@@ -32,7 +32,7 @@ frameborder="0" allowFullScreen></iframe>
     <ul>
       <li>iOS and Android app development</li>
       <li>Embedded firmware and Internet of Things development</li>
-      <li>Beacon and Bluetooth Low Energy applications/li>
+      <li>Beacon and Bluetooth Low Energy applications</li>
       <li>RFID, NFC, and UWB applications.</li>
       <li>Alexa and voice AI applications</li>
       <li>Web service development with Ruby, Node.js and Java</li>
