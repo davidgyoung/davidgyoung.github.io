@@ -2,6 +2,8 @@
 title: The Rise and Fall of the Foreground Service
 ---
 
+![](/images/services.png){:width="320px"}
+
 Once upon a time, building an Android app to do work in the background was easy:  Just build an Android Service, and you could run whatever code you wanted for as long as you wanted.  But things started to change with Android 8 and again with Android 12.  **Today, Android Services are often more trouble than they are worth.** 
 
 ## The Rise of the Foreground Service
