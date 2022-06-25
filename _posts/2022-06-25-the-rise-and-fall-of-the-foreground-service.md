@@ -20,7 +20,7 @@ What's worse, it is often unclear whether a special case applies, and there is n
 
 ```
 try {
-    val intent = new Intent(context, MyService);
+    val intent = new Intent(context, MyService)
     context.startForegroundService(intent)
 }
 catch (e: ServiceStartNotAllowedException) {
@@ -85,7 +85,7 @@ val executor = Executors.newFixedThreadPool(1)
 executor.execute(Runnable {
     while (true) {
         Log.d(TAG, "I will log this line every 10 seconds forever")
-        Thread.sleep(10000);
+        Thread.sleep(10000)
     }
 })
 ```
