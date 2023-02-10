@@ -11,15 +11,15 @@ tagline: Professional Engineering and Software Development
     <header class="inner">
       <img src="./images/david.png" class="mugshot">
       <h1 id="project_title">David G. Young Tech</h1>
-      <h2 id="project_tagline">Professional engineering and software development</h2>
+      <h2 id="project_tagline">Contract engineering and software development</h2>
     </header>
 </div>
 
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
   <section id="main_content" class="inner">
-    <p>David is available for contract software development work for clients worldwide.  He has a strong track record of delivering projects on time and under budget.
-    His strong interpersonal skills allow for easy interaction with customers and end-users, and his high-energy temperament and entrepreneurial orientation allow him to independently complete projects on schedule.   His mobile apps and libraries run on over 150 million mobile devices worldwide, and past works are exhibited at the Smithsonian National Air and Space Museum.  References available on request.
+    <p>David is available for contract software development work for clients worldwide.  He will help complete your project on time and under budget.
+    His strong interpersonal skills make for easy conversations about even the most technical subjects.  His high-energy temperament and entrepreneurial orientation requires minimal supervision.   His mobile apps and libraries run on over 150 million mobile devices worldwide, and past works are exhibited at the Smithsonian National Air and Space Museum.  References available on request.
     </p>
 
 <table border="0" cellpadding="4" align="right" width="320"><tbody><tr><td>
@@ -35,11 +35,82 @@ frameborder="0" allowFullScreen></iframe>
       <li>Beacon and Bluetooth Low Energy applications</li>
       <li>RFID, NFC, and UWB applications.</li>
       <li>Alexa and voice AI applications</li>
-      <li>Web service development with Ruby, Node.js and Java</li>
+      <li>Web service development with Node.js, Ruby, and Java</li>
     </ul>
     
     <h4>Sample Commercial Projects:</h4>
     <table class="samples">
+
+
+    <tr>
+    <td>
+    <img class="appimage" src='./images/lucid.png'/>
+    <p><a href='https://apps.apple.com/us/app/lucid-motors/id1579793272'>Lucid Motors Mobile Key</a></p>
+    <p>
+iOS and Android apps
+&#8226; Bluetooth LE vehicle unlock using your phone
+&#8226; iOS code in Swift
+&#8226; Android code in Kotlin      
+    </p>
+    </td>
+    <td>
+    <img class="appimage" src='./images/washingtonpost.png'/>
+    <p><a href='http://m.washingtonpost.com'>Washington Post Mobile</a></p>
+    <p>
+HTML 5 mobile web app
+&#8226; Offline reading w/ LocalStorage
+&#8226; Responsive HTML5/Javascript and jQuery frontend
+&#8226; Java Spring MVC backend w/ REST web services
+&#8226; Backend bundling and caching services for iPhone native app        
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <tr>
+    <td>
+    <img class="appimage" src='./images/tocsen.jpg'/>
+    <p><a href='https://play.google.com/store/apps/details?id=com.tocsenapp&hl=en_US&gl=US'>Tocsen Crash App</a></p>
+<p>
+Bluetoth-based crash sensor
+&#8226; Mobile apps for iOS and Android
+&#8226; ReactNative UI and Bluetooth Native Modules
+&#8226; Android Beacon Library integration
+</p>
+    </td>
+    <td>
+    <img class="appimage" src='./images/ces2015.png'/>
+    <p><a href='https://play.google.com/store/apps/details?id=com.konvurj&hl=en'>Consumer Electronics Show Mobile Maps</a></p>
+<p>
+Official indoor nav app for the Consumer Electronics Show
+&#8226; iOS and Android
+&#8226; Responsive HTML5/Javascript and jQuery config web app
+&#8226; Ruby on Rails 4 / Postgres backend
+</p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <img class="appimage" src='./images/esp32.jpg'/>
+    <p>GPIO Serial Multiplexer</p>
+<p>
+Industrial control line conversion module
+&#8226; ESP32 platform
+&#8226; Converts GPIO Lines to Serial I/O
+&#8226; Six inputs and six outputs
+</p>
+    </td>
+    <td>
+    <img class="appimage" src='./images/commutyble.png'/>
+    <p><a href='https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8'>Commutyble</a></p>
+<p>
+Garage Reservation and Access App
+&#8226; iOS and Android
+&#8226; Coded in Swift, Java and React Native
+&#8226; Bluetooth GATT comms with Node.js garage access point
+&#8226; NFC tag reading
+</p>
+    </td>
+    </tr>
     <tr>
     <td>
     <img class="appimage" src='./images/amtrak-tag-and-track.png'/>
@@ -63,65 +134,20 @@ frameborder="0" allowFullScreen></iframe>
     </p>
     </td>
     </tr>
-
-    <tr>
-    <td>
-    <img class="appimage" src='./images/washingtonpost.png'/>
-    <p><a href='http://m.washingtonpost.com'>Washington Post Mobile</a></p>
-    <p>
-HTML 5 mobile web app
-&#8226; Offline reading w/ LocalStorage
-&#8226; Responsive HTML5/Javascript and jQuery frontend
-&#8226; Java Spring MVC backend w/ REST web services
-&#8226; Backend bundling and caching services for iPhone native app        
-    </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/ces2015.png'/>
-    <p><a href='https://play.google.com/store/apps/details?id=com.konvurj&hl=en'>Consumer Electronics Show Mobile Maps</a></p>
-<p>
-Official indoor nav app for the Consumer Electronics Show
-&#8226; iOS and Android
-&#8226; Responsive HTML5/Javascript and jQuery config web app
-&#8226; Ruby on Rails 4 / Postgres backend
-</p>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <img class="appimage" src='./images/locate.png'/>
-    <p><a href='https://itunes.apple.com/us/app/locate-beacon/id738709014?mt=8'>Beacon Locate</a></p>
-<p>
-Beacon location and transmission tool
-&#8226; iOS and Android
-</p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/commutyble.png'/>
-    <p><a href='https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8'>Commutyble</a></p>
-<p>
-Garage Reservation and Access App
-&#8226; iOS and Android
-&#8226; Coded in Swift, Java and React Native
-&#8226; Bluetooth GATT comms with Node.js garage access point
-&#8226; NFC tag reading
-</p>
-    </td>
-    </tr>
     </table>
 
     <h4>Open Source Projects:</h4>
     <table class="samples">
     <tr>
     <td>
-    <img class="appimage" src='./images/ningo-web.png'/>
-    <p><a href='https://ningo-api.herokuapp.com'>Ningo Beacon Registry</a></p>
+    <img class="appimage" src='./images/overflowref.png'/>
+    <p><a href='https://github.com/davidgyoung/OverflowAreaBeaconRef'>Overflow Area Advertising</a></p>
     <p>
-    Mobile web app, iOS/Android SDKs
-    &#8226; Responsive web app in React.js
-    &#8226; Beacon metadata server APIs in Ruby on Rails 5 / Postgres
-    &#8226; Open source iOS SDK in Swift
-    &#8226; Open source Andorid SDK in Java   
+    Mobile app for iOS
+    &#8226; Allows phones to advertise to each other in the background
+    &#8226; Advanced Bluetooth Low Energy Advertising 
+    &#8226; Open source iOS code in Swift
+    &#8226; Additional techniques allow Android communication  
     </p>
     </td>
     <td>
@@ -149,12 +175,11 @@ been an excellent resource for our team."
 <br/>-- James Docherty, Co-Founder, Orchard VIE Ltd</blockquote>
     
     <h4>Other Apps</h4>
-    <p>Washington Post News for <a href='https://play.google.com/store/apps/details?id=com.washingtonpost.rainbow&hl=en'>Android</a></p>
-    <p>Washington Post News for <a href='https://itunes.apple.com/us/app/the-washington-post/id938922398?mt=8'>iPad</a></p>
+    <p>Ingenie insurance app with Bluetooth driving sensor for <a href='https://play.google.com/store/apps/details?id=com.ingenie.app&hl=en_US&gl=US'>Android</a> and iOS</p>
+    <p>Lighthouse workforce management app with Bluetooth sensors for iOS and Android (private)</p>
     <p>Workstation Locker App for iOS, Android, Mac and Windows 10 (private)</p>
     <p>Samsung Cordless Security App for Android (private)</p>
-   <p>Orchard Beacon detector for Android (private)</p>
-    <p>Washington Post Election 2012 for iPad (retired)</p>
+    <p>Orchard Beacon detector for Android (private)</p>
     <p>Froogle for <a href='https://itunes.apple.com/us/app/froogle/id1122434174?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.lifemediainc.lifemedia&hl=en'>Android</a></p>
     <p>Music + Art for iOS (not released)</p>
     <p>HortiBeacon and ProxInfo for <a href='https://itunes.apple.com/by/app/prox-info/id1055589119?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.proxiot.proxinfo&hl=en'>Android</a></p>
@@ -162,7 +187,6 @@ been an excellent resource for our team."
     <p>Beacon Scope for <a href='https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner'>Android</a></p>
 
     <h4>Other Libraries</h4>
-    <p><a href='http://altbeacon.github.io/android-beacon-library/'>Android Beacon Library</a></p>
     <p>Orchard Beacon detector Library for Android (private)</p>
     <p>Hydr8 BottleKit Framework for iOS (private)</p>
     <p>All My Spots Beacon Framework for iOS (private)</p>
