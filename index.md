@@ -41,7 +41,7 @@ frameborder="0" allowFullScreen></iframe>
     <h4>Sample Commercial Projects:</h4>
     <div class="samples" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); text-align: center; background-color: black;">
     <div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/lucid.png">
+    <img class="appimage" src="./images/lucid.png">
     <p><a href="https://apps.apple.com/us/app/lucid-motors/id1579793272">Lucid Motors Mobile Key</a></p>
     <p>
 iOS and Android apps
@@ -50,7 +50,7 @@ iOS and Android apps
 • Android code in Kotlin      
     </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/washingtonpost.png">
+    <img class="appimage" src="./images/washingtonpost.png">
     <p><a href="http://m.washingtonpost.com/">Washington Post Mobile</a></p>
     <p>
 HTML 5 mobile web app
@@ -60,7 +60,7 @@ HTML 5 mobile web app
 • Backend bundling and caching services for iPhone native app        
     </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/tocsen.jpg">
+    <img class="appimage" src="./images/tocsen.jpg">
     <p><a href="https://play.google.com/store/apps/details?id=com.tocsenapp&amp;hl=en_US&amp;gl=US">Tocsen Crash App</a></p>
 <p>
 Bluetoth-based helmet crash sensor
@@ -69,7 +69,7 @@ Bluetoth-based helmet crash sensor
 • Android Beacon Library integration
 </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/ces2015.png">
+    <img class="appimage" src="./images/ces2015.png">
     <p><a href="https://play.google.com/store/apps/details?id=com.konvurj&amp;hl=en">Consumer Electronics Show Mobile Maps</a></p>
 <p>
 Official indoor nav app for the Consumer Electronics Show
@@ -78,7 +78,7 @@ Official indoor nav app for the Consumer Electronics Show
 • Ruby on Rails 4 / Postgres backend
 </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/esp32.jpg">
+    <img class="appimage" src="./images/esp32.jpg">
     <p>GPIO Serial Multiplexer</p>
 <p>
 Industrial control line conversion module
@@ -88,7 +88,7 @@ Industrial control line conversion module
 • Extensible to Bluetooth LE relay
 </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/commutyble.png">
+    <img class="appimage" src="./images/commutyble.png">
     <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
 <p>
 Garage Reservation and Access App
@@ -98,7 +98,7 @@ Garage Reservation and Access App
 • NFC tag reading
 </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/amtrak-tag-and-track.png">
+    <img class="appimage" src="./images/amtrak-tag-and-track.png">
     <p>Amtrak Bag Check App (Private)</p>
     <p>
     Allows Amtrak conductors to check and track your bags with printed tags
@@ -108,7 +108,7 @@ Garage Reservation and Access App
     • AWS Lambda with Node.js and a Dynamo DB
     </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/amtrak-alexa.png">
+    <img class="appimage" src="./images/amtrak-alexa.png">
     <p>Amtrak Alexa Train Status (Private Beta)</p>
     <p>
     Alexa voice app for accessing real-time Amtrak train schedules.
@@ -122,7 +122,7 @@ Garage Reservation and Access App
     <h4>Open Source Projects:</h4>
     <div class="samples" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); text-align: center; background-color: black;">
     <div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./David G. Young Tech_files/overflowref.png">
+    <img class="appimage" src="./images/overflowref.png">
     <p><a href="https://github.com/davidgyoung/OverflowAreaBeaconRef">Overflow Area Advertiser</a></p>
     <p>
     Mobile app for iOS
@@ -133,7 +133,7 @@ Garage Reservation and Access App
     </p>
     </div><div style="margin: 1px; padding: 5px; background-color: white;">
 
-    <img class="appimage" src="./David G. Young Tech_files/androidbeaconlibrary.png">
+    <img class="appimage" src="./images/androidbeaconlibrary.png">
     <p><a href="http://altbeacon.github.io/android-beacon-library">Android Beacon Library</a></p>
 <p>
 Open Source library for bluetooth beacons
