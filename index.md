@@ -66,7 +66,6 @@ HTML 5 mobile web app
     </td>
     </tr>
     <tr>
-    <tr>
     <td>
     <img class="appimage" src='./images/tocsen.jpg'/>
     <p><a href='https://play.google.com/store/apps/details?id=com.tocsenapp&hl=en_US&gl=US'>Tocsen Crash App</a></p>
@@ -145,7 +144,7 @@ Garage Reservation and Access App
     <p>
     Mobile app for iOS
     &#8226; Allows phones to advertise to each other in the background
-    &#8226; Advanced Bluetooth Low Energy Advertising 
+    &#8226; Advanced Bluetooth Low Energy advertising 
     &#8226; Open source iOS code in Swift
     &#8226; Additional techniques allow Android communication  
     </p>
