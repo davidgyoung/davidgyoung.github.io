@@ -39,125 +39,106 @@ frameborder="0" allowFullScreen></iframe>
     </ul>
     
     <h4>Sample Commercial Projects:</h4>
-    <table class="samples">
-
-
-    <tr>
-    <td>
-    <img class="appimage" src='./images/lucid.png'/>
-    <p><a href='https://apps.apple.com/us/app/lucid-motors/id1579793272'>Lucid Motors Mobile Key</a></p>
+    <div class="samples" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); text-align: center; background-color: black;">
+    <div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/lucid.png">
+    <p><a href="https://apps.apple.com/us/app/lucid-motors/id1579793272">Lucid Motors Mobile Key</a></p>
     <p>
 iOS and Android apps
-&#8226; Bluetooth LE vehicle unlock using your phone
-&#8226; iOS code in Swift
-&#8226; Android code in Kotlin      
+• Bluetooth LE vehicle unlock using your phone
+• iOS code in Swift
+• Android code in Kotlin      
     </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/washingtonpost.png'/>
-    <p><a href='http://m.washingtonpost.com'>Washington Post Mobile</a></p>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/washingtonpost.png">
+    <p><a href="http://m.washingtonpost.com/">Washington Post Mobile</a></p>
     <p>
 HTML 5 mobile web app
-&#8226; Offline reading w/ LocalStorage
-&#8226; Responsive HTML5/Javascript and jQuery frontend
-&#8226; Java Spring MVC backend w/ REST web services
-&#8226; Backend bundling and caching services for iPhone native app        
+• Offline reading w/ LocalStorage
+• Responsive HTML5/Javascript and jQuery frontend
+• Java Spring MVC backend w/ REST web services
+• Backend bundling and caching services for iPhone native app        
     </p>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <img class="appimage" src='./images/tocsen.jpg'/>
-    <p><a href='https://play.google.com/store/apps/details?id=com.tocsenapp&hl=en_US&gl=US'>Tocsen Crash App</a></p>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/tocsen.jpg">
+    <p><a href="https://play.google.com/store/apps/details?id=com.tocsenapp&amp;hl=en_US&amp;gl=US">Tocsen Crash App</a></p>
 <p>
-Bluetoth-based crash sensor
-&#8226; Mobile apps for iOS and Android
-&#8226; ReactNative UI and Bluetooth Native Modules
-&#8226; Android Beacon Library integration
+Bluetoth-based helmet crash sensor
+• Mobile apps for iOS and Android
+• ReactNative UI and Bluetooth Native Modules
+• Android Beacon Library integration
 </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/ces2015.png'/>
-    <p><a href='https://play.google.com/store/apps/details?id=com.konvurj&hl=en'>Consumer Electronics Show Mobile Maps</a></p>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/ces2015.png">
+    <p><a href="https://play.google.com/store/apps/details?id=com.konvurj&amp;hl=en">Consumer Electronics Show Mobile Maps</a></p>
 <p>
 Official indoor nav app for the Consumer Electronics Show
-&#8226; iOS and Android
-&#8226; Responsive HTML5/Javascript and jQuery config web app
-&#8226; Ruby on Rails 4 / Postgres backend
+• iOS and Android
+• Responsive HTML5/Javascript and jQuery config web app
+• Ruby on Rails 4 / Postgres backend
 </p>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <img class="appimage" src='./images/esp32.jpg'/>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/esp32.jpg">
     <p>GPIO Serial Multiplexer</p>
 <p>
 Industrial control line conversion module
-&#8226; ESP32 platform
-&#8226; Converts GPIO Lines to Serial I/O
-&#8226; Six inputs and six outputs
+• ESP32 platform
+• Converts GPIO Lines to Serial I/O
+• Six inputs and six outputs
+• Extensible to Bluetooth LE relay
 </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/commutyble.png'/>
-    <p><a href='https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8'>Commutyble</a></p>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/commutyble.png">
+    <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
 <p>
 Garage Reservation and Access App
-&#8226; iOS and Android
-&#8226; Coded in Swift, Java and React Native
-&#8226; Bluetooth GATT comms with Node.js garage access point
-&#8226; NFC tag reading
+• iOS and Android
+• Coded in Swift, Java and React Native
+• Bluetooth GATT comms with Node.js garage access point
+• NFC tag reading
 </p>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <img class="appimage" src='./images/amtrak-tag-and-track.png'/>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/amtrak-tag-and-track.png">
     <p>Amtrak Bag Check App (Private)</p>
     <p>
     Allows Amtrak conductors to check and track your bags with printed tags
-    &#8226; Bar code scanning with iPhone camera
-    &#8226; Bluetooth tag printer integration
-    &#8226; Swift 4 and Objective C
-    &#8226; AWS Lambda with Node.js and a Dynamo DB
+    • Bar code scanning with iPhone camera
+    • Bluetooth tag printer integration
+    • Swift 4 and Objective C
+    • AWS Lambda with Node.js and a Dynamo DB
     </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/amtrak-alexa.png'/>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/amtrak-alexa.png">
     <p>Amtrak Alexa Train Status (Private Beta)</p>
     <p>
     Alexa voice app for accessing real-time Amtrak train schedules.
-    &#8226; AWS Lambda with a Dynamo DB
-    &#8226; Java / Maven code to drive lambda
-    &#8226; Restful refresh serverless API
+    • AWS Lambda with a Dynamo DB
+    • Java / Maven code to drive lambda
+    • Restful refresh serverless API
     </p>
-    </td>
-    </tr>
-    </table>
+    </div>
+    </div>
 
     <h4>Open Source Projects:</h4>
-    <table class="samples">
-    <tr>
-    <td>
-    <img class="appimage" src='./images/overflowref.png'/>
-    <p><a href='https://github.com/davidgyoung/OverflowAreaBeaconRef'>Overflow Area Advertising</a></p>
+    <div class="samples" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); text-align: center; background-color: black;">
+    <div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./David G. Young Tech_files/overflowref.png">
+    <p><a href="https://github.com/davidgyoung/OverflowAreaBeaconRef">Overflow Area Advertiser</a></p>
     <p>
     Mobile app for iOS
-    &#8226; Allows phones to advertise to each other in the background
-    &#8226; Advanced Bluetooth Low Energy advertising 
-    &#8226; Open source iOS code in Swift
-    &#8226; Additional techniques allow Android communication  
+    • Allows phones to advertise to each other in the background
+    • Advanced Bluetooth Low Energy advertising 
+    • Open source iOS code in Swift
+    • Additional techniques allow Android communication  
     </p>
-    </td>
-    <td>
-    <img class="appimage" src='./images/androidbeaconlibrary.png'/>
-    <p><a href='http://altbeacon.github.io/android-beacon-library'>Android Beacon Library</a></p>
+    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+
+    <img class="appimage" src="./David G. Young Tech_files/androidbeaconlibrary.png">
+    <p><a href="http://altbeacon.github.io/android-beacon-library">Android Beacon Library</a></p>
 <p>
 Open Source library for bluetooth beacons
 </p>
-    </td>
-    </tr>
-    </table>  
+</div></div> 
     
 	<h4>Testimonials:</h4>
 	<blockquote>"I enthusiastically recommend David Young for development work. 
