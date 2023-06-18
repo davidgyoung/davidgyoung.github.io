@@ -63,7 +63,7 @@ HTML 5 mobile web app
     <img class="appimage" src="./images/tocsen.jpg">
     <p><a href="https://play.google.com/store/apps/details?id=com.tocsenapp&amp;hl=en_US&amp;gl=US">Tocsen Crash App</a></p>
 <p>
-Bluetoth-based helmet crash sensor
+Bluetooth-based helmet crash sensor
 • Mobile apps for iOS and Android
 • ReactNative UI and Bluetooth Native Modules
 • Android Beacon Library integration
@@ -164,7 +164,7 @@ been an excellent resource for our team."
     <p>Music + Art for iOS (not released)</p>
     <p>HortiBeacon and ProxInfo for <a href='https://itunes.apple.com/by/app/prox-info/id1055589119?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.proxiot.proxinfo&hl=en'>Android</a></p>
     <p>Fi Mobile Credit Unions for <a href='https://itunes.apple.com/us/app/navy-federal-credit-union/id370811491?mt=8'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.navyfederal.android&hl=en'>Android</a></p>
-    <p>Beacon Scope for <a href='https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner'>Android</a></p>
+    <p>Beacon Scope for <a href='https://apps.apple.com/us/app/beacon-scope/id1315448039?uo=2'>iOS</a> and <a href='https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner'>Android</a></p>
 
     <h4>Other Libraries</h4>
     <p>Orchard Beacon detector Library for Android (private)</p>
