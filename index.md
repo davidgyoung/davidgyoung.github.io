@@ -181,7 +181,6 @@ Garage Reservation and Access App
 
     <img class="appimage" src="./images/androidbeaconlibrary.png">
     <p><a href="http://altbeacon.github.io/android-beacon-library">Android Beacon Library</a></p>
-    </div>
 <p>
 Open Source library for bluetooth beacons
 </p>
