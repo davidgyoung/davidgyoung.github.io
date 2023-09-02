@@ -1,6 +1,6 @@
 ---
 layout: default
-title: David G. Young Tech
+title: Young Consulting
 tagline: Professional Engineering and Software Development
 ---
 {% include JB/setup %}
@@ -49,17 +49,21 @@ iOS and Android apps
 • iOS code in Swift
 • Android code in Kotlin      
     </p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./images/washingtonpost.png">
-    <p><a href="http://m.washingtonpost.com/">Washington Post Mobile</a></p>
-    <p>
-HTML 5 mobile web app
-• Offline reading w/ LocalStorage
-• Responsive HTML5/Javascript and jQuery frontend
-• Java Spring MVC backend w/ REST web services
-• Backend bundling and caching services for iPhone native app        
-    </p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    </div>
+    
+<div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/starfield.jpeg">
+    <p><a href="https://apps.apple.com/us/app/starfield-watch/id6453560201">Starfield Watch App</a></p>
+<p>
+App integration with smart watch
+• Mobile apps for iOS and Android
+• ReactNative UI and Bluetooth Native Modules
+• Background sync on iOS and Android 8+
+</p>
+</div>    
+    
+    
+<div style="margin: 1px; padding: 5px; background-color: white;">
     <img class="appimage" src="./images/tocsen.jpg">
     <p><a href="https://play.google.com/store/apps/details?id=com.tocsenapp&amp;hl=en_US&amp;gl=US">Tocsen Crash App</a></p>
 <p>
@@ -68,16 +72,14 @@ Bluetooth-based helmet crash sensor
 • ReactNative UI and Bluetooth Native Modules
 • Android Beacon Library integration
 </p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./images/ces2015.png">
-    <p><a href="https://play.google.com/store/apps/details?id=com.konvurj&amp;hl=en">Consumer Electronics Show Mobile Maps</a></p>
-<p>
-Official indoor nav app for the Consumer Electronics Show
-• iOS and Android
-• Responsive HTML5/Javascript and jQuery config web app
-• Ruby on Rails 4 / Postgres backend
-</p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+</div>
+
+
+
+
+
+
+<div style="margin: 1px; padding: 5px; background-color: white;">
     <img class="appimage" src="./images/esp32.jpg">
     <p>GPIO Serial Multiplexer</p>
 <p>
@@ -87,17 +89,48 @@ Industrial control line conversion module
 • Six inputs and six outputs
 • Extensible to Bluetooth LE relay
 </p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./images/commutyble.png">
-    <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
+    </div>
+    
+<div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/hoover.png">
+    <p>Hoover Decoder</p>
 <p>
-Garage Reservation and Access App
-• iOS and Android
-• Coded in Swift, Java and React Native
-• Bluetooth GATT comms with Node.js garage access point
-• NFC tag reading
+Irrigation Controller management app
+• iOS app with NFC read/write capability
+• Phone communicates with irrigation control hardware
+• Maps integration and geolocation
 </p>
-    </div><div style="margin: 1px; padding: 5px; background-color: white;">
+    </div>
+    
+    
+    
+    <div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/washingtonpost.png">
+    <p><a href="http://m.washingtonpost.com/">Washington Post Mobile</a></p>
+    <p>
+HTML 5 mobile web app
+• Offline reading w/ LocalStorage
+• Responsive HTML5/Javascript and jQuery frontend
+• Java Spring MVC backend w/ REST web services
+• Backend bundling and caching services for iPhone native app        
+    </p>
+    </div>
+
+    
+<div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/ces2015.png">
+    <p><a href="https://play.google.com/store/apps/details?id=com.konvurj&amp;hl=en">Consumer Electronics Show Mobile Maps</a></p>
+<p>
+Official indoor nav app for the Consumer Electronics Show
+• iOS and Android
+• Responsive HTML5/Javascript and jQuery config web app
+• Ruby on Rails 4 / Postgres backend
+</p>
+</div>
+
+    
+    
+    <div style="margin: 1px; padding: 5px; background-color: white;">
     <img class="appimage" src="./images/amtrak-tag-and-track.png">
     <p>Amtrak Bag Check App (Private)</p>
     <p>
@@ -135,6 +168,20 @@ Garage Reservation and Access App
 
     <img class="appimage" src="./images/androidbeaconlibrary.png">
     <p><a href="http://altbeacon.github.io/android-beacon-library">Android Beacon Library</a></p>
+    </div>
+
+<div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/commutyble.png">
+    <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
+<p>
+Garage Reservation and Access App
+• iOS and Android
+• Coded in Swift, Java and React Native
+• Bluetooth GATT comms with Node.js garage access point
+• NFC tag reading
+</p>    
+    
+    
 <p>
 Open Source library for bluetooth beacons
 </p>

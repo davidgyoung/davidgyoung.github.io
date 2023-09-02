@@ -2,7 +2,7 @@
 title: Background Launching 
 ---
 
-The most common way to start a mobile app is to tap on its icon on hour phone.  The app's user interface springs to life, and you can interact with it for awhile before moving on to other things.  Once the app is not visible, it is considered to be in the background.  On both iOS and Android, apps in the background may continue running (with some restrictions.)
+The most common way to start a mobile app is to tap on its icon on your phone.  The app's user interface springs to life, and you can interact with it for awhile before moving on to other things.  Once the app is not visible, it is considered to be in the background.  On both iOS and Android, apps in the background may continue running (with some restrictions.)
 
 But it is also possible to launch an app automatically, going directly to the background without the app ever appearing on the screen.  Understanding the details of how this works is important for developers building apps that need to run passively in the background.  This is especially true because both iOS and Android can kill your backgrounded app at any time if memory or battery are low.  Even if you don't care to launch an app automatically, you might wish to resume an app's background tasks automatically after the operating system temporarily killed it due to low resources.
 
