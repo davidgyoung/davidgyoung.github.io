@@ -150,7 +150,20 @@ Official indoor nav app for the Consumer Electronics Show
     • Restful refresh serverless API
     </p>
     </div>
+
+
+<div style="margin: 1px; padding: 5px; background-color: white;">
+    <img class="appimage" src="./images/commutyble.png">
+    <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
+<p>
+Garage Reservation and Access App
+• iOS and Android
+• Coded in Swift, Java and React Native
+• Bluetooth GATT comms with Node.js garage access point
+• NFC tag reading
+</p>    
     </div>
+</div>
 
     <h4>Open Source Projects:</h4>
     <div class="samples" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); text-align: center; background-color: black;">
@@ -169,19 +182,6 @@ Official indoor nav app for the Consumer Electronics Show
     <img class="appimage" src="./images/androidbeaconlibrary.png">
     <p><a href="http://altbeacon.github.io/android-beacon-library">Android Beacon Library</a></p>
     </div>
-
-<div style="margin: 1px; padding: 5px; background-color: white;">
-    <img class="appimage" src="./images/commutyble.png">
-    <p><a href="https://itunes.apple.com/us/app/commutyble/id1153428822?mt=8">Commutyble</a></p>
-<p>
-Garage Reservation and Access App
-• iOS and Android
-• Coded in Swift, Java and React Native
-• Bluetooth GATT comms with Node.js garage access point
-• NFC tag reading
-</p>    
-    
-    
 <p>
 Open Source library for bluetooth beacons
 </p>
