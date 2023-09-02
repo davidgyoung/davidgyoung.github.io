@@ -10,7 +10,7 @@ tagline: Professional Engineering and Software Development
 <div id="header_wrap" class="outer">
     <header class="inner">
       <img src="./images/david.png" class="mugshot">
-      <h1 id="project_title">David G. Young Tech</h1>
+      <h1 id="project_title">Young Consulting</h1>
       <h2 id="project_tagline">Contract engineering and software development</h2>
     </header>
 </div>
