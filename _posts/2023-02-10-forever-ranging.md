@@ -94,7 +94,7 @@ The background location update we requrested, on the ohter hand, uses very littl
 
 ## Safe for the App Store
 
-All of the above are legal techniques appropriate for apps to be published in the AppStore.  However, becuase you are requesting a location backround mode in Info.plist, your app must have some obvious user-facing benefit for using location in the backround.  If you have an app that natigates you around an obsticle course or tracks your umbrella to keep you from leving it behind, this will probably be okay.  
+All of the above are legal techniques appropriate for apps to be published in the AppStore.  However, becuase you are requesting a location backround mode in Info.plist, your app must have some obvious user-facing benefit for using location in the backround.  If you have an app that navigates you around an obsticle course or tracks your umbrella to keep you from leving it behind, this will probably be okay.  
 
 But if your app is a video game that passively looks for beacons to send location-targeted advertising to the user, that will probably be rejected.
 
