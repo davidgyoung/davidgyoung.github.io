@@ -72,8 +72,9 @@ You can see a simple reference app with the iOS code needed to do this here: htt
 
 To add this to your own app:
 
-`. Add these entries to your Info.plist:
+1. Add these entries to your Info.plist:
 
+    ```
     <key>UIBackgroundModes</key>
     <array>
         <string>bluetooth-central</string>
@@ -82,36 +83,37 @@ To add this to your own app:
     <string>This app uses Bluetooth to make magic happen when become near or far.</string>
     <key>NSBluetoothPeripheralUsageDescription</key>
     <string>This app uses Bluetooth to make magic happen when become near or far.</string>
+    ```
 
 2. Start scanning for a custom GATT Service UUID -- pick your own, but our example uses "4c052726-cd97-4dde-9356-212cc1327a84"
 
-```
-func startScanning {
-    // This line below will automatically pop a Bluetooth permissions request dialog using the above usage description
-    centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerRestoredStateScanOptionsKey: "MyAppToMakeMagic"])
-    /// You should really wait until you get the Bluetooth state callback for central.state == .poweredOn before starting scanning
-    centralManager?.scanForPeripherals(withServices: [CBUUID(string: "4c052726-cd97-4dde-9356-212cc1327a84")], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-}
+    ```
+    func startScanning {
+        // This line below will automatically pop a Bluetooth permissions request dialog using the above usage description
+        centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerRestoredStateScanOptionsKey: "MyAppToMakeMagic"])
+        /// You should really wait until you get the Bluetooth state callback for central.state == .poweredOn before starting scanning
+        centralManager?.scanForPeripherals(withServices: [CBUUID(string: "4c052726-cd97-4dde-9356-212cc1327a84")], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        }
     
-```
+    ```
 
 3. In order to auto launch in the background, make you CBCentralManagerDelegate implement this method:
 
-```
-func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-    log.i("Central manager is restoring state after a background wakeup")
-}
-```
+    ```
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        log.i("Central manager is restoring state after a background wakeup")
+    }
+    ```
 4. And add code to your AppDelegate's didFinishLaunching method:
 
-```
-func application(_ application: UIApplication,
+    ```
+    func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    ...
-    // Execute the code the re-initializes your CBCentralManager and sets up its delegate before this method ends
-    startScanning()
-}
-```
+        ...
+        // Execute the code the re-initializes your CBCentralManager and sets up its delegate before this method ends
+        startScanning()
+    }
+    ```
 
 ## Android Details (using Android Beacon Library)
 
@@ -121,35 +123,35 @@ To implement this in your own app:
 
 1. Add this to your build.gradle
 
-```
-dependencies {
-    ...
-    implementation 'org.altbeacon:android-beacon-library:2.21.0-beta4'
-}
-```
+    ```
+    dependencies {
+        ...
+        implementation 'org.altbeacon:android-beacon-library:2.21.0-beta4'
+    }
+    ```
 
 2. Add this to your AndroidManifest.xml
 
-```
-<uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:node="replace"/>
-```
+    ```
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:node="replace"/>
+    ```
 
 3 Start scanning for a non-beacon based on a custom GATT Service UUID -- pick your own, but our example uses "4c052726-cd97-4dde-9356-212cc1327a84"
 
-```
-val notaBeaconLayout = "s:0-15=4c052726-cd97-4dde-9356-212cc1327a84,m:16-16=00,i:17-18,i:19-20,i:21-22,p:-:-59"
-val notaBeaconBeaconRegion = BeaconRegion("notaBeaconBeaconRegion", BeaconParser("notabeacon").setBeaconLayout(notaBeaconLayout), null, null, null)
-val beaconManager = BeaconManager.getInstanceForApplication(this)
-beaconManager.startMonitoring(notaBeaconBeaconRegion)
-beaconManager.startRangingBeacons(notaBeaconBeaconRegion)
-```
+    ```
+    val notaBeaconLayout = "s:0-15=4c052726-cd97-4dde-9356-212cc1327a84,m:16-16=00,i:17-18,i:19-20,i:21-22,p:-:-59"
+    val notaBeaconBeaconRegion = BeaconRegion("notaBeaconBeaconRegion", BeaconParser("notabeacon").setBeaconLayout(notaBeaconLayout), null, null, null)
+    val beaconManager = BeaconManager.getInstanceForApplication(this)
+    beaconManager.startMonitoring(notaBeaconBeaconRegion)
+    beaconManager.startRangingBeacons(notaBeaconBeaconRegion)
+    ```
 
 4. If you want to start a transmitter, use code like this:
 
-```
-val transmitter = BeaconTransmitter(this,  BeaconParser("notabeacon").setBeaconLayout(notaBeaconLayout))
-val notabeacon = Beacon.Builder().setId1("1").setId2("2").setId3("3").build()
-transmitter.startAdvertising(notabeacon)
-```
+    ```
+    val transmitter = BeaconTransmitter(this,  BeaconParser("notabeacon").setBeaconLayout(notaBeaconLayout))
+    val notabeacon = Beacon.Builder().setId1("1").setId2("2").setId3("3").build()
+    transmitter.startAdvertising(notabeacon)
+    ```
 
 5. Also add code to [request Bluetooth permission](https://developer.android.com/training/permissions/requesting) from the user before starting scanning.  This can be a bit verbose, so we won't cover it here.
