@@ -136,7 +136,7 @@ To implement this in your own app:
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:node="replace"/>
     ```
 
-3 Start scanning for a non-beacon based on a custom GATT Service UUID -- pick your own, but our example uses "4c052726-cd97-4dde-9356-212cc1327a84"
+3. Start scanning for a non-beacon based on a custom GATT Service UUID -- pick your own, but our example uses "4c052726-cd97-4dde-9356-212cc1327a84"
 
     ```
     val notaBeaconLayout = "s:0-15=4c052726-cd97-4dde-9356-212cc1327a84,m:16-16=00,i:17-18,i:19-20,i:21-22,p:-:-59"
