@@ -2,6 +2,8 @@
 title: Making Magic Without Permission 
 ---
 
+<div style="float: left; padding-right: 10px;"><img src="/images/magic.png" alt="Alexa" style="display: block; width:320px;border-style:solid;border-width:5px;"/></div>
+
 Some of the coolest things you can do with Bluetooth beacons involve making magic happen when you become near or far from something.  You can unlock a car, get alerted about leaving your umbrella behind, open the door to a parking garage or sync data with your dash cam.  What makes these things seem magically cool is they happen automatically when you come within range or go out of range -- no need to open an app or tap a button.
 
 ## The Problem
@@ -65,6 +67,8 @@ If you take this approach, be careful that you don't go too far.  Don't just cre
 And you absolutely should abide by Android's guidelines for declaring "neverForLocation" on your Bluetooth permission.  Google says you should be able to "strongly assert that your app never derives physical location from Bluetooth scan results".  If you are making this declaration with the intent of figuring out the user's latitude and longitude (instead of just *relative proximity* to a Bluetooth device without a known fixed location) then you are breaking the rules.  Please don't do that.
 
 ## Addendum: Sample Code
+
+If you want to test the code samples below, you can use the [BeaconScope app for Android](https://play.google.com/store/apps/details?id=com.davidgyoungtech.beaconscanner) as a transmitter.  Just go to the transmitter tab and hit the + icon to add a transmitter, and select the beacon type as "Not a Beacon".
 
 ### iOS Details
 
