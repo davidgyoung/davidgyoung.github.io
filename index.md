@@ -18,7 +18,7 @@ tagline: Professional Engineering and Software Development
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
   <section id="main_content" class="inner">
-    <p>David is available for contract software development work for clients worldwide.  He will help complete your project on time and under budget.
+    <p>David is available for contract software development work for clients worldwide.  He will help complete your project on time and under budget using the latest AI tools to cut costs and expedite delivery.
     His strong interpersonal skills make for easy conversations about even the most technical subjects.  His high-energy temperament and entrepreneurial orientation requires minimal supervision.   His mobile apps and libraries run on over 150 million mobile devices worldwide, and past works are exhibited at the Smithsonian National Air and Space Museum.  References available on request.
     </p>
 
