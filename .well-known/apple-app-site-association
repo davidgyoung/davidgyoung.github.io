@@ -3,21 +3,14 @@
         "details": [
             {
                 "appIDs": [
-                    "com.davidgyoungtech.lucidnfc"
-                ],
-                "components": [
-                    {
-                        "#": "no_universal_links",
-                        "exclude": true,
-                        "comment": "Matches any URL with a fragment that equals no_universal_links and instructs the system not to open it as a universal link."
-                    }
+                    "A9DFQ3872A.com.davidgyoungtech.lucidnfc"
                 ]
             }
         ]
     },
     "appclips": {
         "apps": [
-            "com.davidgyoungtech.lucidnfc.Clip"
+            "A9DFQ3872A.com.davidgyoungtech.lucidnfc.Clip"
         ]
     }
 }
